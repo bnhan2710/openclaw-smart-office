@@ -1,7 +1,7 @@
 {
   "name": "soan-thao",
   "version": "1.0.0",
-  "description": "Soạn thảo công văn, tờ trình, biên bản hành chính",
+  "description": "Xuất file DOCX cho văn bản hành chính (US-09, US-10, US-11) — agent tự soạn nội dung",
   "type": "module",
   "scripts": {
     "generate": "node scripts/generate.js"
@@ -9,7 +9,6 @@
   "dependencies": {
     "docx": "^9.0.0",
     "docxtemplater": "^3.50.0",
-    "openai": "^4.85.0",
     "pizzip": "^3.1.7"
   }
 }
