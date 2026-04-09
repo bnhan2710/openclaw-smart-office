@@ -8,11 +8,11 @@ Skills cho [OpenClaw](https://openclaw.ai) — agent quản lý văn phòng thô
 
 | Skill | Mô tả | User Stories |
 |---|---|---|
-| `cong-van-summary` | Tóm tắt & trích xuất thông tin từ công văn (PDF/DOCX) | US-05, US-06 |
-| `knowledge-base` | RAG tra cứu quy định, văn bản nội bộ | US-08 |
-| `soan-thao` | Soạn công văn, tờ trình, biên bản → xuất `.docx` | US-09, US-10, US-11 |
-| `deadline-reminder` | Theo dõi & nhắc hạn xử lý qua Telegram/email | US-13, US-14 |
-| `task-extractor` | NLP tự động trích xuất nhiệm vụ từ văn bản | US-13 |
+| `cong-van-summary` | Tóm tắt & trích xuất thông tin từ công văn (PDF/DOCX)|
+| `knowledge-base` | RAG tra cứu quy định, văn bản nội bộ|
+| `soan-thao` | Soạn công văn, tờ trình, biên bản → xuất `.docx`|
+| `deadline-reminder` | Theo dõi & nhắc hạn xử lý qua Telegram/email|
+| `task-extractor` | NLP tự động trích xuất nhiệm vụ từ văn bản|
 
 ---
 
