@@ -1,0 +1,14 @@
+{
+  "name": "task-extractor",
+  "version": "1.0.0",
+  "description": "Trích xuất nhiệm vụ từ văn bản bằng NLP (US-13)",
+  "type": "module",
+  "scripts": {
+    "extract": "node scripts/extract-task.js"
+  },
+  "dependencies": {
+    "mammoth": "^1.8.0",
+    "openai": "^4.85.0",
+    "pdf-parse": "^1.1.1"
+  }
+}

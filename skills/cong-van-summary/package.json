@@ -1,0 +1,13 @@
+{
+  "name": "cong-van-summary",
+  "version": "1.0.0",
+  "description": "Trích xuất và tóm tắt công văn hành chính",
+  "type": "module",
+  "scripts": {
+    "extract": "node scripts/extract.js"
+  },
+  "dependencies": {
+    "mammoth": "^1.8.0",
+    "pdf-parse": "^1.1.1"
+  }
+}

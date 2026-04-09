@@ -1,0 +1,14 @@
+{
+  "name": "deadline-reminder",
+  "version": "1.0.0",
+  "description": "Theo dõi và nhắc nhở hạn xử lý công văn, nhiệm vụ",
+  "type": "module",
+  "scripts": {
+    "start": "node scripts/cron.js --daemon",
+    "check": "node scripts/cron.js --check --notify",
+    "list": "node scripts/cron.js --list"
+  },
+  "dependencies": {
+    "nodemailer": "^6.10.1"
+  }
+}
