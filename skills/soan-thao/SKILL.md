@@ -1,15 +1,15 @@
 ---
 name: soan-thao
-description: Soạn thảo văn bản hành chính chuẩn Nghị định 30/2020/NĐ-CP: công văn, tờ trình, biên bản họp. Dùng khi người dùng yêu cầu "soạn công văn", "viết tờ trình", "làm biên bản", "soạn văn bản trả lời", hoặc cần tạo file .docx từ nội dung thô. Xuất file Word sẵn sàng ký gửi.
+description: "Soạn thảo văn bản hành chính chuẩn Nghị định 30/2020/NĐ-CP và xuất file DOCX/PDF bằng scripts/generate.js. Dùng khi người dùng yêu cầu soạn công văn, viết tờ trình, làm biên bản, soạn văn bản trả lời, hoặc tạo file .docx/.pdf. Khi xuất file phải chạy exec ngay, không được chỉ hứa gửi sau."
 version: 1.0.0
-metadata: {"openclaw":{"emoji":"✍️","requires":{"bins":["node"]},"install":[{"id":"npm","kind":"node","pkg":"{baseDir}","label":"Cài đặt dependencies (docx, docxtemplater)"}]}}
+metadata: {"openclaw":{"emoji":"✍️","requires":{"bins":["node"]},"install":[{"id":"npm","kind":"node","pkg":"{baseDir}","label":"Cài đặt dependencies (docx, docxtemplater, pdfmake)"}]}}
 ---
 
 ## Khi nào dùng skill này
 
 Dùng skill này khi:
 - Người dùng nói: "soạn công văn", "viết tờ trình", "làm biên bản", "soạn văn bản"
-- Cần tạo file `.docx` cho văn bản hành chính
+- Cần tạo file `.docx` hoặc `.pdf` cho văn bản hành chính
 - Người dùng cung cấp nội dung thô / ghi chú cuộc họp → cần chuyển thành văn bản chuẩn
 - Cần soạn thư trả lời một công văn vừa đọc
 
@@ -37,9 +37,18 @@ Dựa trên thông tin đã thu thập, **tự soạn toàn bộ nội dung văn
 
 Hiển thị bản text đầy đủ cho người dùng xem trước và xác nhận.
 
-### Bước 3 — Xuất file DOCX
+### Bước 3 — Xuất file DOCX/PDF
 
-Sau khi người dùng xác nhận nội dung, lưu text vào file tạm rồi gọi script:
+Sau khi người dùng xác nhận nội dung, lưu text vào file tạm rồi gọi script. Hỏi rõ người dùng muốn:
+- `.docx`
+- `.pdf`
+- hoặc cả hai
+
+Mặc định nếu người dùng chỉ nói "xuất file Word/văn bản" thì xuất `.docx`.
+
+**Không được** tự bịa phương án `.odt`, `.html`, hay nói "môi trường chưa có thư viện" nếu file `{baseDir}/scripts/generate.js` còn tồn tại và chạy được.
+
+Ví dụ:
 ```bash
 # Lưu content vào file tạm
 echo "<nội_dung_đã_soạn>" > /tmp/van-ban-draft.txt
@@ -48,10 +57,25 @@ echo "<nội_dung_đã_soạn>" > /tmp/van-ban-draft.txt
 node {baseDir}/scripts/generate.js \
   --type <loại> \
   --content-file /tmp/van-ban-draft.txt \
+  --format docx \
   --output <tên_file>.docx
+
+# Xuất PDF
+node {baseDir}/scripts/generate.js \
+  --type <loại> \
+  --content-file /tmp/van-ban-draft.txt \
+  --format pdf \
+  --output <tên_file>.pdf
+
+# Xuất cả hai
+node {baseDir}/scripts/generate.js \
+  --type <loại> \
+  --content-file /tmp/van-ban-draft.txt \
+  --format both \
+  --output <tên_file_không_cần_đuôi>
 ```
 
-File được lưu vào `./output/van-ban/` (hoặc `OUTPUT_DIR`). Thông báo đường dẫn file cho người dùng.
+File được lưu vào `./output/van-ban/` trong workspace (hoặc `OUTPUT_DIR`). Thông báo đường dẫn file cho người dùng.
 
 ## Các loại văn bản
 
@@ -67,7 +91,8 @@ Templates `.docx` chuẩn Nghị định 30 nằm tại `{baseDir}/templates/`. 
 
 ## Lưu ý
 
-- **Agent tự soạn nội dung** — script `generate.js` chỉ xuất DOCX, không gọi LLM
+- **Agent tự soạn nội dung** — script `generate.js` chỉ xuất DOCX/PDF, không gọi LLM
 - Tra cứu `knowledge-base` trước nếu cần căn cứ pháp lý
 - Luôn cho người dùng xem trước nội dung trước khi xuất file
 - Biến môi trường `CO_QUAN_TEN` và `CO_QUAN_KY_HIEU` xác định tên và ký hiệu cơ quan ban hành
+- Nếu script trả kết quả thành công, luôn trả lại đường dẫn file đã tạo thay vì đề xuất định dạng thay thế

@@ -1,6 +1,6 @@
 ---
 name: task-extractor
-description: Trích xuất tự động các nhiệm vụ, yêu cầu, phân công từ văn bản hành chính. Dùng khi người dùng nói "tạo task từ văn bản này", "có việc gì cần làm sau cuộc họp", "phân công từ biên bản", "nhiệm vụ trong công văn". Nhận diện: tên nhiệm vụ, người/đơn vị được giao, hạn thực hiện, mức độ ưu tiên.
+description: "Trích xuất tự động các nhiệm vụ, yêu cầu, phân công từ văn bản hành chính. Dùng khi người dùng nói tạo task từ văn bản này, có việc gì cần làm sau cuộc họp, phân công từ biên bản, nhiệm vụ trong công văn. Nhận diện: tên nhiệm vụ, người/đơn vị được giao, hạn thực hiện, mức độ ưu tiên."
 version: 1.0.0
 metadata: {"openclaw":{"emoji":"🎯","requires":{"bins":["node"]},"install":[{"id":"npm","kind":"node","pkg":"{baseDir}","label":"Cài đặt dependencies (pdf-parse, mammoth)"}]}}
 ---

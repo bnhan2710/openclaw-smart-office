@@ -1,6 +1,7 @@
 # Templates Văn Bản Hành Chính
 
 Thư mục này chứa các file template `.docx` dùng cho skill soạn thảo.
+PDF hiện được render trực tiếp từ nội dung text, không dùng template Word.
 
 ## Cách tạo template
 
@@ -21,6 +22,7 @@ Templates sử dụng thư viện `docxtemplater` với cú pháp `{variable}`.
 4. Script `generate.js` sẽ tự động dùng template nếu có
 
 > **Lưu ý**: Nếu không có file template, script sẽ tự tạo file `.docx` đơn giản với font Times New Roman 13pt — đúng theo quy định văn bản hành chính Việt Nam.
+> Với `.pdf`, script dùng renderer riêng và không phụ thuộc template `.docx`.
 
 ## Nguồn tham khảo mẫu
 

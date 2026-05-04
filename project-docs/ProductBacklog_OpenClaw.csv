@@ -1,0 +1,502 @@
+﻿PRODUCT BACKLOG — Trợ lý AI Hành chính Văn phòng (OpenClaw),,,,,,,
+ID,Chức năng,Tính năng,Đối tượng (Ai),Hành động (Muốn gì),Mục đích (Để làm gì),Độ ưu tiên,Sprint
+US-001,Hạ tầng & Cài đặt,Cài đặt Node.js v1,Là Thành viên nhóm,muốn cài đặt Node.js 22+,để hệ thống có môi trường chạy ổn định,🔴 Cao,Sprint 1
+US-002,Hạ tầng & Cài đặt,OpenClaw CLI v1,Là Quản trị viên,muốn chạy lệnh openclaw onboard,để xác thực môi trường,🔴 Cao,Sprint 1
+US-003,Hạ tầng & Cài đặt,Cấu hình API Key v1,Là Quản trị viên,muốn nhập API key Anthropic Claude,để kết nối với mô hình AI,🔴 Cao,Sprint 1
+US-004,Hạ tầng & Cài đặt,Localhost Dashboard v1,Là Người dùng,muốn mở dashboard tại localhost:18789,để theo dõi trạng thái bot,🔴 Cao,Sprint 1
+US-005,Hạ tầng & Cài đặt,Dockerize v1,Là DevOps,muốn tạo Dockerfile cho OpenClaw,để triển khai nhanh trên server,🔴 Cao,Sprint 1
+US-006,Hạ tầng & Cài đặt,Biến môi trường v1,Là Quản trị viên,muốn cấu hình file .env,để bảo mật thông tin nhạy cảm,🔴 Cao,Sprint 1
+US-007,Hạ tầng & Cài đặt,Log system v1,Là Developer,muốn xem log gateway,để debug lỗi kết nối,🔴 Cao,Sprint 1
+US-008,Hạ tầng & Cài đặt,Restart auto v1,Là Quản trị viên,muốn cài đặt pm2,để bot tự khởi động lại khi crash,🔴 Cao,Sprint 1
+US-009,Hạ tầng & Cài đặt,Backup config v1,Là Quản trị viên,muốn sao lưu file config.json,để khôi phục khi gặp sự cố,🔴 Cao,Sprint 1
+US-010,Hạ tầng & Cài đặt,IP Whitelist v1,Là Bảo mật,muốn giới hạn IP truy cập dashboard,để tránh xâm nhập trái phép,🔴 Cao,Sprint 1
+US-011,Hạ tầng & Cài đặt,Cài đặt Node.js v2,Là Thành viên nhóm,muốn cài đặt Node.js 22+,để hệ thống có môi trường chạy ổn định,🔴 Cao,Sprint 1
+US-012,Hạ tầng & Cài đặt,OpenClaw CLI v2,Là Quản trị viên,muốn chạy lệnh openclaw onboard,để xác thực môi trường,🔴 Cao,Sprint 1
+US-013,Hạ tầng & Cài đặt,Cấu hình API Key v2,Là Quản trị viên,muốn nhập API key Anthropic Claude,để kết nối với mô hình AI,🔴 Cao,Sprint 1
+US-014,Hạ tầng & Cài đặt,Localhost Dashboard v2,Là Người dùng,muốn mở dashboard tại localhost:18789,để theo dõi trạng thái bot,🔴 Cao,Sprint 1
+US-015,Hạ tầng & Cài đặt,Dockerize v2,Là DevOps,muốn tạo Dockerfile cho OpenClaw,để triển khai nhanh trên server,🔴 Cao,Sprint 1
+US-016,Hạ tầng & Cài đặt,Biến môi trường v2,Là Quản trị viên,muốn cấu hình file .env,để bảo mật thông tin nhạy cảm,🟡 Trung bình,Sprint 1
+US-017,Hạ tầng & Cài đặt,Log system v2,Là Developer,muốn xem log gateway,để debug lỗi kết nối,🟡 Trung bình,Sprint 1
+US-018,Hạ tầng & Cài đặt,Restart auto v2,Là Quản trị viên,muốn cài đặt pm2,để bot tự khởi động lại khi crash,🟡 Trung bình,Sprint 1
+US-019,Hạ tầng & Cài đặt,Backup config v2,Là Quản trị viên,muốn sao lưu file config.json,để khôi phục khi gặp sự cố,🟡 Trung bình,Sprint 1
+US-020,Hạ tầng & Cài đặt,IP Whitelist v2,Là Bảo mật,muốn giới hạn IP truy cập dashboard,để tránh xâm nhập trái phép,🟡 Trung bình,Sprint 1
+US-021,Hạ tầng & Cài đặt,Cài đặt Node.js v3,Là Thành viên nhóm,muốn cài đặt Node.js 22+,để hệ thống có môi trường chạy ổn định,🟡 Trung bình,Sprint 2
+US-022,Hạ tầng & Cài đặt,OpenClaw CLI v3,Là Quản trị viên,muốn chạy lệnh openclaw onboard,để xác thực môi trường,🟡 Trung bình,Sprint 2
+US-023,Hạ tầng & Cài đặt,Cấu hình API Key v3,Là Quản trị viên,muốn nhập API key Anthropic Claude,để kết nối với mô hình AI,🟡 Trung bình,Sprint 2
+US-024,Hạ tầng & Cài đặt,Localhost Dashboard v3,Là Người dùng,muốn mở dashboard tại localhost:18789,để theo dõi trạng thái bot,🟡 Trung bình,Sprint 2
+US-025,Hạ tầng & Cài đặt,Dockerize v3,Là DevOps,muốn tạo Dockerfile cho OpenClaw,để triển khai nhanh trên server,🟡 Trung bình,Sprint 2
+US-026,Hạ tầng & Cài đặt,Biến môi trường v3,Là Quản trị viên,muốn cấu hình file .env,để bảo mật thông tin nhạy cảm,🟡 Trung bình,Sprint 2
+US-027,Hạ tầng & Cài đặt,Log system v3,Là Developer,muốn xem log gateway,để debug lỗi kết nối,🟡 Trung bình,Sprint 2
+US-028,Hạ tầng & Cài đặt,Restart auto v3,Là Quản trị viên,muốn cài đặt pm2,để bot tự khởi động lại khi crash,🟡 Trung bình,Sprint 2
+US-029,Hạ tầng & Cài đặt,Backup config v3,Là Quản trị viên,muốn sao lưu file config.json,để khôi phục khi gặp sự cố,🟡 Trung bình,Sprint 2
+US-030,Hạ tầng & Cài đặt,IP Whitelist v3,Là Bảo mật,muốn giới hạn IP truy cập dashboard,để tránh xâm nhập trái phép,🟡 Trung bình,Sprint 2
+US-031,Hạ tầng & Cài đặt,Cài đặt Node.js v4,Là Thành viên nhóm,muốn cài đặt Node.js 22+,để hệ thống có môi trường chạy ổn định,🟡 Trung bình,Sprint 2
+US-032,Hạ tầng & Cài đặt,OpenClaw CLI v4,Là Quản trị viên,muốn chạy lệnh openclaw onboard,để xác thực môi trường,🟡 Trung bình,Sprint 2
+US-033,Hạ tầng & Cài đặt,Cấu hình API Key v4,Là Quản trị viên,muốn nhập API key Anthropic Claude,để kết nối với mô hình AI,🟡 Trung bình,Sprint 2
+US-034,Hạ tầng & Cài đặt,Localhost Dashboard v4,Là Người dùng,muốn mở dashboard tại localhost:18789,để theo dõi trạng thái bot,🟡 Trung bình,Sprint 2
+US-035,Hạ tầng & Cài đặt,Dockerize v4,Là DevOps,muốn tạo Dockerfile cho OpenClaw,để triển khai nhanh trên server,🟡 Trung bình,Sprint 2
+US-036,Hạ tầng & Cài đặt,Biến môi trường v4,Là Quản trị viên,muốn cấu hình file .env,để bảo mật thông tin nhạy cảm,🟡 Trung bình,Sprint 2
+US-037,Hạ tầng & Cài đặt,Log system v4,Là Developer,muốn xem log gateway,để debug lỗi kết nối,🟡 Trung bình,Sprint 2
+US-038,Hạ tầng & Cài đặt,Restart auto v4,Là Quản trị viên,muốn cài đặt pm2,để bot tự khởi động lại khi crash,🟡 Trung bình,Sprint 2
+US-039,Hạ tầng & Cài đặt,Backup config v4,Là Quản trị viên,muốn sao lưu file config.json,để khôi phục khi gặp sự cố,🟡 Trung bình,Sprint 2
+US-040,Hạ tầng & Cài đặt,IP Whitelist v4,Là Bảo mật,muốn giới hạn IP truy cập dashboard,để tránh xâm nhập trái phép,🟡 Trung bình,Sprint 2
+US-041,Xử lý văn bản,Tóm tắt PDF type_1,Là Nhân viên,muốn gửi file PDF,để nắm bắt nội dung chính,🔴 Cao,Sprint 1
+US-042,Xử lý văn bản,Trích xuất công văn type_1,Là Văn thư,muốn nhận diện số công văn,để vào sổ theo dõi,🔴 Cao,Sprint 1
+US-043,Xử lý văn bản,OCR hình ảnh type_1,Là Người dùng,muốn chụp ảnh văn bản giấy,để chuyển thành văn bản số,🔴 Cao,Sprint 1
+US-044,Xử lý văn bản,Dịch thuật type_1,Là Nhân viên,muốn dịch tài liệu sang tiếng Anh,để gửi cho đối tác,🔴 Cao,Sprint 1
+US-045,Xử lý văn bản,So sánh hợp đồng type_1,Là Pháp chế,muốn so sánh 2 bản thảo,để tìm điểm khác biệt,🔴 Cao,Sprint 1
+US-046,Xử lý văn bản,Kiểm tra chính tả type_1,Là Thư ký,muốn soát lỗi văn bản,để đảm bảo tính chuyên nghiệp,🔴 Cao,Sprint 1
+US-047,Xử lý văn bản,Trích xuất bảng type_1,Là Kế toán,muốn lấy dữ liệu từ bảng trong Word,để dán vào Excel,🔴 Cao,Sprint 1
+US-048,Xử lý văn bản,Phân loại văn bản type_1,Là Văn thư,muốn tự động phân loại đơn từ/công văn,để chuyển đúng bộ phận,🔴 Cao,Sprint 1
+US-049,Xử lý văn bản,Gắn nhãn bảo mật type_1,Là Quản lý,muốn nhận diện tài liệu mật,để cảnh báo người dùng,🔴 Cao,Sprint 1
+US-050,Xử lý văn bản,Tóm tắt đa file type_1,Là Lãnh đạo,muốn tóm tắt 5 file cùng lúc,để có cái nhìn tổng thể,🔴 Cao,Sprint 1
+US-051,Xử lý văn bản,Tóm tắt PDF type_2,Là Nhân viên,muốn gửi file PDF,để nắm bắt nội dung chính,🔴 Cao,Sprint 1
+US-052,Xử lý văn bản,Trích xuất công văn type_2,Là Văn thư,muốn nhận diện số công văn,để vào sổ theo dõi,🔴 Cao,Sprint 1
+US-053,Xử lý văn bản,OCR hình ảnh type_2,Là Người dùng,muốn chụp ảnh văn bản giấy,để chuyển thành văn bản số,🔴 Cao,Sprint 1
+US-054,Xử lý văn bản,Dịch thuật type_2,Là Nhân viên,muốn dịch tài liệu sang tiếng Anh,để gửi cho đối tác,🔴 Cao,Sprint 1
+US-055,Xử lý văn bản,So sánh hợp đồng type_2,Là Pháp chế,muốn so sánh 2 bản thảo,để tìm điểm khác biệt,🔴 Cao,Sprint 1
+US-056,Xử lý văn bản,Kiểm tra chính tả type_2,Là Thư ký,muốn soát lỗi văn bản,để đảm bảo tính chuyên nghiệp,🔴 Cao,Sprint 1
+US-057,Xử lý văn bản,Trích xuất bảng type_2,Là Kế toán,muốn lấy dữ liệu từ bảng trong Word,để dán vào Excel,🔴 Cao,Sprint 1
+US-058,Xử lý văn bản,Phân loại văn bản type_2,Là Văn thư,muốn tự động phân loại đơn từ/công văn,để chuyển đúng bộ phận,🔴 Cao,Sprint 1
+US-059,Xử lý văn bản,Gắn nhãn bảo mật type_2,Là Quản lý,muốn nhận diện tài liệu mật,để cảnh báo người dùng,🔴 Cao,Sprint 1
+US-060,Xử lý văn bản,Tóm tắt đa file type_2,Là Lãnh đạo,muốn tóm tắt 5 file cùng lúc,để có cái nhìn tổng thể,🔴 Cao,Sprint 1
+US-061,Xử lý văn bản,Tóm tắt PDF type_3,Là Nhân viên,muốn gửi file PDF,để nắm bắt nội dung chính,🟡 Trung bình,Sprint 2
+US-062,Xử lý văn bản,Trích xuất công văn type_3,Là Văn thư,muốn nhận diện số công văn,để vào sổ theo dõi,🟡 Trung bình,Sprint 2
+US-063,Xử lý văn bản,OCR hình ảnh type_3,Là Người dùng,muốn chụp ảnh văn bản giấy,để chuyển thành văn bản số,🟡 Trung bình,Sprint 2
+US-064,Xử lý văn bản,Dịch thuật type_3,Là Nhân viên,muốn dịch tài liệu sang tiếng Anh,để gửi cho đối tác,🟡 Trung bình,Sprint 2
+US-065,Xử lý văn bản,So sánh hợp đồng type_3,Là Pháp chế,muốn so sánh 2 bản thảo,để tìm điểm khác biệt,🟡 Trung bình,Sprint 2
+US-066,Xử lý văn bản,Kiểm tra chính tả type_3,Là Thư ký,muốn soát lỗi văn bản,để đảm bảo tính chuyên nghiệp,🟡 Trung bình,Sprint 2
+US-067,Xử lý văn bản,Trích xuất bảng type_3,Là Kế toán,muốn lấy dữ liệu từ bảng trong Word,để dán vào Excel,🟡 Trung bình,Sprint 2
+US-068,Xử lý văn bản,Phân loại văn bản type_3,Là Văn thư,muốn tự động phân loại đơn từ/công văn,để chuyển đúng bộ phận,🟡 Trung bình,Sprint 2
+US-069,Xử lý văn bản,Gắn nhãn bảo mật type_3,Là Quản lý,muốn nhận diện tài liệu mật,để cảnh báo người dùng,🟡 Trung bình,Sprint 2
+US-070,Xử lý văn bản,Tóm tắt đa file type_3,Là Lãnh đạo,muốn tóm tắt 5 file cùng lúc,để có cái nhìn tổng thể,🟡 Trung bình,Sprint 2
+US-071,Xử lý văn bản,Tóm tắt PDF type_4,Là Nhân viên,muốn gửi file PDF,để nắm bắt nội dung chính,🟡 Trung bình,Sprint 2
+US-072,Xử lý văn bản,Trích xuất công văn type_4,Là Văn thư,muốn nhận diện số công văn,để vào sổ theo dõi,🟡 Trung bình,Sprint 2
+US-073,Xử lý văn bản,OCR hình ảnh type_4,Là Người dùng,muốn chụp ảnh văn bản giấy,để chuyển thành văn bản số,🟡 Trung bình,Sprint 2
+US-074,Xử lý văn bản,Dịch thuật type_4,Là Nhân viên,muốn dịch tài liệu sang tiếng Anh,để gửi cho đối tác,🟡 Trung bình,Sprint 2
+US-075,Xử lý văn bản,So sánh hợp đồng type_4,Là Pháp chế,muốn so sánh 2 bản thảo,để tìm điểm khác biệt,🟡 Trung bình,Sprint 2
+US-076,Xử lý văn bản,Kiểm tra chính tả type_4,Là Thư ký,muốn soát lỗi văn bản,để đảm bảo tính chuyên nghiệp,🟡 Trung bình,Sprint 2
+US-077,Xử lý văn bản,Trích xuất bảng type_4,Là Kế toán,muốn lấy dữ liệu từ bảng trong Word,để dán vào Excel,🟡 Trung bình,Sprint 2
+US-078,Xử lý văn bản,Phân loại văn bản type_4,Là Văn thư,muốn tự động phân loại đơn từ/công văn,để chuyển đúng bộ phận,🟡 Trung bình,Sprint 2
+US-079,Xử lý văn bản,Gắn nhãn bảo mật type_4,Là Quản lý,muốn nhận diện tài liệu mật,để cảnh báo người dùng,🟡 Trung bình,Sprint 2
+US-080,Xử lý văn bản,Tóm tắt đa file type_4,Là Lãnh đạo,muốn tóm tắt 5 file cùng lúc,để có cái nhìn tổng thể,🟡 Trung bình,Sprint 2
+US-081,Xử lý văn bản,Tóm tắt PDF type_5,Là Nhân viên,muốn gửi file PDF,để nắm bắt nội dung chính,🟡 Trung bình,Sprint 3
+US-082,Xử lý văn bản,Trích xuất công văn type_5,Là Văn thư,muốn nhận diện số công văn,để vào sổ theo dõi,🟡 Trung bình,Sprint 3
+US-083,Xử lý văn bản,OCR hình ảnh type_5,Là Người dùng,muốn chụp ảnh văn bản giấy,để chuyển thành văn bản số,🟡 Trung bình,Sprint 3
+US-084,Xử lý văn bản,Dịch thuật type_5,Là Nhân viên,muốn dịch tài liệu sang tiếng Anh,để gửi cho đối tác,🟡 Trung bình,Sprint 3
+US-085,Xử lý văn bản,So sánh hợp đồng type_5,Là Pháp chế,muốn so sánh 2 bản thảo,để tìm điểm khác biệt,🟡 Trung bình,Sprint 3
+US-086,Xử lý văn bản,Kiểm tra chính tả type_5,Là Thư ký,muốn soát lỗi văn bản,để đảm bảo tính chuyên nghiệp,🟡 Trung bình,Sprint 3
+US-087,Xử lý văn bản,Trích xuất bảng type_5,Là Kế toán,muốn lấy dữ liệu từ bảng trong Word,để dán vào Excel,🟡 Trung bình,Sprint 3
+US-088,Xử lý văn bản,Phân loại văn bản type_5,Là Văn thư,muốn tự động phân loại đơn từ/công văn,để chuyển đúng bộ phận,🟡 Trung bình,Sprint 3
+US-089,Xử lý văn bản,Gắn nhãn bảo mật type_5,Là Quản lý,muốn nhận diện tài liệu mật,để cảnh báo người dùng,🟡 Trung bình,Sprint 3
+US-090,Xử lý văn bản,Tóm tắt đa file type_5,Là Lãnh đạo,muốn tóm tắt 5 file cùng lúc,để có cái nhìn tổng thể,🟡 Trung bình,Sprint 3
+US-091,Xử lý văn bản,Tóm tắt PDF type_6,Là Nhân viên,muốn gửi file PDF,để nắm bắt nội dung chính,🟢 Thấp,Sprint 3
+US-092,Xử lý văn bản,Trích xuất công văn type_6,Là Văn thư,muốn nhận diện số công văn,để vào sổ theo dõi,🟢 Thấp,Sprint 3
+US-093,Xử lý văn bản,OCR hình ảnh type_6,Là Người dùng,muốn chụp ảnh văn bản giấy,để chuyển thành văn bản số,🟢 Thấp,Sprint 3
+US-094,Xử lý văn bản,Dịch thuật type_6,Là Nhân viên,muốn dịch tài liệu sang tiếng Anh,để gửi cho đối tác,🟢 Thấp,Sprint 3
+US-095,Xử lý văn bản,So sánh hợp đồng type_6,Là Pháp chế,muốn so sánh 2 bản thảo,để tìm điểm khác biệt,🟢 Thấp,Sprint 3
+US-096,Xử lý văn bản,Kiểm tra chính tả type_6,Là Thư ký,muốn soát lỗi văn bản,để đảm bảo tính chuyên nghiệp,🟢 Thấp,Sprint 3
+US-097,Xử lý văn bản,Trích xuất bảng type_6,Là Kế toán,muốn lấy dữ liệu từ bảng trong Word,để dán vào Excel,🟢 Thấp,Sprint 3
+US-098,Xử lý văn bản,Phân loại văn bản type_6,Là Văn thư,muốn tự động phân loại đơn từ/công văn,để chuyển đúng bộ phận,🟢 Thấp,Sprint 3
+US-099,Xử lý văn bản,Gắn nhãn bảo mật type_6,Là Quản lý,muốn nhận diện tài liệu mật,để cảnh báo người dùng,🟢 Thấp,Sprint 3
+US-100,Xử lý văn bản,Tóm tắt đa file type_6,Là Lãnh đạo,muốn tóm tắt 5 file cùng lúc,để có cái nhìn tổng thể,🟢 Thấp,Sprint 3
+US-101,Soạn thảo văn bản,Soạn công văn mẫu_1,Là Thư ký,muốn sinh mẫu công văn đi,để gửi các đơn vị,🔴 Cao,Sprint 2
+US-102,Soạn thảo văn bản,Tờ trình mua sắm mẫu_1,Là Nhân viên,muốn soạn tờ trình kinh phí,để trình lãnh đạo duyệt,🔴 Cao,Sprint 2
+US-103,Soạn thảo văn bản,Biên bản họp mẫu_1,Là Thư ký,muốn tổng hợp ý kiến thành biên bản,để lưu trữ nội dung họp,🔴 Cao,Sprint 2
+US-104,Soạn thảo văn bản,Thông báo nội bộ mẫu_1,Là HR,muốn soạn thông báo nghỉ lễ,để gửi toàn công ty,🔴 Cao,Sprint 2
+US-105,Soạn thảo văn bản,Giấy mời họp mẫu_1,Là Văn phòng,muốn tạo giấy mời theo danh sách,để mời đại biểu,🔴 Cao,Sprint 2
+US-106,Soạn thảo văn bản,Hợp đồng lao động mẫu_1,Là HR,muốn soạn hợp đồng theo mẫu,để ký kết với nhân viên,🔴 Cao,Sprint 2
+US-107,Soạn thảo văn bản,Báo cáo tháng mẫu_1,Là Trưởng phòng,muốn tổng hợp kết quả công việc,để báo cáo giám đốc,🔴 Cao,Sprint 2
+US-108,Soạn thảo văn bản,Thư ngỏ mẫu_1,Là Kinh doanh,muốn soạn thư giới thiệu dịch vụ,để tiếp cận khách hàng,🔴 Cao,Sprint 2
+US-109,Soạn thảo văn bản,Quyết định khen thưởng mẫu_1,Là Lãnh đạo,muốn soạn quyết định thưởng,để động viên nhân viên,🔴 Cao,Sprint 2
+US-110,Soạn thảo văn bản,Giấy ủy quyền mẫu_1,Là Nhân viên,muốn tạo mẫu ủy quyền giải quyết việc,để đúng thủ tục pháp lý,🔴 Cao,Sprint 2
+US-111,Soạn thảo văn bản,Soạn công văn mẫu_2,Là Thư ký,muốn sinh mẫu công văn đi,để gửi các đơn vị,🔴 Cao,Sprint 2
+US-112,Soạn thảo văn bản,Tờ trình mua sắm mẫu_2,Là Nhân viên,muốn soạn tờ trình kinh phí,để trình lãnh đạo duyệt,🔴 Cao,Sprint 2
+US-113,Soạn thảo văn bản,Biên bản họp mẫu_2,Là Thư ký,muốn tổng hợp ý kiến thành biên bản,để lưu trữ nội dung họp,🔴 Cao,Sprint 2
+US-114,Soạn thảo văn bản,Thông báo nội bộ mẫu_2,Là HR,muốn soạn thông báo nghỉ lễ,để gửi toàn công ty,🔴 Cao,Sprint 2
+US-115,Soạn thảo văn bản,Giấy mời họp mẫu_2,Là Văn phòng,muốn tạo giấy mời theo danh sách,để mời đại biểu,🔴 Cao,Sprint 2
+US-116,Soạn thảo văn bản,Hợp đồng lao động mẫu_2,Là HR,muốn soạn hợp đồng theo mẫu,để ký kết với nhân viên,🔴 Cao,Sprint 2
+US-117,Soạn thảo văn bản,Báo cáo tháng mẫu_2,Là Trưởng phòng,muốn tổng hợp kết quả công việc,để báo cáo giám đốc,🔴 Cao,Sprint 2
+US-118,Soạn thảo văn bản,Thư ngỏ mẫu_2,Là Kinh doanh,muốn soạn thư giới thiệu dịch vụ,để tiếp cận khách hàng,🔴 Cao,Sprint 2
+US-119,Soạn thảo văn bản,Quyết định khen thưởng mẫu_2,Là Lãnh đạo,muốn soạn quyết định thưởng,để động viên nhân viên,🔴 Cao,Sprint 2
+US-120,Soạn thảo văn bản,Giấy ủy quyền mẫu_2,Là Nhân viên,muốn tạo mẫu ủy quyền giải quyết việc,để đúng thủ tục pháp lý,🔴 Cao,Sprint 2
+US-121,Soạn thảo văn bản,Soạn công văn mẫu_3,Là Thư ký,muốn sinh mẫu công văn đi,để gửi các đơn vị,🔴 Cao,Sprint 2
+US-122,Soạn thảo văn bản,Tờ trình mua sắm mẫu_3,Là Nhân viên,muốn soạn tờ trình kinh phí,để trình lãnh đạo duyệt,🔴 Cao,Sprint 2
+US-123,Soạn thảo văn bản,Biên bản họp mẫu_3,Là Thư ký,muốn tổng hợp ý kiến thành biên bản,để lưu trữ nội dung họp,🔴 Cao,Sprint 2
+US-124,Soạn thảo văn bản,Thông báo nội bộ mẫu_3,Là HR,muốn soạn thông báo nghỉ lễ,để gửi toàn công ty,🔴 Cao,Sprint 2
+US-125,Soạn thảo văn bản,Giấy mời họp mẫu_3,Là Văn phòng,muốn tạo giấy mời theo danh sách,để mời đại biểu,🔴 Cao,Sprint 2
+US-126,Soạn thảo văn bản,Hợp đồng lao động mẫu_3,Là HR,muốn soạn hợp đồng theo mẫu,để ký kết với nhân viên,🔴 Cao,Sprint 2
+US-127,Soạn thảo văn bản,Báo cáo tháng mẫu_3,Là Trưởng phòng,muốn tổng hợp kết quả công việc,để báo cáo giám đốc,🔴 Cao,Sprint 2
+US-128,Soạn thảo văn bản,Thư ngỏ mẫu_3,Là Kinh doanh,muốn soạn thư giới thiệu dịch vụ,để tiếp cận khách hàng,🔴 Cao,Sprint 2
+US-129,Soạn thảo văn bản,Quyết định khen thưởng mẫu_3,Là Lãnh đạo,muốn soạn quyết định thưởng,để động viên nhân viên,🔴 Cao,Sprint 2
+US-130,Soạn thảo văn bản,Giấy ủy quyền mẫu_3,Là Nhân viên,muốn tạo mẫu ủy quyền giải quyết việc,để đúng thủ tục pháp lý,🔴 Cao,Sprint 2
+US-131,Soạn thảo văn bản,Soạn công văn mẫu_4,Là Thư ký,muốn sinh mẫu công văn đi,để gửi các đơn vị,🔴 Cao,Sprint 2
+US-132,Soạn thảo văn bản,Tờ trình mua sắm mẫu_4,Là Nhân viên,muốn soạn tờ trình kinh phí,để trình lãnh đạo duyệt,🔴 Cao,Sprint 2
+US-133,Soạn thảo văn bản,Biên bản họp mẫu_4,Là Thư ký,muốn tổng hợp ý kiến thành biên bản,để lưu trữ nội dung họp,🔴 Cao,Sprint 2
+US-134,Soạn thảo văn bản,Thông báo nội bộ mẫu_4,Là HR,muốn soạn thông báo nghỉ lễ,để gửi toàn công ty,🔴 Cao,Sprint 2
+US-135,Soạn thảo văn bản,Giấy mời họp mẫu_4,Là Văn phòng,muốn tạo giấy mời theo danh sách,để mời đại biểu,🔴 Cao,Sprint 2
+US-136,Soạn thảo văn bản,Hợp đồng lao động mẫu_4,Là HR,muốn soạn hợp đồng theo mẫu,để ký kết với nhân viên,🔴 Cao,Sprint 2
+US-137,Soạn thảo văn bản,Báo cáo tháng mẫu_4,Là Trưởng phòng,muốn tổng hợp kết quả công việc,để báo cáo giám đốc,🔴 Cao,Sprint 2
+US-138,Soạn thảo văn bản,Thư ngỏ mẫu_4,Là Kinh doanh,muốn soạn thư giới thiệu dịch vụ,để tiếp cận khách hàng,🔴 Cao,Sprint 2
+US-139,Soạn thảo văn bản,Quyết định khen thưởng mẫu_4,Là Lãnh đạo,muốn soạn quyết định thưởng,để động viên nhân viên,🔴 Cao,Sprint 2
+US-140,Soạn thảo văn bản,Giấy ủy quyền mẫu_4,Là Nhân viên,muốn tạo mẫu ủy quyền giải quyết việc,để đúng thủ tục pháp lý,🔴 Cao,Sprint 2
+US-141,Soạn thảo văn bản,Soạn công văn mẫu_5,Là Thư ký,muốn sinh mẫu công văn đi,để gửi các đơn vị,🟡 Trung bình,Sprint 2
+US-142,Soạn thảo văn bản,Tờ trình mua sắm mẫu_5,Là Nhân viên,muốn soạn tờ trình kinh phí,để trình lãnh đạo duyệt,🟡 Trung bình,Sprint 2
+US-143,Soạn thảo văn bản,Biên bản họp mẫu_5,Là Thư ký,muốn tổng hợp ý kiến thành biên bản,để lưu trữ nội dung họp,🟡 Trung bình,Sprint 2
+US-144,Soạn thảo văn bản,Thông báo nội bộ mẫu_5,Là HR,muốn soạn thông báo nghỉ lễ,để gửi toàn công ty,🟡 Trung bình,Sprint 2
+US-145,Soạn thảo văn bản,Giấy mời họp mẫu_5,Là Văn phòng,muốn tạo giấy mời theo danh sách,để mời đại biểu,🟡 Trung bình,Sprint 2
+US-146,Soạn thảo văn bản,Hợp đồng lao động mẫu_5,Là HR,muốn soạn hợp đồng theo mẫu,để ký kết với nhân viên,🟡 Trung bình,Sprint 2
+US-147,Soạn thảo văn bản,Báo cáo tháng mẫu_5,Là Trưởng phòng,muốn tổng hợp kết quả công việc,để báo cáo giám đốc,🟡 Trung bình,Sprint 2
+US-148,Soạn thảo văn bản,Thư ngỏ mẫu_5,Là Kinh doanh,muốn soạn thư giới thiệu dịch vụ,để tiếp cận khách hàng,🟡 Trung bình,Sprint 2
+US-149,Soạn thảo văn bản,Quyết định khen thưởng mẫu_5,Là Lãnh đạo,muốn soạn quyết định thưởng,để động viên nhân viên,🟡 Trung bình,Sprint 2
+US-150,Soạn thảo văn bản,Giấy ủy quyền mẫu_5,Là Nhân viên,muốn tạo mẫu ủy quyền giải quyết việc,để đúng thủ tục pháp lý,🟡 Trung bình,Sprint 2
+US-151,Soạn thảo văn bản,Soạn công văn mẫu_6,Là Thư ký,muốn sinh mẫu công văn đi,để gửi các đơn vị,🟡 Trung bình,Sprint 3
+US-152,Soạn thảo văn bản,Tờ trình mua sắm mẫu_6,Là Nhân viên,muốn soạn tờ trình kinh phí,để trình lãnh đạo duyệt,🟡 Trung bình,Sprint 3
+US-153,Soạn thảo văn bản,Biên bản họp mẫu_6,Là Thư ký,muốn tổng hợp ý kiến thành biên bản,để lưu trữ nội dung họp,🟡 Trung bình,Sprint 3
+US-154,Soạn thảo văn bản,Thông báo nội bộ mẫu_6,Là HR,muốn soạn thông báo nghỉ lễ,để gửi toàn công ty,🟡 Trung bình,Sprint 3
+US-155,Soạn thảo văn bản,Giấy mời họp mẫu_6,Là Văn phòng,muốn tạo giấy mời theo danh sách,để mời đại biểu,🟡 Trung bình,Sprint 3
+US-156,Soạn thảo văn bản,Hợp đồng lao động mẫu_6,Là HR,muốn soạn hợp đồng theo mẫu,để ký kết với nhân viên,🟡 Trung bình,Sprint 3
+US-157,Soạn thảo văn bản,Báo cáo tháng mẫu_6,Là Trưởng phòng,muốn tổng hợp kết quả công việc,để báo cáo giám đốc,🟡 Trung bình,Sprint 3
+US-158,Soạn thảo văn bản,Thư ngỏ mẫu_6,Là Kinh doanh,muốn soạn thư giới thiệu dịch vụ,để tiếp cận khách hàng,🟡 Trung bình,Sprint 3
+US-159,Soạn thảo văn bản,Quyết định khen thưởng mẫu_6,Là Lãnh đạo,muốn soạn quyết định thưởng,để động viên nhân viên,🟡 Trung bình,Sprint 3
+US-160,Soạn thảo văn bản,Giấy ủy quyền mẫu_6,Là Nhân viên,muốn tạo mẫu ủy quyền giải quyết việc,để đúng thủ tục pháp lý,🟡 Trung bình,Sprint 3
+US-161,Soạn thảo văn bản,Soạn công văn mẫu_7,Là Thư ký,muốn sinh mẫu công văn đi,để gửi các đơn vị,🟡 Trung bình,Sprint 3
+US-162,Soạn thảo văn bản,Tờ trình mua sắm mẫu_7,Là Nhân viên,muốn soạn tờ trình kinh phí,để trình lãnh đạo duyệt,🟡 Trung bình,Sprint 3
+US-163,Soạn thảo văn bản,Biên bản họp mẫu_7,Là Thư ký,muốn tổng hợp ý kiến thành biên bản,để lưu trữ nội dung họp,🟡 Trung bình,Sprint 3
+US-164,Soạn thảo văn bản,Thông báo nội bộ mẫu_7,Là HR,muốn soạn thông báo nghỉ lễ,để gửi toàn công ty,🟡 Trung bình,Sprint 3
+US-165,Soạn thảo văn bản,Giấy mời họp mẫu_7,Là Văn phòng,muốn tạo giấy mời theo danh sách,để mời đại biểu,🟡 Trung bình,Sprint 3
+US-166,Soạn thảo văn bản,Hợp đồng lao động mẫu_7,Là HR,muốn soạn hợp đồng theo mẫu,để ký kết với nhân viên,🟡 Trung bình,Sprint 3
+US-167,Soạn thảo văn bản,Báo cáo tháng mẫu_7,Là Trưởng phòng,muốn tổng hợp kết quả công việc,để báo cáo giám đốc,🟡 Trung bình,Sprint 3
+US-168,Soạn thảo văn bản,Thư ngỏ mẫu_7,Là Kinh doanh,muốn soạn thư giới thiệu dịch vụ,để tiếp cận khách hàng,🟡 Trung bình,Sprint 3
+US-169,Soạn thảo văn bản,Quyết định khen thưởng mẫu_7,Là Lãnh đạo,muốn soạn quyết định thưởng,để động viên nhân viên,🟡 Trung bình,Sprint 3
+US-170,Soạn thảo văn bản,Giấy ủy quyền mẫu_7,Là Nhân viên,muốn tạo mẫu ủy quyền giải quyết việc,để đúng thủ tục pháp lý,🟡 Trung bình,Sprint 3
+US-171,Soạn thảo văn bản,Soạn công văn mẫu_8,Là Thư ký,muốn sinh mẫu công văn đi,để gửi các đơn vị,🟡 Trung bình,Sprint 3
+US-172,Soạn thảo văn bản,Tờ trình mua sắm mẫu_8,Là Nhân viên,muốn soạn tờ trình kinh phí,để trình lãnh đạo duyệt,🟡 Trung bình,Sprint 3
+US-173,Soạn thảo văn bản,Biên bản họp mẫu_8,Là Thư ký,muốn tổng hợp ý kiến thành biên bản,để lưu trữ nội dung họp,🟡 Trung bình,Sprint 3
+US-174,Soạn thảo văn bản,Thông báo nội bộ mẫu_8,Là HR,muốn soạn thông báo nghỉ lễ,để gửi toàn công ty,🟡 Trung bình,Sprint 3
+US-175,Soạn thảo văn bản,Giấy mời họp mẫu_8,Là Văn phòng,muốn tạo giấy mời theo danh sách,để mời đại biểu,🟡 Trung bình,Sprint 3
+US-176,Soạn thảo văn bản,Hợp đồng lao động mẫu_8,Là HR,muốn soạn hợp đồng theo mẫu,để ký kết với nhân viên,🟡 Trung bình,Sprint 3
+US-177,Soạn thảo văn bản,Báo cáo tháng mẫu_8,Là Trưởng phòng,muốn tổng hợp kết quả công việc,để báo cáo giám đốc,🟡 Trung bình,Sprint 3
+US-178,Soạn thảo văn bản,Thư ngỏ mẫu_8,Là Kinh doanh,muốn soạn thư giới thiệu dịch vụ,để tiếp cận khách hàng,🟡 Trung bình,Sprint 3
+US-179,Soạn thảo văn bản,Quyết định khen thưởng mẫu_8,Là Lãnh đạo,muốn soạn quyết định thưởng,để động viên nhân viên,🟡 Trung bình,Sprint 3
+US-180,Soạn thảo văn bản,Giấy ủy quyền mẫu_8,Là Nhân viên,muốn tạo mẫu ủy quyền giải quyết việc,để đúng thủ tục pháp lý,🟡 Trung bình,Sprint 3
+US-181,Soạn thảo văn bản,Soạn công văn mẫu_9,Là Thư ký,muốn sinh mẫu công văn đi,để gửi các đơn vị,🟡 Trung bình,Sprint 3
+US-182,Soạn thảo văn bản,Tờ trình mua sắm mẫu_9,Là Nhân viên,muốn soạn tờ trình kinh phí,để trình lãnh đạo duyệt,🟡 Trung bình,Sprint 3
+US-183,Soạn thảo văn bản,Biên bản họp mẫu_9,Là Thư ký,muốn tổng hợp ý kiến thành biên bản,để lưu trữ nội dung họp,🟡 Trung bình,Sprint 3
+US-184,Soạn thảo văn bản,Thông báo nội bộ mẫu_9,Là HR,muốn soạn thông báo nghỉ lễ,để gửi toàn công ty,🟡 Trung bình,Sprint 3
+US-185,Soạn thảo văn bản,Giấy mời họp mẫu_9,Là Văn phòng,muốn tạo giấy mời theo danh sách,để mời đại biểu,🟡 Trung bình,Sprint 3
+US-186,Soạn thảo văn bản,Hợp đồng lao động mẫu_9,Là HR,muốn soạn hợp đồng theo mẫu,để ký kết với nhân viên,🟡 Trung bình,Sprint 3
+US-187,Soạn thảo văn bản,Báo cáo tháng mẫu_9,Là Trưởng phòng,muốn tổng hợp kết quả công việc,để báo cáo giám đốc,🟡 Trung bình,Sprint 3
+US-188,Soạn thảo văn bản,Thư ngỏ mẫu_9,Là Kinh doanh,muốn soạn thư giới thiệu dịch vụ,để tiếp cận khách hàng,🟡 Trung bình,Sprint 3
+US-189,Soạn thảo văn bản,Quyết định khen thưởng mẫu_9,Là Lãnh đạo,muốn soạn quyết định thưởng,để động viên nhân viên,🟡 Trung bình,Sprint 3
+US-190,Soạn thảo văn bản,Giấy ủy quyền mẫu_9,Là Nhân viên,muốn tạo mẫu ủy quyền giải quyết việc,để đúng thủ tục pháp lý,🟡 Trung bình,Sprint 3
+US-191,Soạn thảo văn bản,Soạn công văn mẫu_10,Là Thư ký,muốn sinh mẫu công văn đi,để gửi các đơn vị,🟡 Trung bình,Sprint 3
+US-192,Soạn thảo văn bản,Tờ trình mua sắm mẫu_10,Là Nhân viên,muốn soạn tờ trình kinh phí,để trình lãnh đạo duyệt,🟡 Trung bình,Sprint 3
+US-193,Soạn thảo văn bản,Biên bản họp mẫu_10,Là Thư ký,muốn tổng hợp ý kiến thành biên bản,để lưu trữ nội dung họp,🟡 Trung bình,Sprint 3
+US-194,Soạn thảo văn bản,Thông báo nội bộ mẫu_10,Là HR,muốn soạn thông báo nghỉ lễ,để gửi toàn công ty,🟡 Trung bình,Sprint 3
+US-195,Soạn thảo văn bản,Giấy mời họp mẫu_10,Là Văn phòng,muốn tạo giấy mời theo danh sách,để mời đại biểu,🟡 Trung bình,Sprint 3
+US-196,Soạn thảo văn bản,Hợp đồng lao động mẫu_10,Là HR,muốn soạn hợp đồng theo mẫu,để ký kết với nhân viên,🟡 Trung bình,Sprint 3
+US-197,Soạn thảo văn bản,Báo cáo tháng mẫu_10,Là Trưởng phòng,muốn tổng hợp kết quả công việc,để báo cáo giám đốc,🟡 Trung bình,Sprint 3
+US-198,Soạn thảo văn bản,Thư ngỏ mẫu_10,Là Kinh doanh,muốn soạn thư giới thiệu dịch vụ,để tiếp cận khách hàng,🟡 Trung bình,Sprint 3
+US-199,Soạn thảo văn bản,Quyết định khen thưởng mẫu_10,Là Lãnh đạo,muốn soạn quyết định thưởng,để động viên nhân viên,🟡 Trung bình,Sprint 3
+US-200,Soạn thảo văn bản,Giấy ủy quyền mẫu_10,Là Nhân viên,muốn tạo mẫu ủy quyền giải quyết việc,để đúng thủ tục pháp lý,🟡 Trung bình,Sprint 3
+US-201,Quản lý công việc,Trích xuất Task feature_1,Là Manager,muốn liệt kê đầu việc từ chat,để theo dõi tiến độ,🔴 Cao,Sprint 3
+US-202,Quản lý công việc,Nhắc deadline feature_1,Là Nhân viên,muốn nhận tin nhắn nhắc việc sáng 8h,để không quên nhiệm vụ,🔴 Cao,Sprint 3
+US-203,Quản lý công việc,Gán người thực hiện feature_1,Là Trưởng nhóm,muốn chỉ định nhân sự cho task,để rõ ràng trách nhiệm,🔴 Cao,Sprint 3
+US-204,Quản lý công việc,Cập nhật trạng thái feature_1,Là Nhân viên,muốn đổi task sang Done bằng lệnh,để báo cáo hoàn thành,🔴 Cao,Sprint 3
+US-205,Quản lý công việc,Lịch Google feature_1,Là Người dùng,muốn đồng bộ task sang Calendar,để quản lý thời gian,🔴 Cao,Sprint 3
+US-206,Quản lý công việc,Báo cáo Kanban feature_1,Là Quản lý,muốn xem danh sách việc đang làm,để điều phối nguồn lực,🔴 Cao,Sprint 3
+US-207,Quản lý công việc,Ưu tiên việc feature_1,Là Nhân viên,muốn sắp xếp task theo độ khẩn,để xử lý việc quan trọng trước,🔴 Cao,Sprint 3
+US-208,Quản lý công việc,Thống kê năng suất feature_1,Là Lãnh đạo,muốn xem số task hoàn thành trong tuần,để đánh giá nhân viên,🔴 Cao,Sprint 3
+US-209,Quản lý công việc,Trích xuất Task feature_2,Là Manager,muốn liệt kê đầu việc từ chat,để theo dõi tiến độ,🔴 Cao,Sprint 3
+US-210,Quản lý công việc,Nhắc deadline feature_2,Là Nhân viên,muốn nhận tin nhắn nhắc việc sáng 8h,để không quên nhiệm vụ,🔴 Cao,Sprint 3
+US-211,Quản lý công việc,Gán người thực hiện feature_2,Là Trưởng nhóm,muốn chỉ định nhân sự cho task,để rõ ràng trách nhiệm,🔴 Cao,Sprint 3
+US-212,Quản lý công việc,Cập nhật trạng thái feature_2,Là Nhân viên,muốn đổi task sang Done bằng lệnh,để báo cáo hoàn thành,🔴 Cao,Sprint 3
+US-213,Quản lý công việc,Lịch Google feature_2,Là Người dùng,muốn đồng bộ task sang Calendar,để quản lý thời gian,🔴 Cao,Sprint 3
+US-214,Quản lý công việc,Báo cáo Kanban feature_2,Là Quản lý,muốn xem danh sách việc đang làm,để điều phối nguồn lực,🔴 Cao,Sprint 3
+US-215,Quản lý công việc,Ưu tiên việc feature_2,Là Nhân viên,muốn sắp xếp task theo độ khẩn,để xử lý việc quan trọng trước,🔴 Cao,Sprint 3
+US-216,Quản lý công việc,Thống kê năng suất feature_2,Là Lãnh đạo,muốn xem số task hoàn thành trong tuần,để đánh giá nhân viên,🔴 Cao,Sprint 3
+US-217,Quản lý công việc,Trích xuất Task feature_3,Là Manager,muốn liệt kê đầu việc từ chat,để theo dõi tiến độ,🔴 Cao,Sprint 3
+US-218,Quản lý công việc,Nhắc deadline feature_3,Là Nhân viên,muốn nhận tin nhắn nhắc việc sáng 8h,để không quên nhiệm vụ,🔴 Cao,Sprint 3
+US-219,Quản lý công việc,Gán người thực hiện feature_3,Là Trưởng nhóm,muốn chỉ định nhân sự cho task,để rõ ràng trách nhiệm,🔴 Cao,Sprint 3
+US-220,Quản lý công việc,Cập nhật trạng thái feature_3,Là Nhân viên,muốn đổi task sang Done bằng lệnh,để báo cáo hoàn thành,🔴 Cao,Sprint 3
+US-221,Quản lý công việc,Lịch Google feature_3,Là Người dùng,muốn đồng bộ task sang Calendar,để quản lý thời gian,🔴 Cao,Sprint 3
+US-222,Quản lý công việc,Báo cáo Kanban feature_3,Là Quản lý,muốn xem danh sách việc đang làm,để điều phối nguồn lực,🔴 Cao,Sprint 3
+US-223,Quản lý công việc,Ưu tiên việc feature_3,Là Nhân viên,muốn sắp xếp task theo độ khẩn,để xử lý việc quan trọng trước,🔴 Cao,Sprint 3
+US-224,Quản lý công việc,Thống kê năng suất feature_3,Là Lãnh đạo,muốn xem số task hoàn thành trong tuần,để đánh giá nhân viên,🔴 Cao,Sprint 3
+US-225,Quản lý công việc,Trích xuất Task feature_4,Là Manager,muốn liệt kê đầu việc từ chat,để theo dõi tiến độ,🔴 Cao,Sprint 3
+US-226,Quản lý công việc,Nhắc deadline feature_4,Là Nhân viên,muốn nhận tin nhắn nhắc việc sáng 8h,để không quên nhiệm vụ,🔴 Cao,Sprint 3
+US-227,Quản lý công việc,Gán người thực hiện feature_4,Là Trưởng nhóm,muốn chỉ định nhân sự cho task,để rõ ràng trách nhiệm,🔴 Cao,Sprint 3
+US-228,Quản lý công việc,Cập nhật trạng thái feature_4,Là Nhân viên,muốn đổi task sang Done bằng lệnh,để báo cáo hoàn thành,🔴 Cao,Sprint 3
+US-229,Quản lý công việc,Lịch Google feature_4,Là Người dùng,muốn đồng bộ task sang Calendar,để quản lý thời gian,🔴 Cao,Sprint 3
+US-230,Quản lý công việc,Báo cáo Kanban feature_4,Là Quản lý,muốn xem danh sách việc đang làm,để điều phối nguồn lực,🔴 Cao,Sprint 3
+US-231,Quản lý công việc,Ưu tiên việc feature_4,Là Nhân viên,muốn sắp xếp task theo độ khẩn,để xử lý việc quan trọng trước,🟡 Trung bình,Sprint 3
+US-232,Quản lý công việc,Thống kê năng suất feature_4,Là Lãnh đạo,muốn xem số task hoàn thành trong tuần,để đánh giá nhân viên,🟡 Trung bình,Sprint 3
+US-233,Quản lý công việc,Trích xuất Task feature_5,Là Manager,muốn liệt kê đầu việc từ chat,để theo dõi tiến độ,🟡 Trung bình,Sprint 3
+US-234,Quản lý công việc,Nhắc deadline feature_5,Là Nhân viên,muốn nhận tin nhắn nhắc việc sáng 8h,để không quên nhiệm vụ,🟡 Trung bình,Sprint 3
+US-235,Quản lý công việc,Gán người thực hiện feature_5,Là Trưởng nhóm,muốn chỉ định nhân sự cho task,để rõ ràng trách nhiệm,🟡 Trung bình,Sprint 3
+US-236,Quản lý công việc,Cập nhật trạng thái feature_5,Là Nhân viên,muốn đổi task sang Done bằng lệnh,để báo cáo hoàn thành,🟡 Trung bình,Sprint 3
+US-237,Quản lý công việc,Lịch Google feature_5,Là Người dùng,muốn đồng bộ task sang Calendar,để quản lý thời gian,🟡 Trung bình,Sprint 3
+US-238,Quản lý công việc,Báo cáo Kanban feature_5,Là Quản lý,muốn xem danh sách việc đang làm,để điều phối nguồn lực,🟡 Trung bình,Sprint 3
+US-239,Quản lý công việc,Ưu tiên việc feature_5,Là Nhân viên,muốn sắp xếp task theo độ khẩn,để xử lý việc quan trọng trước,🟡 Trung bình,Sprint 3
+US-240,Quản lý công việc,Thống kê năng suất feature_5,Là Lãnh đạo,muốn xem số task hoàn thành trong tuần,để đánh giá nhân viên,🟡 Trung bình,Sprint 3
+US-241,Quản lý công việc,Trích xuất Task feature_6,Là Manager,muốn liệt kê đầu việc từ chat,để theo dõi tiến độ,🟡 Trung bình,Sprint 4
+US-242,Quản lý công việc,Nhắc deadline feature_6,Là Nhân viên,muốn nhận tin nhắn nhắc việc sáng 8h,để không quên nhiệm vụ,🟡 Trung bình,Sprint 4
+US-243,Quản lý công việc,Gán người thực hiện feature_6,Là Trưởng nhóm,muốn chỉ định nhân sự cho task,để rõ ràng trách nhiệm,🟡 Trung bình,Sprint 4
+US-244,Quản lý công việc,Cập nhật trạng thái feature_6,Là Nhân viên,muốn đổi task sang Done bằng lệnh,để báo cáo hoàn thành,🟡 Trung bình,Sprint 4
+US-245,Quản lý công việc,Lịch Google feature_6,Là Người dùng,muốn đồng bộ task sang Calendar,để quản lý thời gian,🟡 Trung bình,Sprint 4
+US-246,Quản lý công việc,Báo cáo Kanban feature_6,Là Quản lý,muốn xem danh sách việc đang làm,để điều phối nguồn lực,🟡 Trung bình,Sprint 4
+US-247,Quản lý công việc,Ưu tiên việc feature_6,Là Nhân viên,muốn sắp xếp task theo độ khẩn,để xử lý việc quan trọng trước,🟡 Trung bình,Sprint 4
+US-248,Quản lý công việc,Thống kê năng suất feature_6,Là Lãnh đạo,muốn xem số task hoàn thành trong tuần,để đánh giá nhân viên,🟡 Trung bình,Sprint 4
+US-249,Quản lý công việc,Trích xuất Task feature_7,Là Manager,muốn liệt kê đầu việc từ chat,để theo dõi tiến độ,🟡 Trung bình,Sprint 4
+US-250,Quản lý công việc,Nhắc deadline feature_7,Là Nhân viên,muốn nhận tin nhắn nhắc việc sáng 8h,để không quên nhiệm vụ,🟡 Trung bình,Sprint 4
+US-251,Quản lý công việc,Gán người thực hiện feature_7,Là Trưởng nhóm,muốn chỉ định nhân sự cho task,để rõ ràng trách nhiệm,🟡 Trung bình,Sprint 4
+US-252,Quản lý công việc,Cập nhật trạng thái feature_7,Là Nhân viên,muốn đổi task sang Done bằng lệnh,để báo cáo hoàn thành,🟡 Trung bình,Sprint 4
+US-253,Quản lý công việc,Lịch Google feature_7,Là Người dùng,muốn đồng bộ task sang Calendar,để quản lý thời gian,🟡 Trung bình,Sprint 4
+US-254,Quản lý công việc,Báo cáo Kanban feature_7,Là Quản lý,muốn xem danh sách việc đang làm,để điều phối nguồn lực,🟡 Trung bình,Sprint 4
+US-255,Quản lý công việc,Ưu tiên việc feature_7,Là Nhân viên,muốn sắp xếp task theo độ khẩn,để xử lý việc quan trọng trước,🟡 Trung bình,Sprint 4
+US-256,Quản lý công việc,Thống kê năng suất feature_7,Là Lãnh đạo,muốn xem số task hoàn thành trong tuần,để đánh giá nhân viên,🟡 Trung bình,Sprint 4
+US-257,Quản lý công việc,Trích xuất Task feature_8,Là Manager,muốn liệt kê đầu việc từ chat,để theo dõi tiến độ,🟡 Trung bình,Sprint 4
+US-258,Quản lý công việc,Nhắc deadline feature_8,Là Nhân viên,muốn nhận tin nhắn nhắc việc sáng 8h,để không quên nhiệm vụ,🟡 Trung bình,Sprint 4
+US-259,Quản lý công việc,Gán người thực hiện feature_8,Là Trưởng nhóm,muốn chỉ định nhân sự cho task,để rõ ràng trách nhiệm,🟡 Trung bình,Sprint 4
+US-260,Quản lý công việc,Cập nhật trạng thái feature_8,Là Nhân viên,muốn đổi task sang Done bằng lệnh,để báo cáo hoàn thành,🟡 Trung bình,Sprint 4
+US-261,Quản lý công việc,Lịch Google feature_8,Là Người dùng,muốn đồng bộ task sang Calendar,để quản lý thời gian,🟡 Trung bình,Sprint 4
+US-262,Quản lý công việc,Báo cáo Kanban feature_8,Là Quản lý,muốn xem danh sách việc đang làm,để điều phối nguồn lực,🟡 Trung bình,Sprint 4
+US-263,Quản lý công việc,Ưu tiên việc feature_8,Là Nhân viên,muốn sắp xếp task theo độ khẩn,để xử lý việc quan trọng trước,🟡 Trung bình,Sprint 4
+US-264,Quản lý công việc,Thống kê năng suất feature_8,Là Lãnh đạo,muốn xem số task hoàn thành trong tuần,để đánh giá nhân viên,🟡 Trung bình,Sprint 4
+US-265,Quản lý công việc,Trích xuất Task feature_9,Là Manager,muốn liệt kê đầu việc từ chat,để theo dõi tiến độ,🟡 Trung bình,Sprint 4
+US-266,Quản lý công việc,Nhắc deadline feature_9,Là Nhân viên,muốn nhận tin nhắn nhắc việc sáng 8h,để không quên nhiệm vụ,🟡 Trung bình,Sprint 4
+US-267,Quản lý công việc,Gán người thực hiện feature_9,Là Trưởng nhóm,muốn chỉ định nhân sự cho task,để rõ ràng trách nhiệm,🟡 Trung bình,Sprint 4
+US-268,Quản lý công việc,Cập nhật trạng thái feature_9,Là Nhân viên,muốn đổi task sang Done bằng lệnh,để báo cáo hoàn thành,🟡 Trung bình,Sprint 4
+US-269,Quản lý công việc,Lịch Google feature_9,Là Người dùng,muốn đồng bộ task sang Calendar,để quản lý thời gian,🟡 Trung bình,Sprint 4
+US-270,Quản lý công việc,Báo cáo Kanban feature_9,Là Quản lý,muốn xem danh sách việc đang làm,để điều phối nguồn lực,🟡 Trung bình,Sprint 4
+US-271,Quản lý công việc,Ưu tiên việc feature_9,Là Nhân viên,muốn sắp xếp task theo độ khẩn,để xử lý việc quan trọng trước,🟡 Trung bình,Sprint 4
+US-272,Quản lý công việc,Thống kê năng suất feature_9,Là Lãnh đạo,muốn xem số task hoàn thành trong tuần,để đánh giá nhân viên,🟡 Trung bình,Sprint 4
+US-273,Quản lý công việc,Trích xuất Task feature_10,Là Manager,muốn liệt kê đầu việc từ chat,để theo dõi tiến độ,🟡 Trung bình,Sprint 4
+US-274,Quản lý công việc,Nhắc deadline feature_10,Là Nhân viên,muốn nhận tin nhắn nhắc việc sáng 8h,để không quên nhiệm vụ,🟡 Trung bình,Sprint 4
+US-275,Quản lý công việc,Gán người thực hiện feature_10,Là Trưởng nhóm,muốn chỉ định nhân sự cho task,để rõ ràng trách nhiệm,🟡 Trung bình,Sprint 4
+US-276,Quản lý công việc,Cập nhật trạng thái feature_10,Là Nhân viên,muốn đổi task sang Done bằng lệnh,để báo cáo hoàn thành,🟡 Trung bình,Sprint 4
+US-277,Quản lý công việc,Lịch Google feature_10,Là Người dùng,muốn đồng bộ task sang Calendar,để quản lý thời gian,🟡 Trung bình,Sprint 4
+US-278,Quản lý công việc,Báo cáo Kanban feature_10,Là Quản lý,muốn xem danh sách việc đang làm,để điều phối nguồn lực,🟡 Trung bình,Sprint 4
+US-279,Quản lý công việc,Ưu tiên việc feature_10,Là Nhân viên,muốn sắp xếp task theo độ khẩn,để xử lý việc quan trọng trước,🟡 Trung bình,Sprint 4
+US-280,Quản lý công việc,Thống kê năng suất feature_10,Là Lãnh đạo,muốn xem số task hoàn thành trong tuần,để đánh giá nhân viên,🟡 Trung bình,Sprint 4
+US-281,Tích hợp hệ thống,Kết nối Gmail module_1,Là Nhân viên,muốn đọc email mới qua bot,để xử lý nhanh,🟡 Trung bình,Sprint 3
+US-282,Tích hợp hệ thống,Gửi file Drive module_1,Là Người dùng,muốn upload file soạn thảo lên Google Drive,để lưu trữ đám mây,🟡 Trung bình,Sprint 3
+US-283,Tích hợp hệ thống,Webhook Jira module_1,Là Dev,muốn nhận thông báo ticket mới,để xử lý yêu cầu kỹ thuật,🟡 Trung bình,Sprint 3
+US-284,Tích hợp hệ thống,Bot Telegram module_1,Là Người dùng,muốn gửi lệnh điều khiển qua Telegram,để làm việc di động,🟡 Trung bình,Sprint 3
+US-285,Tích hợp hệ thống,Zalo Integration module_1,Là Sales,muốn nhận tin nhắn khách hàng qua Zalo,để phản hồi tập trung,🟡 Trung bình,Sprint 3
+US-286,Tích hợp hệ thống,API nội bộ module_1,Là Developer,muốn kết nối với database công ty,để lấy dữ liệu nhân sự,🟡 Trung bình,Sprint 3
+US-287,Tích hợp hệ thống,Hệ thống chữ ký số module_1,Là Lãnh đạo,muốn tích hợp ký file PDF,để ban hành văn bản điện tử,🟡 Trung bình,Sprint 3
+US-288,Tích hợp hệ thống,Kết nối Gmail module_2,Là Nhân viên,muốn đọc email mới qua bot,để xử lý nhanh,🟡 Trung bình,Sprint 3
+US-289,Tích hợp hệ thống,Gửi file Drive module_2,Là Người dùng,muốn upload file soạn thảo lên Google Drive,để lưu trữ đám mây,🟡 Trung bình,Sprint 3
+US-290,Tích hợp hệ thống,Webhook Jira module_2,Là Dev,muốn nhận thông báo ticket mới,để xử lý yêu cầu kỹ thuật,🟡 Trung bình,Sprint 3
+US-291,Tích hợp hệ thống,Bot Telegram module_2,Là Người dùng,muốn gửi lệnh điều khiển qua Telegram,để làm việc di động,🟡 Trung bình,Sprint 3
+US-292,Tích hợp hệ thống,Zalo Integration module_2,Là Sales,muốn nhận tin nhắn khách hàng qua Zalo,để phản hồi tập trung,🟡 Trung bình,Sprint 3
+US-293,Tích hợp hệ thống,API nội bộ module_2,Là Developer,muốn kết nối với database công ty,để lấy dữ liệu nhân sự,🟡 Trung bình,Sprint 3
+US-294,Tích hợp hệ thống,Hệ thống chữ ký số module_2,Là Lãnh đạo,muốn tích hợp ký file PDF,để ban hành văn bản điện tử,🟡 Trung bình,Sprint 3
+US-295,Tích hợp hệ thống,Kết nối Gmail module_3,Là Nhân viên,muốn đọc email mới qua bot,để xử lý nhanh,🟡 Trung bình,Sprint 3
+US-296,Tích hợp hệ thống,Gửi file Drive module_3,Là Người dùng,muốn upload file soạn thảo lên Google Drive,để lưu trữ đám mây,🟡 Trung bình,Sprint 3
+US-297,Tích hợp hệ thống,Webhook Jira module_3,Là Dev,muốn nhận thông báo ticket mới,để xử lý yêu cầu kỹ thuật,🟡 Trung bình,Sprint 3
+US-298,Tích hợp hệ thống,Bot Telegram module_3,Là Người dùng,muốn gửi lệnh điều khiển qua Telegram,để làm việc di động,🟡 Trung bình,Sprint 3
+US-299,Tích hợp hệ thống,Zalo Integration module_3,Là Sales,muốn nhận tin nhắn khách hàng qua Zalo,để phản hồi tập trung,🟡 Trung bình,Sprint 3
+US-300,Tích hợp hệ thống,API nội bộ module_3,Là Developer,muốn kết nối với database công ty,để lấy dữ liệu nhân sự,🟡 Trung bình,Sprint 3
+US-301,Tích hợp hệ thống,Hệ thống chữ ký số module_3,Là Lãnh đạo,muốn tích hợp ký file PDF,để ban hành văn bản điện tử,🟡 Trung bình,Sprint 3
+US-302,Tích hợp hệ thống,Kết nối Gmail module_4,Là Nhân viên,muốn đọc email mới qua bot,để xử lý nhanh,🟡 Trung bình,Sprint 3
+US-303,Tích hợp hệ thống,Gửi file Drive module_4,Là Người dùng,muốn upload file soạn thảo lên Google Drive,để lưu trữ đám mây,🟡 Trung bình,Sprint 3
+US-304,Tích hợp hệ thống,Webhook Jira module_4,Là Dev,muốn nhận thông báo ticket mới,để xử lý yêu cầu kỹ thuật,🟡 Trung bình,Sprint 3
+US-305,Tích hợp hệ thống,Bot Telegram module_4,Là Người dùng,muốn gửi lệnh điều khiển qua Telegram,để làm việc di động,🟡 Trung bình,Sprint 3
+US-306,Tích hợp hệ thống,Zalo Integration module_4,Là Sales,muốn nhận tin nhắn khách hàng qua Zalo,để phản hồi tập trung,🟡 Trung bình,Sprint 3
+US-307,Tích hợp hệ thống,API nội bộ module_4,Là Developer,muốn kết nối với database công ty,để lấy dữ liệu nhân sự,🟡 Trung bình,Sprint 3
+US-308,Tích hợp hệ thống,Hệ thống chữ ký số module_4,Là Lãnh đạo,muốn tích hợp ký file PDF,để ban hành văn bản điện tử,🟡 Trung bình,Sprint 3
+US-309,Tích hợp hệ thống,Kết nối Gmail module_5,Là Nhân viên,muốn đọc email mới qua bot,để xử lý nhanh,🟡 Trung bình,Sprint 3
+US-310,Tích hợp hệ thống,Gửi file Drive module_5,Là Người dùng,muốn upload file soạn thảo lên Google Drive,để lưu trữ đám mây,🟡 Trung bình,Sprint 3
+US-311,Tích hợp hệ thống,Webhook Jira module_5,Là Dev,muốn nhận thông báo ticket mới,để xử lý yêu cầu kỹ thuật,🟡 Trung bình,Sprint 3
+US-312,Tích hợp hệ thống,Bot Telegram module_5,Là Người dùng,muốn gửi lệnh điều khiển qua Telegram,để làm việc di động,🟡 Trung bình,Sprint 3
+US-313,Tích hợp hệ thống,Zalo Integration module_5,Là Sales,muốn nhận tin nhắn khách hàng qua Zalo,để phản hồi tập trung,🟡 Trung bình,Sprint 3
+US-314,Tích hợp hệ thống,API nội bộ module_5,Là Developer,muốn kết nối với database công ty,để lấy dữ liệu nhân sự,🟡 Trung bình,Sprint 3
+US-315,Tích hợp hệ thống,Hệ thống chữ ký số module_5,Là Lãnh đạo,muốn tích hợp ký file PDF,để ban hành văn bản điện tử,🟡 Trung bình,Sprint 3
+US-316,Tích hợp hệ thống,Kết nối Gmail module_6,Là Nhân viên,muốn đọc email mới qua bot,để xử lý nhanh,🟡 Trung bình,Sprint 4
+US-317,Tích hợp hệ thống,Gửi file Drive module_6,Là Người dùng,muốn upload file soạn thảo lên Google Drive,để lưu trữ đám mây,🟡 Trung bình,Sprint 4
+US-318,Tích hợp hệ thống,Webhook Jira module_6,Là Dev,muốn nhận thông báo ticket mới,để xử lý yêu cầu kỹ thuật,🟡 Trung bình,Sprint 4
+US-319,Tích hợp hệ thống,Bot Telegram module_6,Là Người dùng,muốn gửi lệnh điều khiển qua Telegram,để làm việc di động,🟡 Trung bình,Sprint 4
+US-320,Tích hợp hệ thống,Zalo Integration module_6,Là Sales,muốn nhận tin nhắn khách hàng qua Zalo,để phản hồi tập trung,🟡 Trung bình,Sprint 4
+US-321,Tích hợp hệ thống,API nội bộ module_6,Là Developer,muốn kết nối với database công ty,để lấy dữ liệu nhân sự,🟡 Trung bình,Sprint 4
+US-322,Tích hợp hệ thống,Hệ thống chữ ký số module_6,Là Lãnh đạo,muốn tích hợp ký file PDF,để ban hành văn bản điện tử,🟡 Trung bình,Sprint 4
+US-323,Tích hợp hệ thống,Kết nối Gmail module_7,Là Nhân viên,muốn đọc email mới qua bot,để xử lý nhanh,🟡 Trung bình,Sprint 4
+US-324,Tích hợp hệ thống,Gửi file Drive module_7,Là Người dùng,muốn upload file soạn thảo lên Google Drive,để lưu trữ đám mây,🟡 Trung bình,Sprint 4
+US-325,Tích hợp hệ thống,Webhook Jira module_7,Là Dev,muốn nhận thông báo ticket mới,để xử lý yêu cầu kỹ thuật,🟡 Trung bình,Sprint 4
+US-326,Tích hợp hệ thống,Bot Telegram module_7,Là Người dùng,muốn gửi lệnh điều khiển qua Telegram,để làm việc di động,🟡 Trung bình,Sprint 4
+US-327,Tích hợp hệ thống,Zalo Integration module_7,Là Sales,muốn nhận tin nhắn khách hàng qua Zalo,để phản hồi tập trung,🟡 Trung bình,Sprint 4
+US-328,Tích hợp hệ thống,API nội bộ module_7,Là Developer,muốn kết nối với database công ty,để lấy dữ liệu nhân sự,🟡 Trung bình,Sprint 4
+US-329,Tích hợp hệ thống,Hệ thống chữ ký số module_7,Là Lãnh đạo,muốn tích hợp ký file PDF,để ban hành văn bản điện tử,🟡 Trung bình,Sprint 4
+US-330,Tích hợp hệ thống,Kết nối Gmail module_8,Là Nhân viên,muốn đọc email mới qua bot,để xử lý nhanh,🟡 Trung bình,Sprint 4
+US-331,Tích hợp hệ thống,Gửi file Drive module_8,Là Người dùng,muốn upload file soạn thảo lên Google Drive,để lưu trữ đám mây,🟡 Trung bình,Sprint 4
+US-332,Tích hợp hệ thống,Webhook Jira module_8,Là Dev,muốn nhận thông báo ticket mới,để xử lý yêu cầu kỹ thuật,🟡 Trung bình,Sprint 4
+US-333,Tích hợp hệ thống,Bot Telegram module_8,Là Người dùng,muốn gửi lệnh điều khiển qua Telegram,để làm việc di động,🟡 Trung bình,Sprint 4
+US-334,Tích hợp hệ thống,Zalo Integration module_8,Là Sales,muốn nhận tin nhắn khách hàng qua Zalo,để phản hồi tập trung,🟡 Trung bình,Sprint 4
+US-335,Tích hợp hệ thống,API nội bộ module_8,Là Developer,muốn kết nối với database công ty,để lấy dữ liệu nhân sự,🟡 Trung bình,Sprint 4
+US-336,Tích hợp hệ thống,Hệ thống chữ ký số module_8,Là Lãnh đạo,muốn tích hợp ký file PDF,để ban hành văn bản điện tử,🟡 Trung bình,Sprint 4
+US-337,Tích hợp hệ thống,Kết nối Gmail module_9,Là Nhân viên,muốn đọc email mới qua bot,để xử lý nhanh,🟡 Trung bình,Sprint 4
+US-338,Tích hợp hệ thống,Gửi file Drive module_9,Là Người dùng,muốn upload file soạn thảo lên Google Drive,để lưu trữ đám mây,🟡 Trung bình,Sprint 4
+US-339,Tích hợp hệ thống,Webhook Jira module_9,Là Dev,muốn nhận thông báo ticket mới,để xử lý yêu cầu kỹ thuật,🟡 Trung bình,Sprint 4
+US-340,Tích hợp hệ thống,Bot Telegram module_9,Là Người dùng,muốn gửi lệnh điều khiển qua Telegram,để làm việc di động,🟡 Trung bình,Sprint 4
+US-341,Tích hợp hệ thống,Zalo Integration module_9,Là Sales,muốn nhận tin nhắn khách hàng qua Zalo,để phản hồi tập trung,🟡 Trung bình,Sprint 4
+US-342,Tích hợp hệ thống,API nội bộ module_9,Là Developer,muốn kết nối với database công ty,để lấy dữ liệu nhân sự,🟡 Trung bình,Sprint 4
+US-343,Tích hợp hệ thống,Hệ thống chữ ký số module_9,Là Lãnh đạo,muốn tích hợp ký file PDF,để ban hành văn bản điện tử,🟡 Trung bình,Sprint 4
+US-344,Tích hợp hệ thống,Kết nối Gmail module_10,Là Nhân viên,muốn đọc email mới qua bot,để xử lý nhanh,🟡 Trung bình,Sprint 4
+US-345,Tích hợp hệ thống,Gửi file Drive module_10,Là Người dùng,muốn upload file soạn thảo lên Google Drive,để lưu trữ đám mây,🟡 Trung bình,Sprint 4
+US-346,Tích hợp hệ thống,Webhook Jira module_10,Là Dev,muốn nhận thông báo ticket mới,để xử lý yêu cầu kỹ thuật,🟡 Trung bình,Sprint 4
+US-347,Tích hợp hệ thống,Bot Telegram module_10,Là Người dùng,muốn gửi lệnh điều khiển qua Telegram,để làm việc di động,🟡 Trung bình,Sprint 4
+US-348,Tích hợp hệ thống,Zalo Integration module_10,Là Sales,muốn nhận tin nhắn khách hàng qua Zalo,để phản hồi tập trung,🟡 Trung bình,Sprint 4
+US-349,Tích hợp hệ thống,API nội bộ module_10,Là Developer,muốn kết nối với database công ty,để lấy dữ liệu nhân sự,🟡 Trung bình,Sprint 4
+US-350,Tích hợp hệ thống,Hệ thống chữ ký số module_10,Là Lãnh đạo,muốn tích hợp ký file PDF,để ban hành văn bản điện tử,🟡 Trung bình,Sprint 4
+US-351,Bảo mật & Dữ liệu,Mã hóa lịch sử rule_1,Là IT,muốn mã hóa database chat,để bảo vệ quyền riêng tư,🔴 Cao,Sprint 2
+US-352,Bảo mật & Dữ liệu,Phân quyền Admin rule_1,Là Quản trị viên,muốn chỉ cho phép admin sửa config,để tránh sai sót,🔴 Cao,Sprint 2
+US-353,Bảo mật & Dữ liệu,Xác thực 2 lớp rule_1,Là Người dùng,muốn đăng nhập cần mã OTP,để tăng cường bảo mật,🔴 Cao,Sprint 2
+US-354,Bảo mật & Dữ liệu,Xóa dữ liệu cũ rule_1,Là Quản trị viên,muốn tự động xóa log sau 30 ngày,để giảm dung lượng,🔴 Cao,Sprint 2
+US-355,Bảo mật & Dữ liệu,Audit Log rule_1,Là Bảo mật,muốn ghi lại ai đã truy cập file nào,để kiểm tra khi có sự cố,🔴 Cao,Sprint 2
+US-356,Bảo mật & Dữ liệu,Chặn User lạ rule_1,Là Hệ thống,muốn từ chối tin nhắn từ ID lạ,để tránh spam,🔴 Cao,Sprint 2
+US-357,Bảo mật & Dữ liệu,Mã hóa lịch sử rule_2,Là IT,muốn mã hóa database chat,để bảo vệ quyền riêng tư,🔴 Cao,Sprint 2
+US-358,Bảo mật & Dữ liệu,Phân quyền Admin rule_2,Là Quản trị viên,muốn chỉ cho phép admin sửa config,để tránh sai sót,🔴 Cao,Sprint 2
+US-359,Bảo mật & Dữ liệu,Xác thực 2 lớp rule_2,Là Người dùng,muốn đăng nhập cần mã OTP,để tăng cường bảo mật,🔴 Cao,Sprint 2
+US-360,Bảo mật & Dữ liệu,Xóa dữ liệu cũ rule_2,Là Quản trị viên,muốn tự động xóa log sau 30 ngày,để giảm dung lượng,🔴 Cao,Sprint 2
+US-361,Bảo mật & Dữ liệu,Audit Log rule_2,Là Bảo mật,muốn ghi lại ai đã truy cập file nào,để kiểm tra khi có sự cố,🔴 Cao,Sprint 2
+US-362,Bảo mật & Dữ liệu,Chặn User lạ rule_2,Là Hệ thống,muốn từ chối tin nhắn từ ID lạ,để tránh spam,🔴 Cao,Sprint 2
+US-363,Bảo mật & Dữ liệu,Mã hóa lịch sử rule_3,Là IT,muốn mã hóa database chat,để bảo vệ quyền riêng tư,🔴 Cao,Sprint 2
+US-364,Bảo mật & Dữ liệu,Phân quyền Admin rule_3,Là Quản trị viên,muốn chỉ cho phép admin sửa config,để tránh sai sót,🔴 Cao,Sprint 2
+US-365,Bảo mật & Dữ liệu,Xác thực 2 lớp rule_3,Là Người dùng,muốn đăng nhập cần mã OTP,để tăng cường bảo mật,🔴 Cao,Sprint 2
+US-366,Bảo mật & Dữ liệu,Xóa dữ liệu cũ rule_3,Là Quản trị viên,muốn tự động xóa log sau 30 ngày,để giảm dung lượng,🔴 Cao,Sprint 2
+US-367,Bảo mật & Dữ liệu,Audit Log rule_3,Là Bảo mật,muốn ghi lại ai đã truy cập file nào,để kiểm tra khi có sự cố,🔴 Cao,Sprint 2
+US-368,Bảo mật & Dữ liệu,Chặn User lạ rule_3,Là Hệ thống,muốn từ chối tin nhắn từ ID lạ,để tránh spam,🔴 Cao,Sprint 2
+US-369,Bảo mật & Dữ liệu,Mã hóa lịch sử rule_4,Là IT,muốn mã hóa database chat,để bảo vệ quyền riêng tư,🔴 Cao,Sprint 2
+US-370,Bảo mật & Dữ liệu,Phân quyền Admin rule_4,Là Quản trị viên,muốn chỉ cho phép admin sửa config,để tránh sai sót,🔴 Cao,Sprint 2
+US-371,Bảo mật & Dữ liệu,Xác thực 2 lớp rule_4,Là Người dùng,muốn đăng nhập cần mã OTP,để tăng cường bảo mật,🟡 Trung bình,Sprint 2
+US-372,Bảo mật & Dữ liệu,Xóa dữ liệu cũ rule_4,Là Quản trị viên,muốn tự động xóa log sau 30 ngày,để giảm dung lượng,🟡 Trung bình,Sprint 2
+US-373,Bảo mật & Dữ liệu,Audit Log rule_4,Là Bảo mật,muốn ghi lại ai đã truy cập file nào,để kiểm tra khi có sự cố,🟡 Trung bình,Sprint 2
+US-374,Bảo mật & Dữ liệu,Chặn User lạ rule_4,Là Hệ thống,muốn từ chối tin nhắn từ ID lạ,để tránh spam,🟡 Trung bình,Sprint 2
+US-375,Bảo mật & Dữ liệu,Mã hóa lịch sử rule_5,Là IT,muốn mã hóa database chat,để bảo vệ quyền riêng tư,🟡 Trung bình,Sprint 2
+US-376,Bảo mật & Dữ liệu,Phân quyền Admin rule_5,Là Quản trị viên,muốn chỉ cho phép admin sửa config,để tránh sai sót,🟡 Trung bình,Sprint 2
+US-377,Bảo mật & Dữ liệu,Xác thực 2 lớp rule_5,Là Người dùng,muốn đăng nhập cần mã OTP,để tăng cường bảo mật,🟡 Trung bình,Sprint 2
+US-378,Bảo mật & Dữ liệu,Xóa dữ liệu cũ rule_5,Là Quản trị viên,muốn tự động xóa log sau 30 ngày,để giảm dung lượng,🟡 Trung bình,Sprint 2
+US-379,Bảo mật & Dữ liệu,Audit Log rule_5,Là Bảo mật,muốn ghi lại ai đã truy cập file nào,để kiểm tra khi có sự cố,🟡 Trung bình,Sprint 2
+US-380,Bảo mật & Dữ liệu,Chặn User lạ rule_5,Là Hệ thống,muốn từ chối tin nhắn từ ID lạ,để tránh spam,🟡 Trung bình,Sprint 2
+US-381,Bảo mật & Dữ liệu,Mã hóa lịch sử rule_6,Là IT,muốn mã hóa database chat,để bảo vệ quyền riêng tư,🟡 Trung bình,Sprint 4
+US-382,Bảo mật & Dữ liệu,Phân quyền Admin rule_6,Là Quản trị viên,muốn chỉ cho phép admin sửa config,để tránh sai sót,🟡 Trung bình,Sprint 4
+US-383,Bảo mật & Dữ liệu,Xác thực 2 lớp rule_6,Là Người dùng,muốn đăng nhập cần mã OTP,để tăng cường bảo mật,🟡 Trung bình,Sprint 4
+US-384,Bảo mật & Dữ liệu,Xóa dữ liệu cũ rule_6,Là Quản trị viên,muốn tự động xóa log sau 30 ngày,để giảm dung lượng,🟡 Trung bình,Sprint 4
+US-385,Bảo mật & Dữ liệu,Audit Log rule_6,Là Bảo mật,muốn ghi lại ai đã truy cập file nào,để kiểm tra khi có sự cố,🟡 Trung bình,Sprint 4
+US-386,Bảo mật & Dữ liệu,Chặn User lạ rule_6,Là Hệ thống,muốn từ chối tin nhắn từ ID lạ,để tránh spam,🟡 Trung bình,Sprint 4
+US-387,Bảo mật & Dữ liệu,Mã hóa lịch sử rule_7,Là IT,muốn mã hóa database chat,để bảo vệ quyền riêng tư,🟡 Trung bình,Sprint 4
+US-388,Bảo mật & Dữ liệu,Phân quyền Admin rule_7,Là Quản trị viên,muốn chỉ cho phép admin sửa config,để tránh sai sót,🟡 Trung bình,Sprint 4
+US-389,Bảo mật & Dữ liệu,Xác thực 2 lớp rule_7,Là Người dùng,muốn đăng nhập cần mã OTP,để tăng cường bảo mật,🟡 Trung bình,Sprint 4
+US-390,Bảo mật & Dữ liệu,Xóa dữ liệu cũ rule_7,Là Quản trị viên,muốn tự động xóa log sau 30 ngày,để giảm dung lượng,🟡 Trung bình,Sprint 4
+US-391,Bảo mật & Dữ liệu,Audit Log rule_7,Là Bảo mật,muốn ghi lại ai đã truy cập file nào,để kiểm tra khi có sự cố,🟡 Trung bình,Sprint 4
+US-392,Bảo mật & Dữ liệu,Chặn User lạ rule_7,Là Hệ thống,muốn từ chối tin nhắn từ ID lạ,để tránh spam,🟡 Trung bình,Sprint 4
+US-393,Bảo mật & Dữ liệu,Mã hóa lịch sử rule_8,Là IT,muốn mã hóa database chat,để bảo vệ quyền riêng tư,🟡 Trung bình,Sprint 4
+US-394,Bảo mật & Dữ liệu,Phân quyền Admin rule_8,Là Quản trị viên,muốn chỉ cho phép admin sửa config,để tránh sai sót,🟡 Trung bình,Sprint 4
+US-395,Bảo mật & Dữ liệu,Xác thực 2 lớp rule_8,Là Người dùng,muốn đăng nhập cần mã OTP,để tăng cường bảo mật,🟡 Trung bình,Sprint 4
+US-396,Bảo mật & Dữ liệu,Xóa dữ liệu cũ rule_8,Là Quản trị viên,muốn tự động xóa log sau 30 ngày,để giảm dung lượng,🟡 Trung bình,Sprint 4
+US-397,Bảo mật & Dữ liệu,Audit Log rule_8,Là Bảo mật,muốn ghi lại ai đã truy cập file nào,để kiểm tra khi có sự cố,🟡 Trung bình,Sprint 4
+US-398,Bảo mật & Dữ liệu,Chặn User lạ rule_8,Là Hệ thống,muốn từ chối tin nhắn từ ID lạ,để tránh spam,🟡 Trung bình,Sprint 4
+US-399,Bảo mật & Dữ liệu,Mã hóa lịch sử rule_9,Là IT,muốn mã hóa database chat,để bảo vệ quyền riêng tư,🟡 Trung bình,Sprint 4
+US-400,Bảo mật & Dữ liệu,Phân quyền Admin rule_9,Là Quản trị viên,muốn chỉ cho phép admin sửa config,để tránh sai sót,🟡 Trung bình,Sprint 4
+US-401,Bảo mật & Dữ liệu,Xác thực 2 lớp rule_9,Là Người dùng,muốn đăng nhập cần mã OTP,để tăng cường bảo mật,🟡 Trung bình,Sprint 4
+US-402,Bảo mật & Dữ liệu,Xóa dữ liệu cũ rule_9,Là Quản trị viên,muốn tự động xóa log sau 30 ngày,để giảm dung lượng,🟡 Trung bình,Sprint 4
+US-403,Bảo mật & Dữ liệu,Audit Log rule_9,Là Bảo mật,muốn ghi lại ai đã truy cập file nào,để kiểm tra khi có sự cố,🟡 Trung bình,Sprint 4
+US-404,Bảo mật & Dữ liệu,Chặn User lạ rule_9,Là Hệ thống,muốn từ chối tin nhắn từ ID lạ,để tránh spam,🟡 Trung bình,Sprint 4
+US-405,Bảo mật & Dữ liệu,Mã hóa lịch sử rule_10,Là IT,muốn mã hóa database chat,để bảo vệ quyền riêng tư,🟡 Trung bình,Sprint 4
+US-406,Bảo mật & Dữ liệu,Phân quyền Admin rule_10,Là Quản trị viên,muốn chỉ cho phép admin sửa config,để tránh sai sót,🟡 Trung bình,Sprint 4
+US-407,Bảo mật & Dữ liệu,Xác thực 2 lớp rule_10,Là Người dùng,muốn đăng nhập cần mã OTP,để tăng cường bảo mật,🟡 Trung bình,Sprint 4
+US-408,Bảo mật & Dữ liệu,Xóa dữ liệu cũ rule_10,Là Quản trị viên,muốn tự động xóa log sau 30 ngày,để giảm dung lượng,🟡 Trung bình,Sprint 4
+US-409,Bảo mật & Dữ liệu,Audit Log rule_10,Là Bảo mật,muốn ghi lại ai đã truy cập file nào,để kiểm tra khi có sự cố,🟡 Trung bình,Sprint 4
+US-410,Bảo mật & Dữ liệu,Chặn User lạ rule_10,Là Hệ thống,muốn từ chối tin nhắn từ ID lạ,để tránh spam,🟡 Trung bình,Sprint 4
+US-411,Trải nghiệm & Báo cáo,Gợi ý lệnh case_1,Là Người dùng,muốn nhận gợi ý phím bấm,để thao tác nhanh hơn,🟡 Trung bình,Sprint 4
+US-412,Trải nghiệm & Báo cáo,Đa ngôn ngữ case_1,Là Nhân viên,muốn chuyển giao diện sang tiếng Anh,để phục vụ chuyên gia nước ngoài,🟡 Trung bình,Sprint 4
+US-413,Trải nghiệm & Báo cáo,Dashboard đẹp case_1,Là Quản lý,muốn xem biểu đồ hình tròn về task,để dễ nắm bắt thông tin,🟡 Trung bình,Sprint 4
+US-414,Trải nghiệm & Báo cáo,Hướng dẫn sử dụng case_1,Là User mới,muốn xem video tutorial,để biết cách dùng bot,🟡 Trung bình,Sprint 4
+US-415,Trải nghiệm & Báo cáo,Phản hồi lỗi case_1,Là Người dùng,muốn gửi report khi bot trả lời sai,để cải thiện chất lượng AI,🟡 Trung bình,Sprint 4
+US-416,Trải nghiệm & Báo cáo,Xuất file Excel case_1,Là Kế toán,muốn tải danh sách thu chi,để làm báo cáo thuế,🟡 Trung bình,Sprint 4
+US-417,Trải nghiệm & Báo cáo,Dark mode case_1,Là Người dùng,muốn đổi giao diện dashboard sang màu tối,để dịu mắt khi làm việc đêm,🟡 Trung bình,Sprint 4
+US-418,Trải nghiệm & Báo cáo,Thông báo âm thanh case_1,Là Người dùng,muốn nhận chuông khi có tin nhắn khẩn,để xử lý tức thì,🟡 Trung bình,Sprint 4
+US-419,Trải nghiệm & Báo cáo,Lịch sử soạn thảo case_1,Là Thư ký,muốn xem lại các bản thảo cũ,để sửa đổi nội dung,🟡 Trung bình,Sprint 4
+US-420,Trải nghiệm & Báo cáo,Gợi ý lệnh case_2,Là Người dùng,muốn nhận gợi ý phím bấm,để thao tác nhanh hơn,🟡 Trung bình,Sprint 4
+US-421,Trải nghiệm & Báo cáo,Đa ngôn ngữ case_2,Là Nhân viên,muốn chuyển giao diện sang tiếng Anh,để phục vụ chuyên gia nước ngoài,🟡 Trung bình,Sprint 4
+US-422,Trải nghiệm & Báo cáo,Dashboard đẹp case_2,Là Quản lý,muốn xem biểu đồ hình tròn về task,để dễ nắm bắt thông tin,🟡 Trung bình,Sprint 4
+US-423,Trải nghiệm & Báo cáo,Hướng dẫn sử dụng case_2,Là User mới,muốn xem video tutorial,để biết cách dùng bot,🟡 Trung bình,Sprint 4
+US-424,Trải nghiệm & Báo cáo,Phản hồi lỗi case_2,Là Người dùng,muốn gửi report khi bot trả lời sai,để cải thiện chất lượng AI,🟡 Trung bình,Sprint 4
+US-425,Trải nghiệm & Báo cáo,Xuất file Excel case_2,Là Kế toán,muốn tải danh sách thu chi,để làm báo cáo thuế,🟡 Trung bình,Sprint 4
+US-426,Trải nghiệm & Báo cáo,Dark mode case_2,Là Người dùng,muốn đổi giao diện dashboard sang màu tối,để dịu mắt khi làm việc đêm,🟡 Trung bình,Sprint 4
+US-427,Trải nghiệm & Báo cáo,Thông báo âm thanh case_2,Là Người dùng,muốn nhận chuông khi có tin nhắn khẩn,để xử lý tức thì,🟡 Trung bình,Sprint 4
+US-428,Trải nghiệm & Báo cáo,Lịch sử soạn thảo case_2,Là Thư ký,muốn xem lại các bản thảo cũ,để sửa đổi nội dung,🟡 Trung bình,Sprint 4
+US-429,Trải nghiệm & Báo cáo,Gợi ý lệnh case_3,Là Người dùng,muốn nhận gợi ý phím bấm,để thao tác nhanh hơn,🟡 Trung bình,Sprint 4
+US-430,Trải nghiệm & Báo cáo,Đa ngôn ngữ case_3,Là Nhân viên,muốn chuyển giao diện sang tiếng Anh,để phục vụ chuyên gia nước ngoài,🟡 Trung bình,Sprint 4
+US-431,Trải nghiệm & Báo cáo,Dashboard đẹp case_3,Là Quản lý,muốn xem biểu đồ hình tròn về task,để dễ nắm bắt thông tin,🟡 Trung bình,Sprint 4
+US-432,Trải nghiệm & Báo cáo,Hướng dẫn sử dụng case_3,Là User mới,muốn xem video tutorial,để biết cách dùng bot,🟡 Trung bình,Sprint 4
+US-433,Trải nghiệm & Báo cáo,Phản hồi lỗi case_3,Là Người dùng,muốn gửi report khi bot trả lời sai,để cải thiện chất lượng AI,🟡 Trung bình,Sprint 4
+US-434,Trải nghiệm & Báo cáo,Xuất file Excel case_3,Là Kế toán,muốn tải danh sách thu chi,để làm báo cáo thuế,🟡 Trung bình,Sprint 4
+US-435,Trải nghiệm & Báo cáo,Dark mode case_3,Là Người dùng,muốn đổi giao diện dashboard sang màu tối,để dịu mắt khi làm việc đêm,🟡 Trung bình,Sprint 4
+US-436,Trải nghiệm & Báo cáo,Thông báo âm thanh case_3,Là Người dùng,muốn nhận chuông khi có tin nhắn khẩn,để xử lý tức thì,🟡 Trung bình,Sprint 4
+US-437,Trải nghiệm & Báo cáo,Lịch sử soạn thảo case_3,Là Thư ký,muốn xem lại các bản thảo cũ,để sửa đổi nội dung,🟡 Trung bình,Sprint 4
+US-438,Trải nghiệm & Báo cáo,Gợi ý lệnh case_4,Là Người dùng,muốn nhận gợi ý phím bấm,để thao tác nhanh hơn,🟡 Trung bình,Sprint 4
+US-439,Trải nghiệm & Báo cáo,Đa ngôn ngữ case_4,Là Nhân viên,muốn chuyển giao diện sang tiếng Anh,để phục vụ chuyên gia nước ngoài,🟡 Trung bình,Sprint 4
+US-440,Trải nghiệm & Báo cáo,Dashboard đẹp case_4,Là Quản lý,muốn xem biểu đồ hình tròn về task,để dễ nắm bắt thông tin,🟡 Trung bình,Sprint 4
+US-441,Trải nghiệm & Báo cáo,Hướng dẫn sử dụng case_4,Là User mới,muốn xem video tutorial,để biết cách dùng bot,🟡 Trung bình,Sprint 4
+US-442,Trải nghiệm & Báo cáo,Phản hồi lỗi case_4,Là Người dùng,muốn gửi report khi bot trả lời sai,để cải thiện chất lượng AI,🟡 Trung bình,Sprint 4
+US-443,Trải nghiệm & Báo cáo,Xuất file Excel case_4,Là Kế toán,muốn tải danh sách thu chi,để làm báo cáo thuế,🟡 Trung bình,Sprint 4
+US-444,Trải nghiệm & Báo cáo,Dark mode case_4,Là Người dùng,muốn đổi giao diện dashboard sang màu tối,để dịu mắt khi làm việc đêm,🟡 Trung bình,Sprint 4
+US-445,Trải nghiệm & Báo cáo,Thông báo âm thanh case_4,Là Người dùng,muốn nhận chuông khi có tin nhắn khẩn,để xử lý tức thì,🟡 Trung bình,Sprint 4
+US-446,Trải nghiệm & Báo cáo,Lịch sử soạn thảo case_4,Là Thư ký,muốn xem lại các bản thảo cũ,để sửa đổi nội dung,🟡 Trung bình,Sprint 4
+US-447,Trải nghiệm & Báo cáo,Gợi ý lệnh case_5,Là Người dùng,muốn nhận gợi ý phím bấm,để thao tác nhanh hơn,🟡 Trung bình,Sprint 4
+US-448,Trải nghiệm & Báo cáo,Đa ngôn ngữ case_5,Là Nhân viên,muốn chuyển giao diện sang tiếng Anh,để phục vụ chuyên gia nước ngoài,🟡 Trung bình,Sprint 4
+US-449,Trải nghiệm & Báo cáo,Dashboard đẹp case_5,Là Quản lý,muốn xem biểu đồ hình tròn về task,để dễ nắm bắt thông tin,🟡 Trung bình,Sprint 4
+US-450,Trải nghiệm & Báo cáo,Hướng dẫn sử dụng case_5,Là User mới,muốn xem video tutorial,để biết cách dùng bot,🟡 Trung bình,Sprint 4
+US-451,Trải nghiệm & Báo cáo,Phản hồi lỗi case_5,Là Người dùng,muốn gửi report khi bot trả lời sai,để cải thiện chất lượng AI,🟡 Trung bình,Sprint 4
+US-452,Trải nghiệm & Báo cáo,Xuất file Excel case_5,Là Kế toán,muốn tải danh sách thu chi,để làm báo cáo thuế,🟡 Trung bình,Sprint 4
+US-453,Trải nghiệm & Báo cáo,Dark mode case_5,Là Người dùng,muốn đổi giao diện dashboard sang màu tối,để dịu mắt khi làm việc đêm,🟡 Trung bình,Sprint 4
+US-454,Trải nghiệm & Báo cáo,Thông báo âm thanh case_5,Là Người dùng,muốn nhận chuông khi có tin nhắn khẩn,để xử lý tức thì,🟡 Trung bình,Sprint 4
+US-455,Trải nghiệm & Báo cáo,Lịch sử soạn thảo case_5,Là Thư ký,muốn xem lại các bản thảo cũ,để sửa đổi nội dung,🟡 Trung bình,Sprint 4
+US-456,Trải nghiệm & Báo cáo,Gợi ý lệnh case_6,Là Người dùng,muốn nhận gợi ý phím bấm,để thao tác nhanh hơn,🟡 Trung bình,Sprint 4
+US-457,Trải nghiệm & Báo cáo,Đa ngôn ngữ case_6,Là Nhân viên,muốn chuyển giao diện sang tiếng Anh,để phục vụ chuyên gia nước ngoài,🟡 Trung bình,Sprint 4
+US-458,Trải nghiệm & Báo cáo,Dashboard đẹp case_6,Là Quản lý,muốn xem biểu đồ hình tròn về task,để dễ nắm bắt thông tin,🟡 Trung bình,Sprint 4
+US-459,Trải nghiệm & Báo cáo,Hướng dẫn sử dụng case_6,Là User mới,muốn xem video tutorial,để biết cách dùng bot,🟡 Trung bình,Sprint 4
+US-460,Trải nghiệm & Báo cáo,Phản hồi lỗi case_6,Là Người dùng,muốn gửi report khi bot trả lời sai,để cải thiện chất lượng AI,🟡 Trung bình,Sprint 4
+US-461,Trải nghiệm & Báo cáo,Xuất file Excel case_6,Là Kế toán,muốn tải danh sách thu chi,để làm báo cáo thuế,🟡 Trung bình,Sprint 4
+US-462,Trải nghiệm & Báo cáo,Dark mode case_6,Là Người dùng,muốn đổi giao diện dashboard sang màu tối,để dịu mắt khi làm việc đêm,🟡 Trung bình,Sprint 4
+US-463,Trải nghiệm & Báo cáo,Thông báo âm thanh case_6,Là Người dùng,muốn nhận chuông khi có tin nhắn khẩn,để xử lý tức thì,🟡 Trung bình,Sprint 4
+US-464,Trải nghiệm & Báo cáo,Lịch sử soạn thảo case_6,Là Thư ký,muốn xem lại các bản thảo cũ,để sửa đổi nội dung,🟡 Trung bình,Sprint 4
+US-465,Trải nghiệm & Báo cáo,Gợi ý lệnh case_7,Là Người dùng,muốn nhận gợi ý phím bấm,để thao tác nhanh hơn,🟡 Trung bình,Sprint 4
+US-466,Trải nghiệm & Báo cáo,Đa ngôn ngữ case_7,Là Nhân viên,muốn chuyển giao diện sang tiếng Anh,để phục vụ chuyên gia nước ngoài,🟡 Trung bình,Sprint 4
+US-467,Trải nghiệm & Báo cáo,Dashboard đẹp case_7,Là Quản lý,muốn xem biểu đồ hình tròn về task,để dễ nắm bắt thông tin,🟡 Trung bình,Sprint 4
+US-468,Trải nghiệm & Báo cáo,Hướng dẫn sử dụng case_7,Là User mới,muốn xem video tutorial,để biết cách dùng bot,🟡 Trung bình,Sprint 4
+US-469,Trải nghiệm & Báo cáo,Phản hồi lỗi case_7,Là Người dùng,muốn gửi report khi bot trả lời sai,để cải thiện chất lượng AI,🟡 Trung bình,Sprint 4
+US-470,Trải nghiệm & Báo cáo,Xuất file Excel case_7,Là Kế toán,muốn tải danh sách thu chi,để làm báo cáo thuế,🟡 Trung bình,Sprint 4
+US-471,Trải nghiệm & Báo cáo,Dark mode case_7,Là Người dùng,muốn đổi giao diện dashboard sang màu tối,để dịu mắt khi làm việc đêm,🟡 Trung bình,Sprint 4
+US-472,Trải nghiệm & Báo cáo,Thông báo âm thanh case_7,Là Người dùng,muốn nhận chuông khi có tin nhắn khẩn,để xử lý tức thì,🟢 Thấp,Sprint 4
+US-473,Trải nghiệm & Báo cáo,Lịch sử soạn thảo case_7,Là Thư ký,muốn xem lại các bản thảo cũ,để sửa đổi nội dung,🟢 Thấp,Sprint 4
+US-474,Trải nghiệm & Báo cáo,Gợi ý lệnh case_8,Là Người dùng,muốn nhận gợi ý phím bấm,để thao tác nhanh hơn,🟢 Thấp,Sprint 4
+US-475,Trải nghiệm & Báo cáo,Đa ngôn ngữ case_8,Là Nhân viên,muốn chuyển giao diện sang tiếng Anh,để phục vụ chuyên gia nước ngoài,🟢 Thấp,Sprint 4
+US-476,Trải nghiệm & Báo cáo,Dashboard đẹp case_8,Là Quản lý,muốn xem biểu đồ hình tròn về task,để dễ nắm bắt thông tin,🟢 Thấp,Sprint 4
+US-477,Trải nghiệm & Báo cáo,Hướng dẫn sử dụng case_8,Là User mới,muốn xem video tutorial,để biết cách dùng bot,🟢 Thấp,Sprint 4
+US-478,Trải nghiệm & Báo cáo,Phản hồi lỗi case_8,Là Người dùng,muốn gửi report khi bot trả lời sai,để cải thiện chất lượng AI,🟢 Thấp,Sprint 4
+US-479,Trải nghiệm & Báo cáo,Xuất file Excel case_8,Là Kế toán,muốn tải danh sách thu chi,để làm báo cáo thuế,🟢 Thấp,Sprint 4
+US-480,Trải nghiệm & Báo cáo,Dark mode case_8,Là Người dùng,muốn đổi giao diện dashboard sang màu tối,để dịu mắt khi làm việc đêm,🟢 Thấp,Sprint 4
+US-481,Trải nghiệm & Báo cáo,Thông báo âm thanh case_8,Là Người dùng,muốn nhận chuông khi có tin nhắn khẩn,để xử lý tức thì,🟢 Thấp,Sprint 4
+US-482,Trải nghiệm & Báo cáo,Lịch sử soạn thảo case_8,Là Thư ký,muốn xem lại các bản thảo cũ,để sửa đổi nội dung,🟢 Thấp,Sprint 4
+US-483,Trải nghiệm & Báo cáo,Gợi ý lệnh case_9,Là Người dùng,muốn nhận gợi ý phím bấm,để thao tác nhanh hơn,🟢 Thấp,Sprint 4
+US-484,Trải nghiệm & Báo cáo,Đa ngôn ngữ case_9,Là Nhân viên,muốn chuyển giao diện sang tiếng Anh,để phục vụ chuyên gia nước ngoài,🟢 Thấp,Sprint 4
+US-485,Trải nghiệm & Báo cáo,Dashboard đẹp case_9,Là Quản lý,muốn xem biểu đồ hình tròn về task,để dễ nắm bắt thông tin,🟢 Thấp,Sprint 4
+US-486,Trải nghiệm & Báo cáo,Hướng dẫn sử dụng case_9,Là User mới,muốn xem video tutorial,để biết cách dùng bot,🟢 Thấp,Sprint 4
+US-487,Trải nghiệm & Báo cáo,Phản hồi lỗi case_9,Là Người dùng,muốn gửi report khi bot trả lời sai,để cải thiện chất lượng AI,🟢 Thấp,Sprint 4
+US-488,Trải nghiệm & Báo cáo,Xuất file Excel case_9,Là Kế toán,muốn tải danh sách thu chi,để làm báo cáo thuế,🟢 Thấp,Sprint 4
+US-489,Trải nghiệm & Báo cáo,Dark mode case_9,Là Người dùng,muốn đổi giao diện dashboard sang màu tối,để dịu mắt khi làm việc đêm,🟢 Thấp,Sprint 4
+US-490,Trải nghiệm & Báo cáo,Thông báo âm thanh case_9,Là Người dùng,muốn nhận chuông khi có tin nhắn khẩn,để xử lý tức thì,🟢 Thấp,Sprint 4
+US-491,Trải nghiệm & Báo cáo,Lịch sử soạn thảo case_9,Là Thư ký,muốn xem lại các bản thảo cũ,để sửa đổi nội dung,🟢 Thấp,Sprint 4
+US-492,Trải nghiệm & Báo cáo,Gợi ý lệnh case_10,Là Người dùng,muốn nhận gợi ý phím bấm,để thao tác nhanh hơn,🟢 Thấp,Sprint 4
+US-493,Trải nghiệm & Báo cáo,Đa ngôn ngữ case_10,Là Nhân viên,muốn chuyển giao diện sang tiếng Anh,để phục vụ chuyên gia nước ngoài,🟢 Thấp,Sprint 4
+US-494,Trải nghiệm & Báo cáo,Dashboard đẹp case_10,Là Quản lý,muốn xem biểu đồ hình tròn về task,để dễ nắm bắt thông tin,🟢 Thấp,Sprint 4
+US-495,Trải nghiệm & Báo cáo,Hướng dẫn sử dụng case_10,Là User mới,muốn xem video tutorial,để biết cách dùng bot,🟢 Thấp,Sprint 4
+US-496,Trải nghiệm & Báo cáo,Phản hồi lỗi case_10,Là Người dùng,muốn gửi report khi bot trả lời sai,để cải thiện chất lượng AI,🟢 Thấp,Sprint 4
+US-497,Trải nghiệm & Báo cáo,Xuất file Excel case_10,Là Kế toán,muốn tải danh sách thu chi,để làm báo cáo thuế,🟢 Thấp,Sprint 4
+US-498,Trải nghiệm & Báo cáo,Dark mode case_10,Là Người dùng,muốn đổi giao diện dashboard sang màu tối,để dịu mắt khi làm việc đêm,🟢 Thấp,Sprint 4
+US-499,Trải nghiệm & Báo cáo,Thông báo âm thanh case_10,Là Người dùng,muốn nhận chuông khi có tin nhắn khẩn,để xử lý tức thì,🟢 Thấp,Sprint 4
+US-500,Trải nghiệm & Báo cáo,Lịch sử soạn thảo case_10,Là Thư ký,muốn xem lại các bản thảo cũ,để sửa đổi nội dung,🟢 Thấp,Sprint 4
