@@ -1,0 +1,202 @@
+﻿🚀 SPRINT BACKLOG — SPRINT 4,,,,,,,,,
+📅 Thời gian: 22/04/2026 – 28/04/2026,,,,,"🎯 Sprint Goal: Hoàn thiện trải nghiệm người dùng, tích hợp nâng cao & đa kênh",,,,
+📊 Tổng: 195 User Stories  |  Story Points: 527,,,🔴 Cao: 0   🟡 TB: 166   🟢 Thấp: 29,,,Trạng thái: To Do  |  In Progress  |  Done,,,
+,,,,,,,,,
+#,ID,Chức năng,Tính năng / User Story,Đối tượng,Mục đích,Độ ưu tiên,Story Points,Người phụ trách,Trạng thái
+1,US-241,Quản lý công việc,Là Là Manager muốn liệt kê đầu việc từ chat để theo dõi tiến độ,Là Manager,để theo dõi tiến độ,🟡 Trung bình,3,,To Do
+2,US-242,Quản lý công việc,Là Là Nhân viên muốn nhận tin nhắn nhắc việc sáng 8h để không quên nhiệm vụ,Là Nhân viên,để không quên nhiệm vụ,🟡 Trung bình,3,,To Do
+3,US-243,Quản lý công việc,Là Là Trưởng nhóm muốn chỉ định nhân sự cho task để rõ ràng trách nhiệm,Là Trưởng nhóm,để rõ ràng trách nhiệm,🟡 Trung bình,3,,To Do
+4,US-244,Quản lý công việc,Là Là Nhân viên muốn đổi task sang Done bằng lệnh để báo cáo hoàn thành,Là Nhân viên,để báo cáo hoàn thành,🟡 Trung bình,3,,To Do
+5,US-245,Quản lý công việc,Là Là Người dùng muốn đồng bộ task sang Calendar để quản lý thời gian,Là Người dùng,để quản lý thời gian,🟡 Trung bình,3,,To Do
+6,US-246,Quản lý công việc,Là Là Quản lý muốn xem danh sách việc đang làm để điều phối nguồn lực,Là Quản lý,để điều phối nguồn lực,🟡 Trung bình,3,,To Do
+7,US-247,Quản lý công việc,Là Là Nhân viên muốn sắp xếp task theo độ khẩn để xử lý việc quan trọng trước,Là Nhân viên,để xử lý việc quan trọng trước,🟡 Trung bình,3,,To Do
+8,US-248,Quản lý công việc,Là Là Lãnh đạo muốn xem số task hoàn thành trong tuần để đánh giá nhân viên,Là Lãnh đạo,để đánh giá nhân viên,🟡 Trung bình,3,,To Do
+9,US-249,Quản lý công việc,Là Là Manager muốn liệt kê đầu việc từ chat để theo dõi tiến độ,Là Manager,để theo dõi tiến độ,🟡 Trung bình,3,,To Do
+10,US-250,Quản lý công việc,Là Là Nhân viên muốn nhận tin nhắn nhắc việc sáng 8h để không quên nhiệm vụ,Là Nhân viên,để không quên nhiệm vụ,🟡 Trung bình,3,,To Do
+11,US-251,Quản lý công việc,Là Là Trưởng nhóm muốn chỉ định nhân sự cho task để rõ ràng trách nhiệm,Là Trưởng nhóm,để rõ ràng trách nhiệm,🟡 Trung bình,3,,To Do
+12,US-252,Quản lý công việc,Là Là Nhân viên muốn đổi task sang Done bằng lệnh để báo cáo hoàn thành,Là Nhân viên,để báo cáo hoàn thành,🟡 Trung bình,3,,To Do
+13,US-253,Quản lý công việc,Là Là Người dùng muốn đồng bộ task sang Calendar để quản lý thời gian,Là Người dùng,để quản lý thời gian,🟡 Trung bình,3,,To Do
+14,US-254,Quản lý công việc,Là Là Quản lý muốn xem danh sách việc đang làm để điều phối nguồn lực,Là Quản lý,để điều phối nguồn lực,🟡 Trung bình,3,,To Do
+15,US-255,Quản lý công việc,Là Là Nhân viên muốn sắp xếp task theo độ khẩn để xử lý việc quan trọng trước,Là Nhân viên,để xử lý việc quan trọng trước,🟡 Trung bình,3,,To Do
+16,US-256,Quản lý công việc,Là Là Lãnh đạo muốn xem số task hoàn thành trong tuần để đánh giá nhân viên,Là Lãnh đạo,để đánh giá nhân viên,🟡 Trung bình,3,,To Do
+17,US-257,Quản lý công việc,Là Là Manager muốn liệt kê đầu việc từ chat để theo dõi tiến độ,Là Manager,để theo dõi tiến độ,🟡 Trung bình,3,,To Do
+18,US-258,Quản lý công việc,Là Là Nhân viên muốn nhận tin nhắn nhắc việc sáng 8h để không quên nhiệm vụ,Là Nhân viên,để không quên nhiệm vụ,🟡 Trung bình,3,,To Do
+19,US-259,Quản lý công việc,Là Là Trưởng nhóm muốn chỉ định nhân sự cho task để rõ ràng trách nhiệm,Là Trưởng nhóm,để rõ ràng trách nhiệm,🟡 Trung bình,3,,To Do
+20,US-260,Quản lý công việc,Là Là Nhân viên muốn đổi task sang Done bằng lệnh để báo cáo hoàn thành,Là Nhân viên,để báo cáo hoàn thành,🟡 Trung bình,3,,To Do
+21,US-261,Quản lý công việc,Là Là Người dùng muốn đồng bộ task sang Calendar để quản lý thời gian,Là Người dùng,để quản lý thời gian,🟡 Trung bình,3,,To Do
+22,US-262,Quản lý công việc,Là Là Quản lý muốn xem danh sách việc đang làm để điều phối nguồn lực,Là Quản lý,để điều phối nguồn lực,🟡 Trung bình,3,,To Do
+23,US-263,Quản lý công việc,Là Là Nhân viên muốn sắp xếp task theo độ khẩn để xử lý việc quan trọng trước,Là Nhân viên,để xử lý việc quan trọng trước,🟡 Trung bình,3,,To Do
+24,US-264,Quản lý công việc,Là Là Lãnh đạo muốn xem số task hoàn thành trong tuần để đánh giá nhân viên,Là Lãnh đạo,để đánh giá nhân viên,🟡 Trung bình,3,,To Do
+25,US-265,Quản lý công việc,Là Là Manager muốn liệt kê đầu việc từ chat để theo dõi tiến độ,Là Manager,để theo dõi tiến độ,🟡 Trung bình,3,,To Do
+26,US-266,Quản lý công việc,Là Là Nhân viên muốn nhận tin nhắn nhắc việc sáng 8h để không quên nhiệm vụ,Là Nhân viên,để không quên nhiệm vụ,🟡 Trung bình,3,,To Do
+27,US-267,Quản lý công việc,Là Là Trưởng nhóm muốn chỉ định nhân sự cho task để rõ ràng trách nhiệm,Là Trưởng nhóm,để rõ ràng trách nhiệm,🟡 Trung bình,3,,To Do
+28,US-268,Quản lý công việc,Là Là Nhân viên muốn đổi task sang Done bằng lệnh để báo cáo hoàn thành,Là Nhân viên,để báo cáo hoàn thành,🟡 Trung bình,3,,To Do
+29,US-269,Quản lý công việc,Là Là Người dùng muốn đồng bộ task sang Calendar để quản lý thời gian,Là Người dùng,để quản lý thời gian,🟡 Trung bình,3,,To Do
+30,US-270,Quản lý công việc,Là Là Quản lý muốn xem danh sách việc đang làm để điều phối nguồn lực,Là Quản lý,để điều phối nguồn lực,🟡 Trung bình,3,,To Do
+31,US-271,Quản lý công việc,Là Là Nhân viên muốn sắp xếp task theo độ khẩn để xử lý việc quan trọng trước,Là Nhân viên,để xử lý việc quan trọng trước,🟡 Trung bình,3,,To Do
+32,US-272,Quản lý công việc,Là Là Lãnh đạo muốn xem số task hoàn thành trong tuần để đánh giá nhân viên,Là Lãnh đạo,để đánh giá nhân viên,🟡 Trung bình,3,,To Do
+33,US-273,Quản lý công việc,Là Là Manager muốn liệt kê đầu việc từ chat để theo dõi tiến độ,Là Manager,để theo dõi tiến độ,🟡 Trung bình,3,,To Do
+34,US-274,Quản lý công việc,Là Là Nhân viên muốn nhận tin nhắn nhắc việc sáng 8h để không quên nhiệm vụ,Là Nhân viên,để không quên nhiệm vụ,🟡 Trung bình,3,,To Do
+35,US-275,Quản lý công việc,Là Là Trưởng nhóm muốn chỉ định nhân sự cho task để rõ ràng trách nhiệm,Là Trưởng nhóm,để rõ ràng trách nhiệm,🟡 Trung bình,3,,To Do
+36,US-276,Quản lý công việc,Là Là Nhân viên muốn đổi task sang Done bằng lệnh để báo cáo hoàn thành,Là Nhân viên,để báo cáo hoàn thành,🟡 Trung bình,3,,To Do
+37,US-277,Quản lý công việc,Là Là Người dùng muốn đồng bộ task sang Calendar để quản lý thời gian,Là Người dùng,để quản lý thời gian,🟡 Trung bình,3,,To Do
+38,US-278,Quản lý công việc,Là Là Quản lý muốn xem danh sách việc đang làm để điều phối nguồn lực,Là Quản lý,để điều phối nguồn lực,🟡 Trung bình,3,,To Do
+39,US-279,Quản lý công việc,Là Là Nhân viên muốn sắp xếp task theo độ khẩn để xử lý việc quan trọng trước,Là Nhân viên,để xử lý việc quan trọng trước,🟡 Trung bình,3,,To Do
+40,US-280,Quản lý công việc,Là Là Lãnh đạo muốn xem số task hoàn thành trong tuần để đánh giá nhân viên,Là Lãnh đạo,để đánh giá nhân viên,🟡 Trung bình,3,,To Do
+41,US-316,Tích hợp hệ thống,Là Là Nhân viên muốn đọc email mới qua bot để xử lý nhanh,Là Nhân viên,để xử lý nhanh,🟡 Trung bình,3,,To Do
+42,US-317,Tích hợp hệ thống,Là Là Người dùng muốn upload file soạn thảo lên Google Drive để lưu trữ đám mây,Là Người dùng,để lưu trữ đám mây,🟡 Trung bình,3,,To Do
+43,US-318,Tích hợp hệ thống,Là Là Dev muốn nhận thông báo ticket mới để xử lý yêu cầu kỹ thuật,Là Dev,để xử lý yêu cầu kỹ thuật,🟡 Trung bình,3,,To Do
+44,US-319,Tích hợp hệ thống,Là Là Người dùng muốn gửi lệnh điều khiển qua Telegram để làm việc di động,Là Người dùng,để làm việc di động,🟡 Trung bình,3,,To Do
+45,US-320,Tích hợp hệ thống,Là Là Sales muốn nhận tin nhắn khách hàng qua Zalo để phản hồi tập trung,Là Sales,để phản hồi tập trung,🟡 Trung bình,3,,To Do
+46,US-321,Tích hợp hệ thống,Là Là Developer muốn kết nối với database công ty để lấy dữ liệu nhân sự,Là Developer,để lấy dữ liệu nhân sự,🟡 Trung bình,3,,To Do
+47,US-322,Tích hợp hệ thống,Là Là Lãnh đạo muốn tích hợp ký file PDF để ban hành văn bản điện tử,Là Lãnh đạo,để ban hành văn bản điện tử,🟡 Trung bình,3,,To Do
+48,US-323,Tích hợp hệ thống,Là Là Nhân viên muốn đọc email mới qua bot để xử lý nhanh,Là Nhân viên,để xử lý nhanh,🟡 Trung bình,3,,To Do
+49,US-324,Tích hợp hệ thống,Là Là Người dùng muốn upload file soạn thảo lên Google Drive để lưu trữ đám mây,Là Người dùng,để lưu trữ đám mây,🟡 Trung bình,3,,To Do
+50,US-325,Tích hợp hệ thống,Là Là Dev muốn nhận thông báo ticket mới để xử lý yêu cầu kỹ thuật,Là Dev,để xử lý yêu cầu kỹ thuật,🟡 Trung bình,3,,To Do
+51,US-326,Tích hợp hệ thống,Là Là Người dùng muốn gửi lệnh điều khiển qua Telegram để làm việc di động,Là Người dùng,để làm việc di động,🟡 Trung bình,3,,To Do
+52,US-327,Tích hợp hệ thống,Là Là Sales muốn nhận tin nhắn khách hàng qua Zalo để phản hồi tập trung,Là Sales,để phản hồi tập trung,🟡 Trung bình,3,,To Do
+53,US-328,Tích hợp hệ thống,Là Là Developer muốn kết nối với database công ty để lấy dữ liệu nhân sự,Là Developer,để lấy dữ liệu nhân sự,🟡 Trung bình,3,,To Do
+54,US-329,Tích hợp hệ thống,Là Là Lãnh đạo muốn tích hợp ký file PDF để ban hành văn bản điện tử,Là Lãnh đạo,để ban hành văn bản điện tử,🟡 Trung bình,3,,To Do
+55,US-330,Tích hợp hệ thống,Là Là Nhân viên muốn đọc email mới qua bot để xử lý nhanh,Là Nhân viên,để xử lý nhanh,🟡 Trung bình,3,,To Do
+56,US-331,Tích hợp hệ thống,Là Là Người dùng muốn upload file soạn thảo lên Google Drive để lưu trữ đám mây,Là Người dùng,để lưu trữ đám mây,🟡 Trung bình,3,,To Do
+57,US-332,Tích hợp hệ thống,Là Là Dev muốn nhận thông báo ticket mới để xử lý yêu cầu kỹ thuật,Là Dev,để xử lý yêu cầu kỹ thuật,🟡 Trung bình,3,,To Do
+58,US-333,Tích hợp hệ thống,Là Là Người dùng muốn gửi lệnh điều khiển qua Telegram để làm việc di động,Là Người dùng,để làm việc di động,🟡 Trung bình,3,,To Do
+59,US-334,Tích hợp hệ thống,Là Là Sales muốn nhận tin nhắn khách hàng qua Zalo để phản hồi tập trung,Là Sales,để phản hồi tập trung,🟡 Trung bình,3,,To Do
+60,US-335,Tích hợp hệ thống,Là Là Developer muốn kết nối với database công ty để lấy dữ liệu nhân sự,Là Developer,để lấy dữ liệu nhân sự,🟡 Trung bình,3,,To Do
+61,US-336,Tích hợp hệ thống,Là Là Lãnh đạo muốn tích hợp ký file PDF để ban hành văn bản điện tử,Là Lãnh đạo,để ban hành văn bản điện tử,🟡 Trung bình,3,,To Do
+62,US-337,Tích hợp hệ thống,Là Là Nhân viên muốn đọc email mới qua bot để xử lý nhanh,Là Nhân viên,để xử lý nhanh,🟡 Trung bình,3,,To Do
+63,US-338,Tích hợp hệ thống,Là Là Người dùng muốn upload file soạn thảo lên Google Drive để lưu trữ đám mây,Là Người dùng,để lưu trữ đám mây,🟡 Trung bình,3,,To Do
+64,US-339,Tích hợp hệ thống,Là Là Dev muốn nhận thông báo ticket mới để xử lý yêu cầu kỹ thuật,Là Dev,để xử lý yêu cầu kỹ thuật,🟡 Trung bình,3,,To Do
+65,US-340,Tích hợp hệ thống,Là Là Người dùng muốn gửi lệnh điều khiển qua Telegram để làm việc di động,Là Người dùng,để làm việc di động,🟡 Trung bình,3,,To Do
+66,US-341,Tích hợp hệ thống,Là Là Sales muốn nhận tin nhắn khách hàng qua Zalo để phản hồi tập trung,Là Sales,để phản hồi tập trung,🟡 Trung bình,3,,To Do
+67,US-342,Tích hợp hệ thống,Là Là Developer muốn kết nối với database công ty để lấy dữ liệu nhân sự,Là Developer,để lấy dữ liệu nhân sự,🟡 Trung bình,3,,To Do
+68,US-343,Tích hợp hệ thống,Là Là Lãnh đạo muốn tích hợp ký file PDF để ban hành văn bản điện tử,Là Lãnh đạo,để ban hành văn bản điện tử,🟡 Trung bình,3,,To Do
+69,US-344,Tích hợp hệ thống,Là Là Nhân viên muốn đọc email mới qua bot để xử lý nhanh,Là Nhân viên,để xử lý nhanh,🟡 Trung bình,3,,To Do
+70,US-345,Tích hợp hệ thống,Là Là Người dùng muốn upload file soạn thảo lên Google Drive để lưu trữ đám mây,Là Người dùng,để lưu trữ đám mây,🟡 Trung bình,3,,To Do
+71,US-346,Tích hợp hệ thống,Là Là Dev muốn nhận thông báo ticket mới để xử lý yêu cầu kỹ thuật,Là Dev,để xử lý yêu cầu kỹ thuật,🟡 Trung bình,3,,To Do
+72,US-347,Tích hợp hệ thống,Là Là Người dùng muốn gửi lệnh điều khiển qua Telegram để làm việc di động,Là Người dùng,để làm việc di động,🟡 Trung bình,3,,To Do
+73,US-348,Tích hợp hệ thống,Là Là Sales muốn nhận tin nhắn khách hàng qua Zalo để phản hồi tập trung,Là Sales,để phản hồi tập trung,🟡 Trung bình,3,,To Do
+74,US-349,Tích hợp hệ thống,Là Là Developer muốn kết nối với database công ty để lấy dữ liệu nhân sự,Là Developer,để lấy dữ liệu nhân sự,🟡 Trung bình,3,,To Do
+75,US-350,Tích hợp hệ thống,Là Là Lãnh đạo muốn tích hợp ký file PDF để ban hành văn bản điện tử,Là Lãnh đạo,để ban hành văn bản điện tử,🟡 Trung bình,3,,To Do
+76,US-381,Bảo mật & Dữ liệu,Là Là IT muốn mã hóa database chat để bảo vệ quyền riêng tư,Là IT,để bảo vệ quyền riêng tư,🟡 Trung bình,3,,To Do
+77,US-382,Bảo mật & Dữ liệu,Là Là Quản trị viên muốn chỉ cho phép admin sửa config để tránh sai sót,Là Quản trị viên,để tránh sai sót,🟡 Trung bình,3,,To Do
+78,US-383,Bảo mật & Dữ liệu,Là Là Người dùng muốn đăng nhập cần mã OTP để tăng cường bảo mật,Là Người dùng,để tăng cường bảo mật,🟡 Trung bình,3,,To Do
+79,US-384,Bảo mật & Dữ liệu,Là Là Quản trị viên muốn tự động xóa log sau 30 ngày để giảm dung lượng,Là Quản trị viên,để giảm dung lượng,🟡 Trung bình,3,,To Do
+80,US-385,Bảo mật & Dữ liệu,Là Là Bảo mật muốn ghi lại ai đã truy cập file nào để kiểm tra khi có sự cố,Là Bảo mật,để kiểm tra khi có sự cố,🟡 Trung bình,3,,To Do
+81,US-386,Bảo mật & Dữ liệu,Là Là Hệ thống muốn từ chối tin nhắn từ ID lạ để tránh spam,Là Hệ thống,để tránh spam,🟡 Trung bình,3,,To Do
+82,US-387,Bảo mật & Dữ liệu,Là Là IT muốn mã hóa database chat để bảo vệ quyền riêng tư,Là IT,để bảo vệ quyền riêng tư,🟡 Trung bình,3,,To Do
+83,US-388,Bảo mật & Dữ liệu,Là Là Quản trị viên muốn chỉ cho phép admin sửa config để tránh sai sót,Là Quản trị viên,để tránh sai sót,🟡 Trung bình,3,,To Do
+84,US-389,Bảo mật & Dữ liệu,Là Là Người dùng muốn đăng nhập cần mã OTP để tăng cường bảo mật,Là Người dùng,để tăng cường bảo mật,🟡 Trung bình,3,,To Do
+85,US-390,Bảo mật & Dữ liệu,Là Là Quản trị viên muốn tự động xóa log sau 30 ngày để giảm dung lượng,Là Quản trị viên,để giảm dung lượng,🟡 Trung bình,3,,To Do
+86,US-391,Bảo mật & Dữ liệu,Là Là Bảo mật muốn ghi lại ai đã truy cập file nào để kiểm tra khi có sự cố,Là Bảo mật,để kiểm tra khi có sự cố,🟡 Trung bình,3,,To Do
+87,US-392,Bảo mật & Dữ liệu,Là Là Hệ thống muốn từ chối tin nhắn từ ID lạ để tránh spam,Là Hệ thống,để tránh spam,🟡 Trung bình,3,,To Do
+88,US-393,Bảo mật & Dữ liệu,Là Là IT muốn mã hóa database chat để bảo vệ quyền riêng tư,Là IT,để bảo vệ quyền riêng tư,🟡 Trung bình,3,,To Do
+89,US-394,Bảo mật & Dữ liệu,Là Là Quản trị viên muốn chỉ cho phép admin sửa config để tránh sai sót,Là Quản trị viên,để tránh sai sót,🟡 Trung bình,3,,To Do
+90,US-395,Bảo mật & Dữ liệu,Là Là Người dùng muốn đăng nhập cần mã OTP để tăng cường bảo mật,Là Người dùng,để tăng cường bảo mật,🟡 Trung bình,3,,To Do
+91,US-396,Bảo mật & Dữ liệu,Là Là Quản trị viên muốn tự động xóa log sau 30 ngày để giảm dung lượng,Là Quản trị viên,để giảm dung lượng,🟡 Trung bình,3,,To Do
+92,US-397,Bảo mật & Dữ liệu,Là Là Bảo mật muốn ghi lại ai đã truy cập file nào để kiểm tra khi có sự cố,Là Bảo mật,để kiểm tra khi có sự cố,🟡 Trung bình,3,,To Do
+93,US-398,Bảo mật & Dữ liệu,Là Là Hệ thống muốn từ chối tin nhắn từ ID lạ để tránh spam,Là Hệ thống,để tránh spam,🟡 Trung bình,3,,To Do
+94,US-399,Bảo mật & Dữ liệu,Là Là IT muốn mã hóa database chat để bảo vệ quyền riêng tư,Là IT,để bảo vệ quyền riêng tư,🟡 Trung bình,3,,To Do
+95,US-400,Bảo mật & Dữ liệu,Là Là Quản trị viên muốn chỉ cho phép admin sửa config để tránh sai sót,Là Quản trị viên,để tránh sai sót,🟡 Trung bình,3,,To Do
+96,US-401,Bảo mật & Dữ liệu,Là Là Người dùng muốn đăng nhập cần mã OTP để tăng cường bảo mật,Là Người dùng,để tăng cường bảo mật,🟡 Trung bình,3,,To Do
+97,US-402,Bảo mật & Dữ liệu,Là Là Quản trị viên muốn tự động xóa log sau 30 ngày để giảm dung lượng,Là Quản trị viên,để giảm dung lượng,🟡 Trung bình,3,,To Do
+98,US-403,Bảo mật & Dữ liệu,Là Là Bảo mật muốn ghi lại ai đã truy cập file nào để kiểm tra khi có sự cố,Là Bảo mật,để kiểm tra khi có sự cố,🟡 Trung bình,3,,To Do
+99,US-404,Bảo mật & Dữ liệu,Là Là Hệ thống muốn từ chối tin nhắn từ ID lạ để tránh spam,Là Hệ thống,để tránh spam,🟡 Trung bình,3,,To Do
+100,US-405,Bảo mật & Dữ liệu,Là Là IT muốn mã hóa database chat để bảo vệ quyền riêng tư,Là IT,để bảo vệ quyền riêng tư,🟡 Trung bình,3,,To Do
+101,US-406,Bảo mật & Dữ liệu,Là Là Quản trị viên muốn chỉ cho phép admin sửa config để tránh sai sót,Là Quản trị viên,để tránh sai sót,🟡 Trung bình,3,,To Do
+102,US-407,Bảo mật & Dữ liệu,Là Là Người dùng muốn đăng nhập cần mã OTP để tăng cường bảo mật,Là Người dùng,để tăng cường bảo mật,🟡 Trung bình,3,,To Do
+103,US-408,Bảo mật & Dữ liệu,Là Là Quản trị viên muốn tự động xóa log sau 30 ngày để giảm dung lượng,Là Quản trị viên,để giảm dung lượng,🟡 Trung bình,3,,To Do
+104,US-409,Bảo mật & Dữ liệu,Là Là Bảo mật muốn ghi lại ai đã truy cập file nào để kiểm tra khi có sự cố,Là Bảo mật,để kiểm tra khi có sự cố,🟡 Trung bình,3,,To Do
+105,US-410,Bảo mật & Dữ liệu,Là Là Hệ thống muốn từ chối tin nhắn từ ID lạ để tránh spam,Là Hệ thống,để tránh spam,🟡 Trung bình,3,,To Do
+106,US-411,Trải nghiệm & Báo cáo,Là Là Người dùng muốn nhận gợi ý phím bấm để thao tác nhanh hơn,Là Người dùng,để thao tác nhanh hơn,🟡 Trung bình,3,,To Do
+107,US-412,Trải nghiệm & Báo cáo,Là Là Nhân viên muốn chuyển giao diện sang tiếng Anh để phục vụ chuyên gia nước ngoài,Là Nhân viên,để phục vụ chuyên gia nước ngoài,🟡 Trung bình,3,,To Do
+108,US-413,Trải nghiệm & Báo cáo,Là Là Quản lý muốn xem biểu đồ hình tròn về task để dễ nắm bắt thông tin,Là Quản lý,để dễ nắm bắt thông tin,🟡 Trung bình,3,,To Do
+109,US-414,Trải nghiệm & Báo cáo,Là Là User mới muốn xem video tutorial để biết cách dùng bot,Là User mới,để biết cách dùng bot,🟡 Trung bình,3,,To Do
+110,US-415,Trải nghiệm & Báo cáo,Là Là Người dùng muốn gửi report khi bot trả lời sai để cải thiện chất lượng AI,Là Người dùng,để cải thiện chất lượng AI,🟡 Trung bình,3,,To Do
+111,US-416,Trải nghiệm & Báo cáo,Là Là Kế toán muốn tải danh sách thu chi để làm báo cáo thuế,Là Kế toán,để làm báo cáo thuế,🟡 Trung bình,3,,To Do
+112,US-417,Trải nghiệm & Báo cáo,Là Là Người dùng muốn đổi giao diện dashboard sang màu tối để dịu mắt khi làm việc đêm,Là Người dùng,để dịu mắt khi làm việc đêm,🟡 Trung bình,3,,To Do
+113,US-418,Trải nghiệm & Báo cáo,Là Là Người dùng muốn nhận chuông khi có tin nhắn khẩn để xử lý tức thì,Là Người dùng,để xử lý tức thì,🟡 Trung bình,3,,To Do
+114,US-419,Trải nghiệm & Báo cáo,Là Là Thư ký muốn xem lại các bản thảo cũ để sửa đổi nội dung,Là Thư ký,để sửa đổi nội dung,🟡 Trung bình,3,,To Do
+115,US-420,Trải nghiệm & Báo cáo,Là Là Người dùng muốn nhận gợi ý phím bấm để thao tác nhanh hơn,Là Người dùng,để thao tác nhanh hơn,🟡 Trung bình,3,,To Do
+116,US-421,Trải nghiệm & Báo cáo,Là Là Nhân viên muốn chuyển giao diện sang tiếng Anh để phục vụ chuyên gia nước ngoài,Là Nhân viên,để phục vụ chuyên gia nước ngoài,🟡 Trung bình,3,,To Do
+117,US-422,Trải nghiệm & Báo cáo,Là Là Quản lý muốn xem biểu đồ hình tròn về task để dễ nắm bắt thông tin,Là Quản lý,để dễ nắm bắt thông tin,🟡 Trung bình,3,,To Do
+118,US-423,Trải nghiệm & Báo cáo,Là Là User mới muốn xem video tutorial để biết cách dùng bot,Là User mới,để biết cách dùng bot,🟡 Trung bình,3,,To Do
+119,US-424,Trải nghiệm & Báo cáo,Là Là Người dùng muốn gửi report khi bot trả lời sai để cải thiện chất lượng AI,Là Người dùng,để cải thiện chất lượng AI,🟡 Trung bình,3,,To Do
+120,US-425,Trải nghiệm & Báo cáo,Là Là Kế toán muốn tải danh sách thu chi để làm báo cáo thuế,Là Kế toán,để làm báo cáo thuế,🟡 Trung bình,3,,To Do
+121,US-426,Trải nghiệm & Báo cáo,Là Là Người dùng muốn đổi giao diện dashboard sang màu tối để dịu mắt khi làm việc đêm,Là Người dùng,để dịu mắt khi làm việc đêm,🟡 Trung bình,3,,To Do
+122,US-427,Trải nghiệm & Báo cáo,Là Là Người dùng muốn nhận chuông khi có tin nhắn khẩn để xử lý tức thì,Là Người dùng,để xử lý tức thì,🟡 Trung bình,3,,To Do
+123,US-428,Trải nghiệm & Báo cáo,Là Là Thư ký muốn xem lại các bản thảo cũ để sửa đổi nội dung,Là Thư ký,để sửa đổi nội dung,🟡 Trung bình,3,,To Do
+124,US-429,Trải nghiệm & Báo cáo,Là Là Người dùng muốn nhận gợi ý phím bấm để thao tác nhanh hơn,Là Người dùng,để thao tác nhanh hơn,🟡 Trung bình,3,,To Do
+125,US-430,Trải nghiệm & Báo cáo,Là Là Nhân viên muốn chuyển giao diện sang tiếng Anh để phục vụ chuyên gia nước ngoài,Là Nhân viên,để phục vụ chuyên gia nước ngoài,🟡 Trung bình,3,,To Do
+126,US-431,Trải nghiệm & Báo cáo,Là Là Quản lý muốn xem biểu đồ hình tròn về task để dễ nắm bắt thông tin,Là Quản lý,để dễ nắm bắt thông tin,🟡 Trung bình,3,,To Do
+127,US-432,Trải nghiệm & Báo cáo,Là Là User mới muốn xem video tutorial để biết cách dùng bot,Là User mới,để biết cách dùng bot,🟡 Trung bình,3,,To Do
+128,US-433,Trải nghiệm & Báo cáo,Là Là Người dùng muốn gửi report khi bot trả lời sai để cải thiện chất lượng AI,Là Người dùng,để cải thiện chất lượng AI,🟡 Trung bình,3,,To Do
+129,US-434,Trải nghiệm & Báo cáo,Là Là Kế toán muốn tải danh sách thu chi để làm báo cáo thuế,Là Kế toán,để làm báo cáo thuế,🟡 Trung bình,3,,To Do
+130,US-435,Trải nghiệm & Báo cáo,Là Là Người dùng muốn đổi giao diện dashboard sang màu tối để dịu mắt khi làm việc đêm,Là Người dùng,để dịu mắt khi làm việc đêm,🟡 Trung bình,3,,To Do
+131,US-436,Trải nghiệm & Báo cáo,Là Là Người dùng muốn nhận chuông khi có tin nhắn khẩn để xử lý tức thì,Là Người dùng,để xử lý tức thì,🟡 Trung bình,3,,To Do
+132,US-437,Trải nghiệm & Báo cáo,Là Là Thư ký muốn xem lại các bản thảo cũ để sửa đổi nội dung,Là Thư ký,để sửa đổi nội dung,🟡 Trung bình,3,,To Do
+133,US-438,Trải nghiệm & Báo cáo,Là Là Người dùng muốn nhận gợi ý phím bấm để thao tác nhanh hơn,Là Người dùng,để thao tác nhanh hơn,🟡 Trung bình,3,,To Do
+134,US-439,Trải nghiệm & Báo cáo,Là Là Nhân viên muốn chuyển giao diện sang tiếng Anh để phục vụ chuyên gia nước ngoài,Là Nhân viên,để phục vụ chuyên gia nước ngoài,🟡 Trung bình,3,,To Do
+135,US-440,Trải nghiệm & Báo cáo,Là Là Quản lý muốn xem biểu đồ hình tròn về task để dễ nắm bắt thông tin,Là Quản lý,để dễ nắm bắt thông tin,🟡 Trung bình,3,,To Do
+136,US-441,Trải nghiệm & Báo cáo,Là Là User mới muốn xem video tutorial để biết cách dùng bot,Là User mới,để biết cách dùng bot,🟡 Trung bình,3,,To Do
+137,US-442,Trải nghiệm & Báo cáo,Là Là Người dùng muốn gửi report khi bot trả lời sai để cải thiện chất lượng AI,Là Người dùng,để cải thiện chất lượng AI,🟡 Trung bình,3,,To Do
+138,US-443,Trải nghiệm & Báo cáo,Là Là Kế toán muốn tải danh sách thu chi để làm báo cáo thuế,Là Kế toán,để làm báo cáo thuế,🟡 Trung bình,3,,To Do
+139,US-444,Trải nghiệm & Báo cáo,Là Là Người dùng muốn đổi giao diện dashboard sang màu tối để dịu mắt khi làm việc đêm,Là Người dùng,để dịu mắt khi làm việc đêm,🟡 Trung bình,3,,To Do
+140,US-445,Trải nghiệm & Báo cáo,Là Là Người dùng muốn nhận chuông khi có tin nhắn khẩn để xử lý tức thì,Là Người dùng,để xử lý tức thì,🟡 Trung bình,3,,To Do
+141,US-446,Trải nghiệm & Báo cáo,Là Là Thư ký muốn xem lại các bản thảo cũ để sửa đổi nội dung,Là Thư ký,để sửa đổi nội dung,🟡 Trung bình,3,,To Do
+142,US-447,Trải nghiệm & Báo cáo,Là Là Người dùng muốn nhận gợi ý phím bấm để thao tác nhanh hơn,Là Người dùng,để thao tác nhanh hơn,🟡 Trung bình,3,,To Do
+143,US-448,Trải nghiệm & Báo cáo,Là Là Nhân viên muốn chuyển giao diện sang tiếng Anh để phục vụ chuyên gia nước ngoài,Là Nhân viên,để phục vụ chuyên gia nước ngoài,🟡 Trung bình,3,,To Do
+144,US-449,Trải nghiệm & Báo cáo,Là Là Quản lý muốn xem biểu đồ hình tròn về task để dễ nắm bắt thông tin,Là Quản lý,để dễ nắm bắt thông tin,🟡 Trung bình,3,,To Do
+145,US-450,Trải nghiệm & Báo cáo,Là Là User mới muốn xem video tutorial để biết cách dùng bot,Là User mới,để biết cách dùng bot,🟡 Trung bình,3,,To Do
+146,US-451,Trải nghiệm & Báo cáo,Là Là Người dùng muốn gửi report khi bot trả lời sai để cải thiện chất lượng AI,Là Người dùng,để cải thiện chất lượng AI,🟡 Trung bình,3,,To Do
+147,US-452,Trải nghiệm & Báo cáo,Là Là Kế toán muốn tải danh sách thu chi để làm báo cáo thuế,Là Kế toán,để làm báo cáo thuế,🟡 Trung bình,3,,To Do
+148,US-453,Trải nghiệm & Báo cáo,Là Là Người dùng muốn đổi giao diện dashboard sang màu tối để dịu mắt khi làm việc đêm,Là Người dùng,để dịu mắt khi làm việc đêm,🟡 Trung bình,3,,To Do
+149,US-454,Trải nghiệm & Báo cáo,Là Là Người dùng muốn nhận chuông khi có tin nhắn khẩn để xử lý tức thì,Là Người dùng,để xử lý tức thì,🟡 Trung bình,3,,To Do
+150,US-455,Trải nghiệm & Báo cáo,Là Là Thư ký muốn xem lại các bản thảo cũ để sửa đổi nội dung,Là Thư ký,để sửa đổi nội dung,🟡 Trung bình,3,,To Do
+151,US-456,Trải nghiệm & Báo cáo,Là Là Người dùng muốn nhận gợi ý phím bấm để thao tác nhanh hơn,Là Người dùng,để thao tác nhanh hơn,🟡 Trung bình,3,,To Do
+152,US-457,Trải nghiệm & Báo cáo,Là Là Nhân viên muốn chuyển giao diện sang tiếng Anh để phục vụ chuyên gia nước ngoài,Là Nhân viên,để phục vụ chuyên gia nước ngoài,🟡 Trung bình,3,,To Do
+153,US-458,Trải nghiệm & Báo cáo,Là Là Quản lý muốn xem biểu đồ hình tròn về task để dễ nắm bắt thông tin,Là Quản lý,để dễ nắm bắt thông tin,🟡 Trung bình,3,,To Do
+154,US-459,Trải nghiệm & Báo cáo,Là Là User mới muốn xem video tutorial để biết cách dùng bot,Là User mới,để biết cách dùng bot,🟡 Trung bình,3,,To Do
+155,US-460,Trải nghiệm & Báo cáo,Là Là Người dùng muốn gửi report khi bot trả lời sai để cải thiện chất lượng AI,Là Người dùng,để cải thiện chất lượng AI,🟡 Trung bình,3,,To Do
+156,US-461,Trải nghiệm & Báo cáo,Là Là Kế toán muốn tải danh sách thu chi để làm báo cáo thuế,Là Kế toán,để làm báo cáo thuế,🟡 Trung bình,3,,To Do
+157,US-462,Trải nghiệm & Báo cáo,Là Là Người dùng muốn đổi giao diện dashboard sang màu tối để dịu mắt khi làm việc đêm,Là Người dùng,để dịu mắt khi làm việc đêm,🟡 Trung bình,3,,To Do
+158,US-463,Trải nghiệm & Báo cáo,Là Là Người dùng muốn nhận chuông khi có tin nhắn khẩn để xử lý tức thì,Là Người dùng,để xử lý tức thì,🟡 Trung bình,3,,To Do
+159,US-464,Trải nghiệm & Báo cáo,Là Là Thư ký muốn xem lại các bản thảo cũ để sửa đổi nội dung,Là Thư ký,để sửa đổi nội dung,🟡 Trung bình,3,,To Do
+160,US-465,Trải nghiệm & Báo cáo,Là Là Người dùng muốn nhận gợi ý phím bấm để thao tác nhanh hơn,Là Người dùng,để thao tác nhanh hơn,🟡 Trung bình,3,,To Do
+161,US-466,Trải nghiệm & Báo cáo,Là Là Nhân viên muốn chuyển giao diện sang tiếng Anh để phục vụ chuyên gia nước ngoài,Là Nhân viên,để phục vụ chuyên gia nước ngoài,🟡 Trung bình,3,,To Do
+162,US-467,Trải nghiệm & Báo cáo,Là Là Quản lý muốn xem biểu đồ hình tròn về task để dễ nắm bắt thông tin,Là Quản lý,để dễ nắm bắt thông tin,🟡 Trung bình,3,,To Do
+163,US-468,Trải nghiệm & Báo cáo,Là Là User mới muốn xem video tutorial để biết cách dùng bot,Là User mới,để biết cách dùng bot,🟡 Trung bình,3,,To Do
+164,US-469,Trải nghiệm & Báo cáo,Là Là Người dùng muốn gửi report khi bot trả lời sai để cải thiện chất lượng AI,Là Người dùng,để cải thiện chất lượng AI,🟡 Trung bình,3,,To Do
+165,US-470,Trải nghiệm & Báo cáo,Là Là Kế toán muốn tải danh sách thu chi để làm báo cáo thuế,Là Kế toán,để làm báo cáo thuế,🟡 Trung bình,3,,To Do
+166,US-471,Trải nghiệm & Báo cáo,Là Là Người dùng muốn đổi giao diện dashboard sang màu tối để dịu mắt khi làm việc đêm,Là Người dùng,để dịu mắt khi làm việc đêm,🟡 Trung bình,3,,To Do
+167,US-472,Trải nghiệm & Báo cáo,Là Là Người dùng muốn nhận chuông khi có tin nhắn khẩn để xử lý tức thì,Là Người dùng,để xử lý tức thì,🟢 Thấp,1,,To Do
+168,US-473,Trải nghiệm & Báo cáo,Là Là Thư ký muốn xem lại các bản thảo cũ để sửa đổi nội dung,Là Thư ký,để sửa đổi nội dung,🟢 Thấp,1,,To Do
+169,US-474,Trải nghiệm & Báo cáo,Là Là Người dùng muốn nhận gợi ý phím bấm để thao tác nhanh hơn,Là Người dùng,để thao tác nhanh hơn,🟢 Thấp,1,,To Do
+170,US-475,Trải nghiệm & Báo cáo,Là Là Nhân viên muốn chuyển giao diện sang tiếng Anh để phục vụ chuyên gia nước ngoài,Là Nhân viên,để phục vụ chuyên gia nước ngoài,🟢 Thấp,1,,To Do
+171,US-476,Trải nghiệm & Báo cáo,Là Là Quản lý muốn xem biểu đồ hình tròn về task để dễ nắm bắt thông tin,Là Quản lý,để dễ nắm bắt thông tin,🟢 Thấp,1,,To Do
+172,US-477,Trải nghiệm & Báo cáo,Là Là User mới muốn xem video tutorial để biết cách dùng bot,Là User mới,để biết cách dùng bot,🟢 Thấp,1,,To Do
+173,US-478,Trải nghiệm & Báo cáo,Là Là Người dùng muốn gửi report khi bot trả lời sai để cải thiện chất lượng AI,Là Người dùng,để cải thiện chất lượng AI,🟢 Thấp,1,,To Do
+174,US-479,Trải nghiệm & Báo cáo,Là Là Kế toán muốn tải danh sách thu chi để làm báo cáo thuế,Là Kế toán,để làm báo cáo thuế,🟢 Thấp,1,,To Do
+175,US-480,Trải nghiệm & Báo cáo,Là Là Người dùng muốn đổi giao diện dashboard sang màu tối để dịu mắt khi làm việc đêm,Là Người dùng,để dịu mắt khi làm việc đêm,🟢 Thấp,1,,To Do
+176,US-481,Trải nghiệm & Báo cáo,Là Là Người dùng muốn nhận chuông khi có tin nhắn khẩn để xử lý tức thì,Là Người dùng,để xử lý tức thì,🟢 Thấp,1,,To Do
+177,US-482,Trải nghiệm & Báo cáo,Là Là Thư ký muốn xem lại các bản thảo cũ để sửa đổi nội dung,Là Thư ký,để sửa đổi nội dung,🟢 Thấp,1,,To Do
+178,US-483,Trải nghiệm & Báo cáo,Là Là Người dùng muốn nhận gợi ý phím bấm để thao tác nhanh hơn,Là Người dùng,để thao tác nhanh hơn,🟢 Thấp,1,,To Do
+179,US-484,Trải nghiệm & Báo cáo,Là Là Nhân viên muốn chuyển giao diện sang tiếng Anh để phục vụ chuyên gia nước ngoài,Là Nhân viên,để phục vụ chuyên gia nước ngoài,🟢 Thấp,1,,To Do
+180,US-485,Trải nghiệm & Báo cáo,Là Là Quản lý muốn xem biểu đồ hình tròn về task để dễ nắm bắt thông tin,Là Quản lý,để dễ nắm bắt thông tin,🟢 Thấp,1,,To Do
+181,US-486,Trải nghiệm & Báo cáo,Là Là User mới muốn xem video tutorial để biết cách dùng bot,Là User mới,để biết cách dùng bot,🟢 Thấp,1,,To Do
+182,US-487,Trải nghiệm & Báo cáo,Là Là Người dùng muốn gửi report khi bot trả lời sai để cải thiện chất lượng AI,Là Người dùng,để cải thiện chất lượng AI,🟢 Thấp,1,,To Do
+183,US-488,Trải nghiệm & Báo cáo,Là Là Kế toán muốn tải danh sách thu chi để làm báo cáo thuế,Là Kế toán,để làm báo cáo thuế,🟢 Thấp,1,,To Do
+184,US-489,Trải nghiệm & Báo cáo,Là Là Người dùng muốn đổi giao diện dashboard sang màu tối để dịu mắt khi làm việc đêm,Là Người dùng,để dịu mắt khi làm việc đêm,🟢 Thấp,1,,To Do
+185,US-490,Trải nghiệm & Báo cáo,Là Là Người dùng muốn nhận chuông khi có tin nhắn khẩn để xử lý tức thì,Là Người dùng,để xử lý tức thì,🟢 Thấp,1,,To Do
+186,US-491,Trải nghiệm & Báo cáo,Là Là Thư ký muốn xem lại các bản thảo cũ để sửa đổi nội dung,Là Thư ký,để sửa đổi nội dung,🟢 Thấp,1,,To Do
+187,US-492,Trải nghiệm & Báo cáo,Là Là Người dùng muốn nhận gợi ý phím bấm để thao tác nhanh hơn,Là Người dùng,để thao tác nhanh hơn,🟢 Thấp,1,,To Do
+188,US-493,Trải nghiệm & Báo cáo,Là Là Nhân viên muốn chuyển giao diện sang tiếng Anh để phục vụ chuyên gia nước ngoài,Là Nhân viên,để phục vụ chuyên gia nước ngoài,🟢 Thấp,1,,To Do
+189,US-494,Trải nghiệm & Báo cáo,Là Là Quản lý muốn xem biểu đồ hình tròn về task để dễ nắm bắt thông tin,Là Quản lý,để dễ nắm bắt thông tin,🟢 Thấp,1,,To Do
+190,US-495,Trải nghiệm & Báo cáo,Là Là User mới muốn xem video tutorial để biết cách dùng bot,Là User mới,để biết cách dùng bot,🟢 Thấp,1,,To Do
+191,US-496,Trải nghiệm & Báo cáo,Là Là Người dùng muốn gửi report khi bot trả lời sai để cải thiện chất lượng AI,Là Người dùng,để cải thiện chất lượng AI,🟢 Thấp,1,,To Do
+192,US-497,Trải nghiệm & Báo cáo,Là Là Kế toán muốn tải danh sách thu chi để làm báo cáo thuế,Là Kế toán,để làm báo cáo thuế,🟢 Thấp,1,,To Do
+193,US-498,Trải nghiệm & Báo cáo,Là Là Người dùng muốn đổi giao diện dashboard sang màu tối để dịu mắt khi làm việc đêm,Là Người dùng,để dịu mắt khi làm việc đêm,🟢 Thấp,1,,To Do
+194,US-499,Trải nghiệm & Báo cáo,Là Là Người dùng muốn nhận chuông khi có tin nhắn khẩn để xử lý tức thì,Là Người dùng,để xử lý tức thì,🟢 Thấp,1,,To Do
+195,US-500,Trải nghiệm & Báo cáo,Là Là Thư ký muốn xem lại các bản thảo cũ để sửa đổi nội dung,Là Thư ký,để sửa đổi nội dung,🟢 Thấp,1,,To Do
+,,,,,,,,,
+✅ TỔNG CỘNG SPRINT 4,,,,,,,527,,
