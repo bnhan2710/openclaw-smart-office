@@ -1,0 +1,39 @@
+QUY CHE NOI BO - TIEP NHAN VA XU LY CONG VAN (BAN KHUNG)
+
+I. PHAM VI VA DINH NGHIA
+1. Van ban nay ap dung cho tat ca cong van den tai Don vi.
+2. Cong van khan (CVK): cong van co dau KHAN/HOA TOC.
+3. Cong van thuong: cong van khong co dau KHAN/HOA TOC.
+
+II. TIEP NHAN CONG VAN
+1. Cong van den duoc tiep nhan tai Van thu trong gio hanh chinh.
+2. Ngoai gio hanh chinh, Van thu ghi nhan va bao cao lanh dao truc.
+3. Ban scan (PDF) phai duoc luu tru tren he thong luu tru noi bo.
+
+III. PHAN LOAI VA XU LY
+1. Cong van KHAN/HOA TOC: trinh lanh dao trong 2 gio ke tu khi tiep nhan.
+2. Cong van thuong: chuyen phong/bo phan lien quan trong 24 gio.
+3. Neu cong van lien quan den nhieu don vi, Van thu ghi ro don vi chu tri va phoi hop.
+
+IV. THOI HAN TRA LOI
+1. Cong van KHAN/HOA TOC: phai co du thao tra loi trong 1 ngay lam viec.
+2. Cong van thuong: du thao tra loi trong 5 ngay lam viec.
+3. Truong hop phuc tap co the xin gia han, nhung khong qua 10 ngay.
+
+V. VAO SO VA LUU TRU
+1. Tat ca cong van den phai vao so va luu tru.
+2. Thoi han luu tru toi thieu 5 nam.
+3. Ban scan luu tai thu muc: /LuuTru/CongVanDen/YYYY/MM/.
+
+VI. PHAN CONG NHIEM VU (TOM TAT)
+1. Giao Phong Hanh chinh cap nhat so cong van hang ngay.
+2. Giao Phong CNTT duy tri he thong luu tru va sao luu dinh ky vao thu 6 hang tuan.
+3. De nghi Van thu thong bao danh sach cong van khan cho lanh dao trong 2 gio.
+
+VII. CAN CU VA HIEU LUC
+1. Can cu: Nghi dinh 30/2020/ND-CP ve cong tac van thu.
+2. Van ban co hieu luc ke tu 01/05/2026.
+
+PHU LUC A - MAU BIEU
+1. Mau so 01: Phieu tiep nhan cong van.
+2. Mau so 02: Phieu chuyen xu ly cong van.
