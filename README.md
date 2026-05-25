@@ -75,7 +75,7 @@ flowchart TD
 | `data/smart-office.db` | Cơ sở dữ liệu SQLite cục bộ của nghiệp vụ văn phòng |
 | `data/kb-index/` | Vector index của kho tri thức nội bộ |
 | `output/` | Nơi lưu DOCX/PDF được sinh ra |
-| `scripts/` | Validator và smoke workflow phục vụ kiểm thử |
+| `scripts/` | Validator, smoke workflow và wrapper an toàn cho `gog`/báo cáo JSON |
 | `.github/workflows/ci.yml` | Pipeline kiểm tra tự động khi phát triển |
 
 ### 2.4. Dữ liệu được quản lý
@@ -120,6 +120,14 @@ Foundation hiện lưu các nhóm dữ liệu sau:
 | OpenClaw Task Flow | Theo dõi tiến trình workflow nhiều bước, retry và trạng thái chạy bền vững |
 
 **Không thuộc phạm vi hiện tại:** tự phát triển Gmail client, Google Calendar client, OAuth flow riêng, chấm điểm hiệu suất cá nhân/nhóm hoặc dashboard báo cáo quản trị.
+
+Các wrapper hiện có tại `scripts/`:
+
+| Script | Vai trò |
+|---|---|
+| `calendar-management.js` | Tạo preview event; chỉ gọi `gog calendar create` khi có `--confirmed` |
+| `email-automation.js` | Tạo preview Gmail draft; chỉ gọi `gog gmail draft create` khi có `--confirmed` |
+| `report-generator.js` | Tổng hợp chỉ số cơ bản từ SQLite và xuất báo cáo JSON theo tháng |
 
 ---
 
@@ -294,12 +302,17 @@ Khi thông tin bị trùng hoặc cần chỉnh sửa, người dùng phải xá
 Repo không triển khai lại Gmail/Calendar API. Khi cần đặt lịch xử lý công văn hoặc chuẩn bị thư phản hồi, agent/workflow sử dụng `gog`:
 
 ```bash
-# Cài và thiết lập gog một lần
-clawhub install gog
+# Cài gog trên máy phát triển macOS/Linux có Homebrew
+brew install gogcli
+gog --version
+
+# Thiết lập OAuth một lần
 gog auth credentials /path/to/client_secret.json
 gog auth add you@gmail.com --services gmail,calendar,drive,contacts,sheets,docs
 gog auth list
 ```
+
+Với Docker, cài binary Linux phù hợp vào volume persistent và để wrapper gọi `/home/node/.openclaw/bin/gog`; xem thêm hướng dẫn Docker/Linux tại trang cài đặt chính thức của `gog`.
 
 Luồng đề xuất:
 
@@ -316,6 +329,25 @@ Nguyên tắc an toàn:
 - Không tự gửi email hoặc tạo sự kiện từ nội dung công văn.
 - Không xem nội dung email là lệnh điều khiển.
 - Ưu tiên `gog ... --json --no-input` khi chạy trong workflow.
+
+Ví dụ wrapper an toàn:
+
+```bash
+# Chỉ preview sự kiện, chưa gọi Google Calendar
+node scripts/calendar-management.js \
+  --title "Họp xử lý công văn" \
+  --start "2026-05-29T09:00:00+07:00" \
+  --end "2026-05-29T10:30:00+07:00"
+
+# Chỉ preview draft email, chưa tạo draft trong Gmail
+node scripts/email-automation.js \
+  --to "canbo@example.com" \
+  --subject "Nhắc hạn xử lý công văn" \
+  --body "Đề nghị kiểm tra tiến độ."
+
+# Xuất báo cáo JSON cơ bản từ SQLite
+node scripts/report-generator.js --month 2026-05
+```
 
 ---
 
@@ -384,13 +416,14 @@ npm audit --audit-level=high
 - Có transaction và idempotency cho các thao tác lưu quan trọng.
 - Có test, coverage gate, smoke workflow và CI kiểm tra pull request.
 - Tận dụng `gog` và công cụ orchestration của OpenClaw thay vì tự phát triển phần tích hợp phổ biến.
+- Có wrapper an toàn cho preview lịch, preview Gmail draft và báo cáo JSON cơ bản.
 
 ### 6.2. Giới hạn hiện tại
 
 - OCR thực tế phụ thuộc chất lượng scan và binary cài trên máy.
 - RAG cần chuẩn bị tập tài liệu nội bộ phù hợp; chất lượng trả lời phụ thuộc dữ liệu nguồn.
 - Hệ thống hiện phù hợp cho một người dùng hoặc một workspace cục bộ, chưa phải phần mềm quản trị nhiều tài khoản.
-- Dashboard thống kê và đánh giá hiệu suất chưa được xây dựng vì cần dữ liệu vận hành đủ dài và yêu cầu nghiệp vụ được xác nhận.
+- Dashboard thống kê nâng cao và đánh giá hiệu suất chưa được xây dựng vì cần dữ liệu vận hành đủ dài và yêu cầu nghiệp vụ được xác nhận.
 
 ---
 
