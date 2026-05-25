@@ -14,6 +14,10 @@ import path from "path";
 import { createRequire } from "module";
 import { parseArgs } from "util";
 import { fileURLToPath } from "url";
+import { getDatabase, storeDocument, storeExtraction } from "../../../lib/database.js";
+import { fileHash } from "../../../lib/documents.js";
+import { analyzeAdministrativeDocument } from "../../../lib/review.js";
+import { printEnvelope, printError } from "../../../lib/response.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const require = createRequire(import.meta.url);
@@ -65,6 +69,7 @@ const { values: args } = parseArgs({
     output: { type: "string", short: "o" },
     format: { type: "string", short: "f" },
     number: { type: "string", short: "n" },
+    review: { type: "boolean" },
     help: { type: "boolean", short: "h" },
   },
   strict: false,
@@ -80,6 +85,7 @@ Tham số:
   --content, -c       Nội dung văn bản đã soạn (do agent cung cấp)
   --content-file      Đọc nội dung từ file text (dùng khi nội dung dài)
   --format, -f        Định dạng xuất: docx | pdf | both (mặc định: docx)
+  --review             Kiểm tra trường hành chính bắt buộc trước khi xuất
   --number, -n        Số hiệu văn bản (tuỳ chọn, tự sinh nếu bỏ qua)
   --output, -o        Tên file xuất (mặc định: <type>-<so_hieu>.<ext>)
 
@@ -279,6 +285,13 @@ async function main() {
       content = fs.readFileSync(cfPath, "utf8");
     }
     if (!content) throw new Error("Cần --content hoặc --content-file");
+    if (args.review) {
+      const review = analyzeAdministrativeDocument(content);
+      if (!review.passed) {
+        printEnvelope("soan-thao", { exported: false, review, requires_correction: true });
+        return;
+      }
+    }
 
     // Tạo số hiệu nếu chưa có
     const seq = String(Math.floor(Math.random() * 900) + 100);
@@ -294,7 +307,6 @@ async function main() {
     fs.mkdirSync(outputDir, { recursive: true });
 
     const result = {
-      success: true,
       so_hieu: soHieu,
       loai: docTypeDef.label,
       format,
@@ -320,21 +332,33 @@ async function main() {
       mediaOutputs.push(outputTargets.pdf);
     }
 
-    console.log(
-      JSON.stringify(
-        result,
-        null,
-        2
-      )
-    );
+    const storedPath = result.files.docx ?? result.files.pdf;
+    const db = getDatabase();
+    const stored = db.transaction(() => {
+      const document = storeDocument(db, {
+        filePath: storedPath,
+        fileName: path.basename(storedPath),
+        fileHash: fileHash(storedPath),
+        source: "soan-thao",
+      });
+      storeExtraction(db, {
+        documentId: document.id,
+        method: "authored",
+        text: content,
+        metadata: { so_hieu: soHieu, loai: docTypeDef.label, format },
+      });
+      return document;
+    })();
+    db.close();
+    printEnvelope("soan-thao", { document_id: stored.id, ...result });
 
     for (const mediaPath of mediaOutputs) {
       const escaped = mediaPath.replace(/"/g, "\\\"");
       console.log(`MEDIA:"${escaped}"`);
     }
   } catch (err) {
-    console.error(` Lỗi: ${err.message}`);
-    process.exit(1);
+    printError("soan-thao", err);
+    process.exitCode = 1;
   }
 }
 

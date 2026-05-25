@@ -1,0 +1,8 @@
+{
+  "name": "organization-tracker",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "organizations": "node scripts/organizations.js"
+  }
+}

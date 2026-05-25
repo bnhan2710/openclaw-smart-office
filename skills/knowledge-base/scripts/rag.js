@@ -8,6 +8,11 @@ import { createHash } from "crypto";
 import fs from "fs";
 import path from "path";
 import { parseArgs } from "util";
+import { getDatabase, storeDocument, storeExtraction } from "../../../lib/database.js";
+import { fileHash, readDocumentText } from "../../../lib/documents.js";
+import { printEnvelope, printError } from "../../../lib/response.js";
+
+const SKILL = "knowledge-base";
 
 // ── Config ────────────────────────────────────────────────────────────────────
 const CONFIG = {
@@ -176,7 +181,9 @@ function loadIndex() {
 
 function saveIndex(index) {
   fs.mkdirSync(CONFIG.indexDir, { recursive: true });
-  fs.writeFileSync(INDEX_FILE, JSON.stringify(index, null, 2), "utf8");
+  const temporaryPath = `${INDEX_FILE}.tmp-${process.pid}`;
+  fs.writeFileSync(temporaryPath, JSON.stringify(index, null, 2), "utf8");
+  fs.renameSync(temporaryPath, INDEX_FILE);
 }
 
 function resetIndex() {
@@ -272,26 +279,7 @@ function inferTitle(text) {
 
 // ── File reading (reuse approach from cong-van-summary) ──────────────────────
 async function readFileText(filePath) {
-  const ext = path.extname(filePath).toLowerCase();
-
-  if (ext === ".txt" || ext === ".md") {
-    return fs.readFileSync(filePath, "utf8");
-  }
-  if (ext === ".pdf") {
-    const { default: pdfParse } = await import("pdf-parse").catch(() => {
-      throw new Error("Cần cài đặt: npm install pdf-parse");
-    });
-    const data = await pdfParse(fs.readFileSync(filePath));
-    return data.text;
-  }
-  if (ext === ".docx") {
-    const mammoth = await import("mammoth").catch(() => {
-      throw new Error("Cần cài đặt: npm install mammoth");
-    });
-    const result = await mammoth.extractRawText({ path: filePath });
-    return result.value;
-  }
-  throw new Error(`Định dạng không hỗ trợ: ${ext}`);
+  return (await readDocumentText(filePath)).text;
 }
 
 // ── Add document ──────────────────────────────────────────────────────────────
@@ -319,11 +307,11 @@ async function addDocument(filePath) {
     (e) => e.fileId !== fileId && e.contentHash !== contentHash && e.sourcePath !== absPath
   );
 
+  const pendingChunks = [];
   for (let i = 0; i < chunks.length; i++) {
     process.stderr.write(`  Chunk ${i + 1}/${chunks.length}...\r`);
     const embedding = await embed(chunks[i]);
-    filtered.push({
-      fileId,
+    pendingChunks.push({
       source: sourceLabel,
       sourceLabel,
       sourceFile,
@@ -336,8 +324,22 @@ async function addDocument(filePath) {
     });
   }
 
-  saveIndex(filtered);
+  const db = getDatabase();
+  const document = db.transaction(() => {
+    const stored = storeDocument(db, {
+      filePath: absPath,
+      fileName: sourceFile,
+      fileHash: fileHash(absPath),
+      source: "knowledge-base",
+    });
+    storeExtraction(db, { documentId: stored.id, method: "native-text", text });
+    const nextIndex = [...filtered, ...pendingChunks.map((entry) => ({ fileId, documentId: stored.id, ...entry }))];
+    saveIndex(nextIndex);
+    return stored;
+  })();
+  db.close();
   console.error(`\n✅ Đã lập chỉ mục ${chunks.length} đoạn từ ${sourceLabel}`);
+  return { document_id: document.id, source: sourceLabel, chunks_indexed: chunks.length };
 }
 
 async function addDirectory(dirPath) {
@@ -348,9 +350,9 @@ async function addDirectory(dirPath) {
     .map((f) => path.join(absDir, f));
 
   console.error(`📂 Tìm thấy ${files.length} file trong ${absDir}`);
-  for (const file of files) {
-    await addDocument(file);
-  }
+  const documents = [];
+  for (const file of files) documents.push(await addDocument(file));
+  return documents;
 }
 
 function getIndexStats(index) {
@@ -402,8 +404,7 @@ function lexicalFallback(queryText, entries) {
 async function query(queryText, topK) {
   const index = loadIndex();
   if (index.length === 0) {
-    console.log(JSON.stringify({ error: "Knowledge base trống. Chạy --build hoặc --add trước." }));
-    return;
+    return { query: queryText, results: [], answer: "Knowledge base trống. Chạy --build hoặc --add trước." };
   }
 
   const queryEmbedding = await embed(queryText);
@@ -435,14 +436,7 @@ async function query(queryText, topK) {
   }
 
   if (selected.length === 0) {
-    console.log(
-      JSON.stringify({
-        query: queryText,
-        results: [],
-        answer: "Không tìm thấy thông tin liên quan trong knowledge base.",
-      }, null, 2)
-    );
-    return;
+    return { query: queryText, results: [], answer: "Không tìm thấy thông tin liên quan trong knowledge base." };
   }
 
   const warnings = [];
@@ -472,9 +466,7 @@ Nếu thông tin không đủ, nói rõ giới hạn.`,
     );
   }
 
-  console.log(
-    JSON.stringify(
-      {
+  return {
         query: queryText,
         results: selected.map(({ embedding: _e, ...rest }) => rest),
         answer,
@@ -494,11 +486,7 @@ Nếu thông tin không đủ, nói rõ giới hạn.`,
         note: CONFIG.enableGeneration
           ? undefined
           : "Retrieval-only: hay dung results de LLM trong OpenClaw tra loi.",
-      },
-      null,
-      2
-    )
-  );
+  };
 }
 
 // ── Main ──────────────────────────────────────────────────────────────────────
@@ -506,12 +494,12 @@ async function main() {
   try {
     if (args.stats) {
       const index = loadIndex();
-      console.log(JSON.stringify(getIndexStats(index), null, 2));
+      printEnvelope(SKILL, getIndexStats(index));
       return;
     }
     if (args.reset) {
       resetIndex();
-      console.log(JSON.stringify({ ok: true, message: "Đã reset index" }, null, 2));
+      printEnvelope(SKILL, { message: "Đã reset index" });
       return;
     }
     if (args.remove) {
@@ -519,26 +507,26 @@ async function main() {
         throw new Error("--remove yêu cầu --label hoặc --file");
       }
       const result = removeEntries({ label: args.label, file: args.file });
-      console.log(JSON.stringify({ ok: true, ...result }, null, 2));
+      printEnvelope(SKILL, result);
       return;
     }
     if (args.build) {
       const source = args.source ?? CONFIG.dataDir;
-      await addDirectory(source);
+      printEnvelope(SKILL, await addDirectory(source));
     } else if (args.add) {
-      if (args.file) await addDocument(args.file);
-      else if (args.dir) await addDirectory(args.dir);
+      if (args.file) printEnvelope(SKILL, await addDocument(args.file));
+      else if (args.dir) printEnvelope(SKILL, await addDirectory(args.dir));
       else throw new Error("--add yêu cầu --file hoặc --dir");
     } else if (args.query) {
       const topK = args["top-k"] ? parseInt(args["top-k"]) : undefined;
-      await query(args.query, topK);
+      printEnvelope(SKILL, await query(args.query, topK));
     } else {
       console.error("Thiếu tham số. Dùng --help để xem hướng dẫn.");
       process.exit(1);
     }
   } catch (err) {
-    console.error(`❌ Lỗi: ${err.message}`);
-    process.exit(1);
+    printError(SKILL, err);
+    process.exitCode = 1;
   }
 }
 

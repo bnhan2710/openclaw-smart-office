@@ -1,368 +1,143 @@
 #!/usr/bin/env node
-/**
- * cron.js — Theo dõi và nhắc nhở hạn xử lý công văn/nhiệm vụ
- * Theo dõi deadline
- * Gửi thông báo nhắc nhở tự động
- */
+import fs from "node:fs";
+import path from "node:path";
+import { randomUUID } from "node:crypto";
+import { parseArgs } from "node:util";
 
-import fs from "fs";
-import path from "path";
-import { parseArgs } from "util";
+import { LEGACY_DEADLINES_PATH } from "../../../lib/config.js";
+import { createTask, getDatabase, logAudit, migrateLegacyDeadlines } from "../../../lib/database.js";
+import { daysUntil } from "../../../lib/dates.js";
+import { printEnvelope, printError } from "../../../lib/response.js";
 
-// ── Config ────────────────────────────────────────────────────────────────────
-const CONFIG = {
-  telegram: {
-    token: process.env.TELEGRAM_BOT_TOKEN,
-    chatId: process.env.TELEGRAM_CHAT_ID,
-  },
-  smtp: {
-    host: process.env.SMTP_HOST,
-    port: parseInt(process.env.SMTP_PORT ?? "587"),
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
-    notifyEmail: process.env.NOTIFY_EMAIL,
-  },
-  reminderDaysBefore: (process.env.REMINDER_DAYS_BEFORE ?? "3,1")
-    .split(",")
-    .map(Number),
-  reminderTime: process.env.REMINDER_TIME ?? "08:00",
-  deadlinesFile: path.resolve(process.env.DEADLINES_FILE ?? "./data/deadlines.json"),
-  timezone: "Asia/Ho_Chi_Minh",
-};
-
-// ── CLI args ──────────────────────────────────────────────────────────────────
+const SKILL = "deadline-reminder";
+const reminderDays = (process.env.REMINDER_DAYS_BEFORE ?? "3,1").split(",").map(Number);
 const { values: args } = parseArgs({
   options: {
-    add: { type: "boolean" },
-    remove: { type: "boolean" },
-    list: { type: "boolean" },
-    check: { type: "boolean" },
-    daemon: { type: "boolean" },
-    notify: { type: "boolean" },
-    title: { type: "string" },
-    deadline: { type: "string" },
-    ref: { type: "string" },
-    priority: { type: "string", default: "medium" },
-    id: { type: "string" },
-    days: { type: "string", default: "30" },
-    help: { type: "boolean", short: "h" },
+    add: { type: "boolean" }, remove: { type: "boolean" }, list: { type: "boolean" }, check: { type: "boolean" },
+    daemon: { type: "boolean" }, notify: { type: "boolean" }, "import-json": { type: "boolean" }, "export-json": { type: "boolean" },
+    title: { type: "string" }, deadline: { type: "string" }, ref: { type: "string" }, priority: { type: "string", default: "medium" },
+    id: { type: "string" }, days: { type: "string", default: "30" }, file: { type: "string" }, help: { type: "boolean" },
   },
   strict: false,
 });
 
-if (args.help) {
-  console.log(`
-Sử dụng:
-  node cron.js --add --title "..." --deadline "YYYY-MM-DD" [--ref "..."] [--priority high|medium|low]
-  node cron.js --remove --id <id>
-  node cron.js --list [--days 7]
-  node cron.js --check [--notify]
-  node cron.js --daemon
-
-Biến môi trường:
-  TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID
-  SMTP_HOST / SMTP_PORT / SMTP_USER / SMTP_PASS / NOTIFY_EMAIL
-  REMINDER_DAYS_BEFORE   (mặc định: 3,1)
-  REMINDER_TIME          (mặc định: 08:00)
-  DEADLINES_FILE         (mặc định: ./data/deadlines.json)
-`);
-  process.exit(0);
+function upcomingTasks(db, horizon = Number.parseInt(args.days ?? "30", 10)) {
+  return db.prepare("SELECT id, title, deadline, priority, reference, status FROM tasks WHERE deadline IS NOT NULL AND status NOT IN ('completed', 'removed')")
+    .all()
+    .map((task) => ({ ...task, daysLeft: daysUntil(task.deadline) }))
+    .filter((task) => task.daysLeft <= horizon)
+    .sort((left, right) => left.daysLeft - right.daysLeft);
 }
 
-// ── Storage ───────────────────────────────────────────────────────────────────
-function loadDeadlines() {
-  if (!fs.existsSync(CONFIG.deadlinesFile)) return [];
-  return JSON.parse(fs.readFileSync(CONFIG.deadlinesFile, "utf8"));
+function reminderText(tasks) {
+  return [
+    "NHẮC NHỞ DEADLINE - Smart Office",
+    ...tasks.map((task) => `${task.daysLeft < 0 ? "QUÁ HẠN" : `CÒN ${task.daysLeft} NGÀY`}: ${task.title}${task.reference ? ` [${task.reference}]` : ""} (${task.deadline})`),
+  ].join("\n");
 }
 
-function saveDeadlines(deadlines) {
-  fs.mkdirSync(path.dirname(CONFIG.deadlinesFile), { recursive: true });
-  fs.writeFileSync(CONFIG.deadlinesFile, JSON.stringify(deadlines, null, 2), "utf8");
-}
-
-function generateId() {
-  return Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
-}
-
-// ── Deadline helpers ──────────────────────────────────────────────────────────
-function daysUntil(dateStr) {
-  const deadline = new Date(dateStr);
-  deadline.setHours(23, 59, 59, 0);
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  return Math.ceil((deadline - today) / (1000 * 60 * 60 * 24));
-}
-
-function urgencyEmoji(days, priority) {
-  if (days < 0) return "🔴";
-  if (days === 0) return "🚨";
-  if (days <= 1) return "🚨";
-  if (days <= 3) return "⚠️";
-  if (priority === "high") return "🔶";
-  return "📋";
-}
-
-function formatDate(dateStr) {
-  const d = new Date(dateStr);
-  return d.toLocaleDateString("vi-VN");
-}
-
-// ── Notification senders ──────────────────────────────────────────────────────
-async function sendTelegram(message) {
-  if (!CONFIG.telegram.token || !CONFIG.telegram.chatId) {
-    throw new Error("Thiếu TELEGRAM_BOT_TOKEN hoặc TELEGRAM_CHAT_ID");
-  }
-
-  const url = `https://api.telegram.org/bot${CONFIG.telegram.token}/sendMessage`;
-  const body = JSON.stringify({
-    chat_id: CONFIG.telegram.chatId,
-    text: message,
-    parse_mode: "HTML",
-  });
-
-  const { default: fetch } = await import("node-fetch").catch(async () => {
-    // Node 18+ has native fetch
-    return { default: globalThis.fetch };
-  });
-
-  const res = await fetch(url, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body,
-  });
-
-  if (!res.ok) {
-    const err = await res.text();
-    throw new Error(`Telegram API error: ${err}`);
-  }
-}
-
-async function sendEmail(subject, body) {
-  const nodemailer = await import("nodemailer").catch(() => {
-    throw new Error("Cần cài đặt: npm install nodemailer");
-  });
-
-  const transporter = nodemailer.default.createTransport({
-    host: CONFIG.smtp.host,
-    port: CONFIG.smtp.port,
-    secure: CONFIG.smtp.port === 465,
-    auth: { user: CONFIG.smtp.user, pass: CONFIG.smtp.pass },
-  });
-
-  await transporter.sendMail({
-    from: CONFIG.smtp.user,
-    to: CONFIG.smtp.notifyEmail,
-    subject,
-    text: body,
-  });
-}
-
-// ── Notification builder ──────────────────────────────────────────────────────
-function buildReminderMessage(overdue, urgent, upcoming) {
-  const lines = [
-    "🔔 <b>NHẮC NHỞ DEADLINE — Smart Office</b>",
-    "━━━━━━━━━━━━━━━━━━━━━━━━",
+function configuredChannels() {
+  return [
+    ...(process.env.TELEGRAM_BOT_TOKEN && process.env.TELEGRAM_CHAT_ID ? ["telegram"] : []),
+    ...(process.env.SMTP_HOST && process.env.NOTIFY_EMAIL ? ["email"] : []),
   ];
-
-  if (overdue.length) {
-    lines.push("\n🔴 <b>QUÁ HẠN:</b>");
-    overdue.forEach((d) => {
-      const days = Math.abs(daysUntil(d.deadline));
-      lines.push(`  • ${d.title}${d.ref ? ` [${d.ref}]` : ""}`);
-      lines.push(`    ❌ Đã quá hạn ${days} ngày (${formatDate(d.deadline)})`);
-    });
-  }
-
-  if (urgent.length) {
-    lines.push("\n🚨 <b>CẦN XỬ LÝ NGAY:</b>");
-    urgent.forEach((d) => {
-      const days = daysUntil(d.deadline);
-      lines.push(`  • ${d.title}${d.ref ? ` [${d.ref}]` : ""}`);
-      lines.push(`    📅 Hạn: ${formatDate(d.deadline)} (còn ${days} ngày)`);
-    });
-  }
-
-  if (upcoming.length) {
-    lines.push("\n⚠️ <b>SẮP ĐẾN HẠN:</b>");
-    upcoming.forEach((d) => {
-      const days = daysUntil(d.deadline);
-      lines.push(`  • ${d.title}${d.ref ? ` [${d.ref}]` : ""}`);
-      lines.push(`    📅 Hạn: ${formatDate(d.deadline)} (còn ${days} ngày)`);
-    });
-  }
-
-  const total = overdue.length + urgent.length + upcoming.length;
-  lines.push(`\n📋 Tổng: ${total} việc cần chú ý`);
-
-  return lines.join("\n");
 }
 
-// ── Commands ──────────────────────────────────────────────────────────────────
-function cmdAdd() {
-  if (!args.title || !args.deadline) {
-    console.error("❌ Yêu cầu --title và --deadline");
-    process.exit(1);
-  }
-
-  const deadlines = loadDeadlines();
-  const entry = {
-    id: generateId(),
-    title: args.title,
-    deadline: args.deadline,
-    ref: args.ref ?? null,
-    priority: args.priority,
-    createdAt: new Date().toISOString(),
-    notifiedDays: [],
-  };
-
-  deadlines.push(entry);
-  saveDeadlines(deadlines);
-
-  const days = daysUntil(args.deadline);
-  console.log(
-    JSON.stringify({ success: true, id: entry.id, daysLeft: days }, null, 2)
-  );
-  console.error(`✅ Đã thêm deadline: ${entry.title} (${formatDate(args.deadline)}, còn ${days} ngày)`);
-}
-
-function cmdRemove() {
-  if (!args.id) {
-    console.error("❌ Yêu cầu --id");
-    process.exit(1);
-  }
-
-  const deadlines = loadDeadlines();
-  const filtered = deadlines.filter((d) => d.id !== args.id);
-
-  if (filtered.length === deadlines.length) {
-    console.error(`❌ Không tìm thấy deadline với id: ${args.id}`);
-    process.exit(1);
-  }
-
-  saveDeadlines(filtered);
-  console.error(`✅ Đã xoá deadline ${args.id}`);
-}
-
-function cmdList() {
-  const daysAhead = parseInt(args.days ?? "30");
-  const deadlines = loadDeadlines();
-  const now = new Date();
-
-  const filtered = deadlines
-    .map((d) => ({ ...d, daysLeft: daysUntil(d.deadline) }))
-    .filter((d) => d.daysLeft <= daysAhead)
-    .sort((a, b) => a.daysLeft - b.daysLeft);
-
-  if (!filtered.length) {
-    console.log(`✅ Không có deadline nào trong ${daysAhead} ngày tới.`);
+async function sendNotification(channel, text) {
+  if (channel === "telegram") {
+    const response = await fetch(`https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN}/sendMessage`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ chat_id: process.env.TELEGRAM_CHAT_ID, text }),
+    });
+    if (!response.ok) throw new Error("Telegram notification failed");
     return;
   }
-
-  console.log(`\n📋 DEADLINE TRONG ${daysAhead} NGÀY TỚI (${filtered.length} việc)\n`);
-  filtered.forEach((d) => {
-    const emoji = urgencyEmoji(d.daysLeft, d.priority);
-    const status = d.daysLeft < 0
-      ? `QUÁ HẠN ${Math.abs(d.daysLeft)} ngày`
-      : d.daysLeft === 0
-      ? "HÔM NAY"
-      : `còn ${d.daysLeft} ngày`;
-    console.log(`${emoji} [${d.id}] ${d.title}`);
-    console.log(`   📅 ${formatDate(d.deadline)} (${status})${d.ref ? ` | Ref: ${d.ref}` : ""}`);
-    console.log(`   Priority: ${d.priority}`);
-    console.log();
-  });
-}
-
-async function cmdCheck(andNotify = false) {
-  const deadlines = loadDeadlines();
-  const maxReminderDays = Math.max(...CONFIG.reminderDaysBefore);
-
-  const overdue = deadlines.filter((d) => daysUntil(d.deadline) < 0);
-  const urgent = deadlines.filter((d) => {
-    const days = daysUntil(d.deadline);
-    return days >= 0 && days <= 1;
-  });
-  const upcoming = deadlines.filter((d) => {
-    const days = daysUntil(d.deadline);
-    return days > 1 && days <= maxReminderDays;
-  });
-
-  const shouldNotify = overdue.length + urgent.length + upcoming.length > 0;
-
-  if (!shouldNotify) {
-    console.log("✅ Không có deadline cần nhắc nhở ngay.");
-    return;
-  }
-
-  const message = buildReminderMessage(overdue, urgent, upcoming);
-  console.log(message.replace(/<[^>]+>/g, "")); // strip HTML for console
-
-  if (andNotify) {
-    let sent = false;
-    if (CONFIG.telegram.token && CONFIG.telegram.chatId) {
-      await sendTelegram(message);
-      console.error("📱 Đã gửi Telegram");
-      sent = true;
-    }
-    if (CONFIG.smtp.host && CONFIG.smtp.notifyEmail) {
-      await sendEmail(
-        "🔔 Nhắc nhở Deadline — Smart Office",
-        message.replace(/<[^>]+>/g, "")
-      );
-      console.error("📧 Đã gửi Email");
-      sent = true;
-    }
-    if (!sent) {
-      console.error("⚠️  Chưa cấu hình kênh thông báo (Telegram hoặc Email)");
-    }
+  if (channel === "email") {
+    const { default: nodemailer } = await import("nodemailer");
+    const transporter = nodemailer.createTransport({
+      host: process.env.SMTP_HOST,
+      port: Number.parseInt(process.env.SMTP_PORT ?? "587", 10),
+      secure: process.env.SMTP_PORT === "465",
+      auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
+    });
+    await transporter.sendMail({ from: process.env.SMTP_USER, to: process.env.NOTIFY_EMAIL, subject: "Nhắc nhở Deadline - Smart Office", text });
   }
 }
 
-// ── Daemon mode ───────────────────────────────────────────────────────────────
+async function checkAndMaybeNotify(db, notify) {
+  const tasks = upcomingTasks(db, Math.max(...reminderDays, 1)).filter((task) => task.daysLeft < 0 || task.daysLeft <= 1 || reminderDays.includes(task.daysLeft));
+  if (!notify || tasks.length === 0) return { tasks, message: tasks.length ? reminderText(tasks) : "Không có deadline cần nhắc.", channels: [] };
+  const today = new Date().toISOString().slice(0, 10);
+  const configured = configuredChannels();
+  const channels = [];
+  for (const channel of configured) {
+    const unsent = tasks.filter((task) => !db.prepare("SELECT 1 FROM reminders WHERE task_id = ? AND channel = ? AND reminder_key = ?").get(task.id, channel, `${today}:${task.daysLeft}`));
+    if (unsent.length === 0) continue;
+    await sendNotification(channel, reminderText(unsent));
+    db.transaction(() => {
+      for (const task of unsent) {
+        db.prepare("INSERT INTO reminders (id, task_id, channel, reminder_key, sent_at) VALUES (?, ?, ?, ?, ?)")
+          .run(`rem-${randomUUID()}`, task.id, channel, `${today}:${task.daysLeft}`, new Date().toISOString());
+      }
+      logAudit(db, { action: "reminder.notify", entityType: "task", details: { count: unsent.length, channel } });
+    })();
+    channels.push(channel);
+  }
+  if (configured.length > 0 && channels.length === 0) return { tasks, message: "Các nhắc nhở hôm nay đã được gửi.", channels };
+  return { tasks, message: reminderText(tasks), channels };
+}
+
 function startDaemon() {
-  const [hours, minutes] = CONFIG.reminderTime.split(":").map(Number);
-  console.error(`🕐 Daemon khởi động. Gửi nhắc lúc ${CONFIG.reminderTime} ICT mỗi ngày.`);
-
-  function scheduleNext() {
+  const [hours, minutes] = (process.env.REMINDER_TIME ?? "08:00").split(":").map(Number);
+  const schedule = () => {
     const now = new Date();
-    const next = new Date(
-      now.getFullYear(),
-      now.getMonth(),
-      now.getDate(),
-      hours,
-      minutes,
-      0,
-      0
-    );
+    const next = new Date(now.getFullYear(), now.getMonth(), now.getDate(), hours, minutes, 0, 0);
     if (next <= now) next.setDate(next.getDate() + 1);
-    const msUntil = next - now;
-    console.error(
-      `⏳ Lần nhắc tiếp theo: ${next.toLocaleString("vi-VN")} (sau ${Math.round(msUntil / 60000)} phút)`
-    );
     setTimeout(async () => {
-      await cmdCheck(true);
-      scheduleNext();
-    }, msUntil);
-  }
-
-  scheduleNext();
+      const db = getDatabase();
+      try { await checkAndMaybeNotify(db, true); } finally { db.close(); schedule(); }
+    }, next.getTime() - now.getTime());
+  };
+  schedule();
+  return { status: "running", reminder_time: process.env.REMINDER_TIME ?? "08:00" };
 }
 
-// ── Main ──────────────────────────────────────────────────────────────────────
 async function main() {
+  if (args.help) {
+    console.log("Usage: cron.js --add ... | --list | --check [--notify] | --import-json [--file path] | --export-json [--file path] | --daemon");
+    return;
+  }
+  if (args.daemon) {
+    printEnvelope(SKILL, startDaemon());
+    return;
+  }
+  const db = getDatabase();
   try {
-    if (args.add) cmdAdd();
-    else if (args.remove) cmdRemove();
-    else if (args.list) cmdList();
-    else if (args.check) await cmdCheck(args.notify);
-    else if (args.daemon) startDaemon();
-    else {
-      console.error("Thiếu lệnh. Dùng --help để xem hướng dẫn.");
-      process.exit(1);
-    }
-  } catch (err) {
-    console.error(`❌ Lỗi: ${err.message}`);
-    process.exit(1);
+    let result;
+    if (args.add) result = createTask(db, { title: args.title, deadline: args.deadline, reference: args.ref, priority: args.priority });
+    else if (args.remove && args.id) {
+      db.transaction(() => {
+        db.prepare("UPDATE tasks SET status = 'removed' WHERE id = ?").run(args.id);
+        logAudit(db, { action: "task.remove", entityType: "task", entityId: args.id });
+      })();
+      result = { id: args.id, status: "removed" };
+    } else if (args.list) result = upcomingTasks(db);
+    else if (args.check) result = await checkAndMaybeNotify(db, args.notify);
+    else if (args["import-json"]) result = { imported: migrateLegacyDeadlines(db, args.file ?? LEGACY_DEADLINES_PATH) };
+    else if (args["export-json"]) {
+      const filePath = path.resolve(args.file ?? "./data/deadlines-export.json");
+      const data = db.prepare("SELECT id, title, deadline, reference AS ref, priority, status, created_at AS createdAt FROM tasks WHERE deadline IS NOT NULL").all();
+      fs.mkdirSync(path.dirname(filePath), { recursive: true });
+      fs.writeFileSync(filePath, JSON.stringify(data, null, 2), "utf8");
+      result = { file: filePath, exported: data.length };
+    } else throw new Error("Choose a deadline command");
+    printEnvelope(SKILL, result);
+  } catch (error) {
+    printError(SKILL, error);
+    process.exitCode = 1;
+  } finally {
+    db.close();
   }
 }
 

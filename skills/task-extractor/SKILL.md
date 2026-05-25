@@ -8,7 +8,7 @@ metadata: {"openclaw":{"emoji":"🎯","requires":{"bins":["node"]},"install":[{"
 ## Khi nào dùng skill này
 
 Dùng skill này khi:
-- Vừa xử lý xong biên bản họp qua `cong-van-summary` → tự động tạo danh sách việc cần làm
+- Người dùng hoặc workflow chuyển text/`document_id` từ biên bản đã đọc sang để đề xuất danh sách việc cần làm
 - Người dùng nói: "tạo task", "việc gì cần làm", "phân công", "nhiệm vụ từ văn bản"
 - Cần chuyển nội dung cuộc họp/công văn thành to-do list rõ ràng
 
@@ -16,9 +16,9 @@ Dùng skill này khi:
 
 ### Bước 1 — Lấy nội dung văn bản
 
-Nếu có file, dùng script để đọc text thô:
+Nếu công văn đã được xử lý, ưu tiên dùng `document_id` từ `cong-van-summary`; nếu chỉ có file thì đọc trực tiếp:
 ```bash
-node {baseDir}/scripts/extract-task.js --file <đường_dẫn> --read-only
+node {baseDir}/scripts/extract-task.js --document-id <document_id> --read-only
 ```
 
 Script trả về text đầy đủ. **Agent tự đọc và phân tích** nội dung.
@@ -48,6 +48,7 @@ Với mỗi task có deadline:
 ```bash
 node {baseDir}/scripts/extract-task.js \
   --add-deadline \
+  --document-id "<document_id>" \
   --title "<tên_task>" \
   --deadline "YYYY-MM-DD" \
   --ref "<số_công_văn>" \
@@ -59,4 +60,5 @@ node {baseDir}/scripts/extract-task.js \
 - **Agent tự phân tích bằng LLM của OpenClaw** — không cần API key riêng
 - Script chỉ đảm nhiệm đọc file và regex gợi ý ban đầu
 - Đặc biệt hiệu quả với biên bản họp có mục "Kết luận / Phân công"
-- Luồng tối ưu: `cong-van-summary` → `task-extractor` → `deadline-reminder`
+- Task được lưu vào SQLite dùng chung chỉ sau bước xác nhận.
+- Khi cần tạo lịch Google, agent/workflow dùng skill `gog` sau approval checkpoint; script này không gọi integration khác.

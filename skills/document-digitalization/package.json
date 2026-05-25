@@ -1,0 +1,11 @@
+{
+  "name": "document-digitalization",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "digitalize": "node scripts/digitalize.js"
+  },
+  "dependencies": {
+    "pdf-parse": "^1.1.1"
+  }
+}

@@ -15,9 +15,11 @@ Dùng skill này khi:
 ## Quy trình thực hiện
 
 1. **Nhận file**: Lưu file đính kèm vào disk nếu chưa có đường dẫn
-2. **Chạy script trích xuất**:
+2. **Chạy script trích xuất** (kết quả JSON gồm `document_id` để dùng cho các skill sau):
    ```bash
-   node {baseDir}/scripts/extract.js --file <đường_dẫn_file> --output text
+   node {baseDir}/scripts/extract.js --file <đường_dẫn_file>
+   # Hoặc sau khi OCR:
+   node {baseDir}/scripts/extract.js --document-id <document_id_tu_document-digitalization>
    ```
 3. **Đọc output** và trình bày cho người dùng theo cấu trúc:
    - Số hiệu văn bản
@@ -36,6 +38,6 @@ Dùng skill này khi:
 
 ## Lưu ý
 
-- Nếu file PDF là ảnh scan (không có text), thông báo OCR không khả dụng và đề nghị file có text
+- Nếu file PDF là ảnh scan (không có text), trả nhu cầu OCR cho agent; việc điều phối sang `document-digitalization` thuộc agent/workflow, không thuộc script này
 - Đối với OpenClaw 3.2+: ưu tiên dùng native `pdf` tool trước khi gọi script nếu model hỗ trợ
-- Sau khi trích xuất, hỏi người dùng có muốn thêm hạn xử lý vào deadline-reminder không
+- Metadata và text được lưu trong SQLite dùng chung; sau khi trích xuất, hỏi người dùng có muốn lưu task/deadline không

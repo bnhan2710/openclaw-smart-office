@@ -8,7 +8,7 @@ metadata: {"openclaw":{"emoji":"⏰","requires":{"bins":["node"]},"install":[{"i
 ## Khi nào dùng skill này
 
 Dùng skill này khi:
-- `cong-van-summary` hoặc `task-extractor` phát hiện `han_xu_ly` trong văn bản → tự động thêm
+- Người dùng hoặc workflow đã duyệt task có `han_xu_ly` từ `cong-van-summary`/`task-extractor` và cần lưu nhắc hạn
 - Người dùng nói: "nhắc tôi", "thêm nhắc nhở", "đặt deadline", "việc gì cần làm"
 - Người dùng hỏi: "deadline nào sắp đến?", "hôm nay cần làm gì?"
 - Cần xem danh sách, thêm, hoặc xóa deadline
@@ -85,6 +85,8 @@ Daemon gửi thông báo lúc `REMINDER_TIME` (mặc định 08:00) mỗi ngày 
 
 ## Lưu ý
 
-- Deadlines được lưu tại `./data/deadlines.json` (hoặc `DEADLINES_FILE`)
+- Deadlines được lưu dưới dạng task trong `SMART_OFFICE_DB`; `DEADLINES_FILE` chỉ là nguồn import dữ liệu cũ
+- Nhập dữ liệu JSON cũ một lần: `node {baseDir}/scripts/cron.js --import-json`
+- Xuất bản sao JSON: `node {baseDir}/scripts/cron.js --export-json --file <path>`
 - Tự động gọi skill này sau `cong-van-summary` nếu phát hiện hạn xử lý
 - Dùng `--daemon` với PM2 để nhắc nhở 24/7: `pm2 start {baseDir}/scripts/cron.js --name deadline-reminder -- --daemon`
