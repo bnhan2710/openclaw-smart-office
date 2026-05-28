@@ -1,0 +1,72 @@
+{
+  "name": "kb-advanced-rag-benchmark",
+  "source": "skills/knowledge-base/references",
+  "cases": [
+    {
+      "id": "scope-definition",
+      "query": "Van ban nay ap dung cho nhung doi tuong nao?",
+      "max_rank": 3,
+      "expectation": {
+        "source_file": "kb-test-phuc-tap.txt",
+        "document_type": "quy-che",
+        "must_include_headings": ["PHAM VI VA DINH NGHIA"],
+        "must_include_terms": ["tat ca cong van den", "cong van den"]
+      }
+    },
+    {
+      "id": "urgent-processing",
+      "query": "Cong van khan hoa toc duoc trinh lanh dao trong bao lau?",
+      "max_rank": 3,
+      "expectation": {
+        "source_file": "kb-test-phuc-tap.txt",
+        "document_type": "quy-che",
+        "must_include_headings": ["PHAN LOAI VA XU LY"],
+        "must_include_terms": ["2 gio", "trinh lanh dao"]
+      }
+    },
+    {
+      "id": "response-time",
+      "query": "Thoi han tra loi cua cong van thuong la bao lau?",
+      "max_rank": 3,
+      "expectation": {
+        "source_file": "kb-test-phuc-tap.txt",
+        "document_type": "quy-che",
+        "must_include_headings": ["THOI HAN TRA LOI"],
+        "must_include_terms": ["5 ngay", "10 ngay"]
+      }
+    },
+    {
+      "id": "proposal-budget",
+      "query": "To trinh co de xuat kinh phi bao nhieu va giao don vi nao van hanh?",
+      "max_rank": 3,
+      "expectation": {
+        "source_file": "kb-to-trinh-mau.txt",
+        "document_type": "to-trinh",
+        "must_include_headings": ["NOI DUNG DE XUAT", "KINH PHI VA LO TRINH"],
+        "must_include_terms": ["35.000.000", "Phong CNTT", "05 ngay"]
+      }
+    },
+    {
+      "id": "meeting-ownership",
+      "query": "Bien ban hop giao phong nao cap nhat index va bo sung benchmark corpus?",
+      "max_rank": 3,
+      "expectation": {
+        "source_file": "kb-bien-ban-mau.txt",
+        "document_type": "bien-ban",
+        "must_include_headings": ["KET LUAN", "PHAN CONG HAU KIEM"],
+        "must_include_terms": ["Phong CNTT", "Van thu", "benchmark corpus"]
+      }
+    },
+    {
+      "id": "decision-schema",
+      "query": "Quyet dinh quy dinh schema version va updated_at cho index nhu the nao?",
+      "max_rank": 3,
+      "expectation": {
+        "source_file": "kb-quyet-dinh-mau.txt",
+        "document_type": "quyet-dinh",
+        "must_include_headings": ["QUYET DINH", "TRACH NHIEM THUC HIEN"],
+        "must_include_terms": ["schema_version", "updated_at", "migration"]
+      }
+    }
+  ]
+}

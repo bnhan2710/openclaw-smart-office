@@ -1,7 +1,7 @@
 ---
 name: knowledge-base
 description: Tra cứu quy định, văn bản pháp lý, tiền lệ từ kho tài liệu nội bộ sử dụng RAG (Retrieval-Augmented Generation). Dùng khi người dùng hỏi "quy định về...", "tìm văn bản liên quan đến...", "có tiền lệ nào về...", "quy trình xử lý...", hoặc cần tham chiếu văn bản nội bộ trước khi soạn thảo. Trả lời có trích dẫn nguồn cụ thể (số hiệu, tên văn bản).
-version: 1.0.2
+version: 1.3.0
 metadata: {"openclaw":{"emoji":"🔍","requires":{"bins":["node"]},"install":[{"id":"npm","kind":"node","pkg":"{baseDir}","label":"Cài đặt dependencies (openai, pdf-parse, mammoth)"}]}}
 ---
 
@@ -101,3 +101,19 @@ ALLOW_FALLBACK=true
 - Index được lưu tại `{baseDir}/../../data/kb-index/index.json`
 - Nếu `ENABLE_GENERATION=false`, script chỉ trả về kết quả truy hồi để OpenClaw tự trả lời
 - Nếu có `fallback` hoặc `warnings`, cần thông báo độ tin cậy thấp
+- `scripts/rag.js` đã có metadata extraction theo loại tài liệu, hybrid scoring, query rewrite, multi-query retrieval, rerank và citation pack; ưu tiên giữ các trường `documentMetadata`, `semantic_score`, `lexical_score`, `metadata_score`, `rerank_score`, `rerank_boost`
+- `scripts/rag.js` đã hỗ trợ `schema_version` cho index, có `--migrate-index`, và lưu payload index dạng object có `created_at` / `updated_at`
+- Khi chạy local 4GB VRAM, ưu tiên `qwen2.5:3b-instruct` làm model chính cho query rewrite và synthesis; model này đang có sẵn trong Ollama trên máy này và là lựa chọn cân bằng nhất cho KB tiếng Việt
+- Nếu ưu tiên summarization dài hoặc prompt rewriting hơn multilingual, `llama3.2:3b` là phương án dự phòng hợp lý; nếu ưu tiên reasoning ngắn gọn, `phi3.5` cũng là một lựa chọn
+- LM Studio hiện chỉ thấy embedding model `nomic-embed-text-v1.5-Q4_K_M.gguf`; chưa thấy LLM tương đương nên ưu tiên Ollama cho generation
+- Benchmark suite hiện đã mở rộng sang nhiều loại tài liệu: quy chế, tờ trình, biên bản, quyết định; agent sau cần chạy `npm run eval` sau mỗi thay đổi retrieval/index quan trọng
+
+## Tracking & handoff
+
+- Mỗi thay đổi liên quan knowledge base phải cập nhật `track/progress.md`
+- Mọi thay đổi lớn hơn 1 tính năng nên thêm mục tương ứng vào `track/roadmap.md`
+- Agent kế tiếp nên đọc `track/README.md` trước khi chạm vào `scripts/rag.js`
+- Chạy `npm run eval` hoặc `node scripts/rag.js --eval` để kiểm tra regression với benchmark suite
+- Khi thêm tính năng mới, ghi rõ: `done`, `partial`, `next`, và `risks`
+- Nếu đổi cấu trúc index hoặc metadata, cập nhật cả `SKILL.md` lẫn file track để tránh lệch ngữ cảnh
+- Mục tiêu phát triển tiếp theo: tách citation theo đoạn/trang tốt hơn, regression metadata, và benchmark đa tài liệu thật

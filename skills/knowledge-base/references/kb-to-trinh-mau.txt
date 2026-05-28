@@ -1,0 +1,25 @@
+TO TRINH PHE DUYET KINH PHI NANG CAP HE THONG LUU TRU
+
+I. CAN CU LAP TO TRINH
+1. Nhu cau nang cap he thong luu tru tai bo phan Van thu.
+2. Ke hoach so hoa va chuan hoa metadata tai Knowledge Base.
+
+II. NOI DUNG DE XUAT
+1. De xuat phe duyet kinh phi mua 01 may chu 4GB VRAM phuc vu RAG noi bo.
+2. De xuat cau hinh uu tien cho Ollama va embedding model noi bo.
+3. De xuat giao phong CNTT quan ly van hanh va sao luu dinh ky.
+
+III. KINH PHI VA LO TRINH
+1. Tong kinh phi du kien: 35.000.000 VND.
+2. Thoi gian trien khai: 05 ngay lam viec.
+3. Ket qua mong doi: hoan thien advanced RAG, tra cuu chinh xac hon.
+
+IV. DE NGHI PHE DUYET
+1. De nghi lanh dao phe duyet chu truong va kinh phi.
+2. De nghi cho phep ap dung thu nghiem tren tap tai lieu noi bo.
+3. De nghi ban hanh chi dao trong ngay.
+
+NƠI NHAN
+1. Ban Giam doc
+2. Phong Tai chinh
+3. Phong CNTT

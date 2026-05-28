@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "build": "node scripts/rag.js --build",
-    "query": "node scripts/rag.js --query"
+    "query": "node scripts/rag.js --query",
+    "eval": "node scripts/rag.js --eval",
+    "migrate-index": "node scripts/rag.js --migrate-index"
   },
   "dependencies": {
     "mammoth": "^1.8.0",

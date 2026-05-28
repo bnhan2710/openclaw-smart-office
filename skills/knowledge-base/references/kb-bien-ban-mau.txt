@@ -1,0 +1,25 @@
+BIEN BAN HOP RUT KINH NGHIEM VE RAG NOI BO
+
+I. THOI GIAN DIA DIEM
+1. Bat dau luc 14:00 ngay 28/05/2026.
+2. Dia diem: Phong hop tang 3.
+
+II. THANH PHAN THAM DU
+1. Dai dien Van thu.
+2. Dai dien Phong CNTT.
+3. Dai dien Bo phan Nghiep vu.
+
+III. NOI DUNG CUOC HOP
+1. Danh gia benchmark advanced RAG tren tap tai lieu mau.
+2. Thong nhat can bo sung versioning cho index.json.
+3. Thong nhat mo rong benchmark sang nhieu loai tai lieu.
+
+IV. KET LUAN
+1. Ghi nhan ket qua pass 100% tren benchmark mau.
+2. Giao phong CNTT duy tri index va cap nhat schema khi can.
+3. Giao Van thu cung cap them tai lieu goc cho corpus kiem thu.
+
+V. PHAN CONG HAU KIEM
+1. Phong CNTT: bo sung migration cho index.
+2. Van thu: cap nhat benchmark corpus.
+3. Bo phan Nghiep vu: xac nhan tinh dung cua metadata.

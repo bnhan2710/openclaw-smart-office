@@ -1,0 +1,18 @@
+QUYET DINH BAN HANH QUY TRINH CAP NHAT KNOWLEDGE BASE
+
+I. QUYET DINH
+1. Ban hanh quy trinh cap nhat knowledge base noi bo.
+2. Quy dinh index phai co schema_version va updated_at.
+
+II. PHAM VI AP DUNG
+1. Ap dung voi tat ca tai lieu trong kho knowledge base.
+2. Ap dung voi nhan su Van thu, CNTT va nghiep vu.
+
+III. TRACH NHIEM THUC HIEN
+1. Phong CNTT: quan ly index, migration, benchmark.
+2. Van thu: bo sung tai lieu nguon va metadata chinh xac.
+3. Bo phan Nghiep vu: xac nhan ket qua truy hoi.
+
+IV. HIEU LUC
+1. Quyet dinh co hieu luc ke tu ngay ky.
+2. Van ban nay thay the cac huong dan truoc do ve KB neu co mâu thuan.
