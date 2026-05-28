@@ -171,6 +171,14 @@ function buildOutputTargets(params) {
   return { docx: path.resolve(outputDir, ext === ".docx" || !ext ? fileName : `${baseWithoutExt}.docx`) };
 }
 
+function formatMediaPath(filePath) {
+  const relative = path.relative(WORKSPACE_DIR, filePath);
+  if (relative && !relative.startsWith("..") && !path.isAbsolute(relative)) {
+    return `./${relative.replace(/\\/g, "/")}`;
+  }
+  return filePath;
+}
+
 // ── DOCX generation ───────────────────────────────────────────────────────────
 async function exportDocx(text, outputPath, templateName) {
   const templatePath = path.join(TEMPLATES_DIR, templateName);
@@ -353,7 +361,7 @@ async function main() {
     printEnvelope("soan-thao", { document_id: stored.id, ...result });
 
     for (const mediaPath of mediaOutputs) {
-      const escaped = mediaPath.replace(/"/g, "\\\"");
+      const escaped = formatMediaPath(mediaPath).replace(/"/g, "\\\"");
       console.log(`MEDIA:"${escaped}"`);
     }
   } catch (err) {

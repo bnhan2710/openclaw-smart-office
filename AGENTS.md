@@ -119,14 +119,20 @@ Skills provide your tools. When you need one, check its `SKILL.md`. Keep local n
 
 ### Smart Office document export
 
-When the user asks to create or export an administrative document as DOCX/PDF, use the `soan-thao` skill. Do not promise to send files later. Do not say you are waiting or that you will create files in the background.
+When the user asks to create or export an administrative document as DOCX/PDF, use the `soan-thao` skill. This includes follow-up confirmations such as "Xuất bản nháp ngay", "xuất file ngay", "tạo bản nháp", "gửi DOCX", or "gửi PDF". Do not promise to send files later. Do not say you are waiting, that you cannot export directly, or that you will create files in the background while the `exec` and `message` tools are available.
+
+Critical: for any request containing "ngay lập tức", "xuất ngay", "để placeholder", "bản nháp", "DOCX", or "PDF", your next assistant turn must either call `exec` or report the real `exec` error. A plain text reply such as "mình sẽ xuất" is incorrect because no background job will continue after the reply.
 
 Required behavior:
 
 - Read `skills/soan-thao/SKILL.md` if needed.
-- Save the final document text to a temporary file.
-- Immediately run `node /home/node/.openclaw/workspace/skills/soan-thao/scripts/generate.js --type cong-van --content-file <temp-file> --format both --output <name>` with `exec`.
-- Report the generated file paths from `output/van-ban`.
+- If required fields are missing and the user asks to export immediately or as a draft, use clear placeholders such as `[....]` and continue. Do not block the export just to ask again.
+- Save the final document text to a temporary file, for example `/tmp/<name>.txt`.
+- Choose the document type from the request: use `--type to-trinh` for tờ trình, báo cáo/tờ trình phê duyệt, xin phê duyệt, or approval-submission drafts; use `--type cong-van` only for công văn; use `--type bien-ban` for biên bản.
+- Use `--format both` when the user asks for "PDF hoặc DOCX", "DOCX/PDF", "xuất file", or does not clearly choose one format. Use the specific format only when the user clearly requests one.
+- Immediately run `node /home/node/.openclaw/workspace/skills/soan-thao/scripts/generate.js --type <type> --content-file <temp-file> --format <docx|pdf|both> --output <name>` with `exec` from `/home/node/.openclaw/workspace`.
+- Send the generated files back to the chat with the `message` tool using `filePath` (or `path`/`media`) for each generated file. For `--format both`, send both the DOCX and PDF.
+- Report the generated file paths from `output/van-ban` after sending attachments.
 - If the command fails, show the actual error and stop. Do not invent fallback formats like HTML/ODT unless the user explicitly asks.
 
 **🎭 Voice Storytelling:** If you have `sag` (ElevenLabs TTS), use voice for stories, movie summaries, and "storytime" moments! Way more engaging than walls of text. Surprise people with funny voices.

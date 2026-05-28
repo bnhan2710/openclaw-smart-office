@@ -13,7 +13,7 @@ for (const name of skills) {
   if (!fs.existsSync(skillPath)) errors.push(`${name}: missing SKILL.md`);
   if (!fs.existsSync(packagePath)) errors.push(`${name}: missing package.json`);
   if (fs.existsSync(skillPath)) {
-    const contents = fs.readFileSync(skillPath, "utf8");
+    const contents = fs.readFileSync(skillPath, "utf8").replace(/\r\n/g, "\n");
     if (!contents.startsWith("---\n") || !contents.includes(`name: ${name}`)) errors.push(`${name}: invalid frontmatter name`);
   }
   if (fs.existsSync(packagePath)) {
