@@ -1,0 +1,8 @@
+{
+  "name": "email-composer",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "compose": "node scripts/compose.js"
+  }
+}
