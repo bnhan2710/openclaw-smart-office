@@ -26,7 +26,7 @@ Trong công tác hành chính - văn phòng, cán bộ thường phải xử lý
 
 ### 1.2. Phạm vi hiện tại
 
-Repo hiện triển khai **8 skill nghiệp vụ cục bộ** và một lớp foundation dùng chung. Tích hợp Gmail/Google Calendar không được viết lại trong repo; khi cần, hệ thống sử dụng `gog` và đặt thao tác thay đổi dữ liệu sau bước phê duyệt của workflow.
+Repo hiện triển khai **11 skill nghiệp vụ cục bộ** và một lớp foundation dùng chung. Tích hợp Gmail/Google Calendar không được viết lại trong repo; khi cần, hệ thống sử dụng `gog` qua wrapper an toàn và đặt thao tác thay đổi dữ liệu sau bước phê duyệt của workflow.
 
 ---
 
@@ -108,6 +108,9 @@ Foundation hiện lưu các nhóm dữ liệu sau:
 | 6 | `soan-thao` | Xuất công văn, tờ trình, biên bản | File `.docx`, `.pdf` hoặc cả hai |
 | 7 | `document-review` | Kiểm tra trường bắt buộc của văn bản hành chính | Lỗi cần sửa và gợi ý hoàn thiện |
 | 8 | `organization-tracker` | Lưu và tra cứu cơ quan/đơn vị xuất hiện trong hồ sơ | Bản ghi tổ chức và thông tin liên hệ |
+| 9 | `calendar-management` | Preview và tạo sự kiện Google Calendar sau xác nhận | JSON preview hoặc kết quả `gog calendar create` |
+| 10 | `email-composer` | Soạn tiêu đề và nội dung email hành chính chuyên nghiệp | JSON subject/body sẵn sàng gửi |
+| 11 | `email-automation` | Preview Gmail draft/email nhắc hạn sau xác nhận | JSON preview hoặc kết quả tạo draft/gửi SMTP |
 
 ### 3.2. Khả năng tích hợp sử dụng lại
 
@@ -126,8 +129,11 @@ Các wrapper hiện có tại `scripts/`:
 | Script | Vai trò |
 |---|---|
 | `calendar-management.js` | Tạo preview event; chỉ gọi `gog calendar create` khi có `--confirmed` |
+| `email-composer.js` | Soạn subject/body email hành chính từ yêu cầu tự nhiên |
 | `email-automation.js` | Tạo preview Gmail draft; chỉ gọi `gog gmail draft create` khi có `--confirmed` |
 | `report-generator.js` | Tổng hợp chỉ số cơ bản từ SQLite và xuất báo cáo JSON theo tháng |
+
+Hai wrapper Google Workspace cũng được đóng gói thành workspace skill tại `skills/calendar-management` và `skills/email-automation`. Riêng email có thêm `skills/email-composer` để soạn subject/body chuyên nghiệp trước khi tạo draft hoặc gửi SMTP.
 
 ---
 
@@ -312,7 +318,17 @@ gog auth add you@gmail.com --services gmail,calendar,drive,contacts,sheets,docs
 gog auth list
 ```
 
-Với Docker, cài binary Linux phù hợp vào volume persistent và để wrapper gọi `/home/node/.openclaw/bin/gog`; xem thêm hướng dẫn Docker/Linux tại trang cài đặt chính thức của `gog`.
+Với Windows trong workspace này, có thể đặt `gog.exe` tại `tools/gog/gog.exe`; wrapper sẽ tự tìm binary này. Wrapper mặc định đặt `GOG_HOME=./tools/gog-state` để OAuth token nằm trong workspace cục bộ, không phụ thuộc `%APPDATA%`. Với Docker, cài binary Linux phù hợp vào volume persistent và để wrapper gọi `/home/node/.openclaw/bin/gog`; có thể đặt `GOG_BIN` nếu binary nằm ở vị trí khác. Calendar mặc định là `primary`, hoặc đặt `GOOGLE_CALENDAR_ID` trong môi trường.
+
+Ví dụ auth cục bộ cùng thư mục state mà wrapper sử dụng:
+
+```powershell
+tools\gog\gog.exe --home "D:\QLDA\openclaw-smart-office\tools\gog-state" auth credentials "D:\path\to\client_secret.json"
+tools\gog\gog.exe --home "D:\QLDA\openclaw-smart-office\tools\gog-state" auth add your@gmail.com --services calendar,gmail
+tools\gog\gog.exe --home "D:\QLDA\openclaw-smart-office\tools\gog-state" auth list --check
+tools\gog\gog.exe --home "D:\QLDA\openclaw-smart-office\tools\gog-state" auth doctor --check
+tools\gog\gog.exe --home "D:\QLDA\openclaw-smart-office\tools\gog-state" auth alias set default your@gmail.com
+```
 
 Luồng đề xuất:
 
@@ -333,21 +349,41 @@ Nguyên tắc an toàn:
 Ví dụ wrapper an toàn:
 
 ```bash
-# Chỉ preview sự kiện, chưa gọi Google Calendar
+# Chỉ preview sự kiện theo kịch bản PLAN.md, chưa gọi Google Calendar
 node scripts/calendar-management.js \
-  --title "Họp xử lý công văn" \
-  --start "2026-05-29T09:00:00+07:00" \
-  --end "2026-05-29T10:30:00+07:00"
+  --title "Họp rà soát hồ sơ cán bộ năm 2026" \
+  --start "2026-06-02T09:00:00+07:00" \
+  --end "2026-06-02T10:30:00+07:00" \
+  --description "Phân công rà soát hồ sơ và thống nhất hạn gửi báo cáo"
 
-# Chỉ preview draft email, chưa tạo draft trong Gmail
+# Chỉ preview nội dung email, chưa tạo draft trong Gmail.
+# Có thể thiếu --to ở bước preview; phải bổ sung --to trước khi --confirmed.
 node scripts/email-automation.js \
-  --to "canbo@example.com" \
-  --subject "Nhắc hạn xử lý công văn" \
-  --body "Đề nghị kiểm tra tiến độ."
+  --subject "Nhắc hạn rà soát hồ sơ cán bộ" \
+  --body "Kính gửi Phòng Hành chính - Tổng hợp,
+
+Đề nghị Phòng hoàn thành rà soát hồ sơ trước ngày 05/06/2026."
+
+# Sau khi người dùng xác nhận và đã có người nhận, mới tạo draft thật
+node scripts/email-automation.js \
+  --to "hanhchinh@example.com" \
+  --subject "Nhắc hạn rà soát hồ sơ cán bộ" \
+  --body "Kính gửi Phòng Hành chính - Tổng hợp,
+
+Đề nghị Phòng hoàn thành rà soát hồ sơ trước ngày 05/06/2026." \
+  --confirmed
 
 # Xuất báo cáo JSON cơ bản từ SQLite
 node scripts/report-generator.js --month 2026-05
 ```
+
+Khi chạy trong OpenClaw agent, người dùng có thể ra lệnh tự nhiên như:
+
+```text
+Tạo preview lịch họp xử lý công văn rà soát hồ sơ cán bộ, chưa gọi Google Calendar thật.
+```
+
+Agent sẽ dùng skill `calendar-management` để preview. Sau khi người dùng xác nhận, agent chạy lại wrapper với `--confirmed` để tạo event thật. Nếu người dùng đã nói rõ ngay từ đầu như “tạo lịch thật vào Google Calendar”, agent có thể gọi wrapper với `--confirmed` trong cùng lượt.
 
 ---
 

@@ -3,6 +3,10 @@ coverage/
 data/
 output/
 secrets/
+tools/gog/
+tools/gog-state/
+tools/*.zip
+tools/*.tar.gz
 .env
 *.db
 *.db-shm

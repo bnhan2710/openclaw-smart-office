@@ -135,6 +135,37 @@ Required behavior:
 - Report the generated file paths from `output/van-ban` after sending attachments.
 - If the command fails, show the actual error and stop. Do not invent fallback formats like HTML/ODT unless the user explicitly asks.
 
+### Smart Office Google Calendar
+
+When the user asks to create a Google Calendar event, use the `calendar-management` skill. If the request says "tao lich that", "dat lich that", "tao vao Google Calendar", "xac nhan tao", "confirm", or clearly asks you to create the real event, that message is explicit permission to call the Google Calendar wrapper.
+
+Critical: for a real calendar request, your next assistant turn must either call `exec` or report the real `exec` error. A plain text reply such as "ban hay chay lenh nay", "minh chua co quyen truy cap", or "hay dang nhap Google" is incorrect unless the wrapper command was actually run and returned that error.
+
+Required behavior:
+
+- Read `skills/calendar-management/SKILL.md` if needed.
+- Convert Vietnamese date/time to ISO 8601 with timezone `+07:00` when the user gives local Vietnam time.
+- For a real event, immediately run `node /home/node/.openclaw/workspace/skills/calendar-management/scripts/calendar.js --title "<title>" --start "<ISO>" --end "<ISO>" --description "<description>" --confirmed` with `exec` from `/home/node/.openclaw/workspace`.
+- For a preview-only request, run the same wrapper without `--confirmed`.
+- Do not call `gog calendar ...` directly. Do not give raw `gog` commands as the primary answer.
+- If the command succeeds, summarize the created event. If it fails, show the actual wrapper error and stop.
+
+### Smart Office Email
+
+When the user asks to write or send an email, use `email-composer` before `email-automation` unless the user already supplied a complete professional subject and body. A natural-language instruction such as "soan noi dung email va gui den ... de yeu cau hop khan cap" is not a subject/body; it must be rewritten into an administrative office email first.
+
+Critical: never send the user's raw command as the email subject or body. The outgoing email must have a concise subject, a greeting, a clear purpose, concrete requested actions, and a formal closing.
+
+Email body must be normal plain text. Do not use HTML. Do not send literal `\n` sequences that appear in Gmail; line breaks must render as real new lines.
+
+Required behavior:
+
+- Run `node /home/node/.openclaw/workspace/skills/email-composer/scripts/compose.js --request "<user_request>" --to "<recipient_email>"` first.
+- Use the returned `data.email.subject` and `data.email.body` for `email-automation`.
+- If the user clearly says "gui email", "gui mail", or asks to send to a specific address, that is confirmation to send through the configured email wrapper. Your next assistant turn must either call `exec` or report the real `exec` error.
+- For SMTP sending, run `node /home/node/.openclaw/workspace/skills/email-automation/scripts/email.js --to "<recipient_email>" --subject "<composed_subject>" --body "<composed_body>" --smtp --confirmed` from `/home/node/.openclaw/workspace`.
+- Do not say "da gui" unless `email-automation` returns success.
+
 **🎭 Voice Storytelling:** If you have `sag` (ElevenLabs TTS), use voice for stories, movie summaries, and "storytime" moments! Way more engaging than walls of text. Surprise people with funny voices.
 
 **📝 Platform Formatting:**

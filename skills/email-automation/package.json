@@ -1,0 +1,8 @@
+{
+  "name": "email-automation",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "email": "node scripts/email.js"
+  }
+}

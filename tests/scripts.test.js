@@ -39,10 +39,96 @@ test("Google wrappers return previews until explicitly confirmed", () => {
 
   assert.equal(calendar.data.action, "preview");
   assert.equal(calendar.data.requires_confirmation, true);
+  assert.equal(calendar.data.event.title, "Hop xu ly cong van");
+  assert.equal(calendar.data.event.calendar_id, "primary");
   assert.equal(calendar.data.command[1], "calendar");
   assert.equal(email.data.action, "preview-draft");
   assert.equal(email.data.requires_confirmation, true);
+  assert.equal(email.data.ready_for_confirmation, true);
+  assert.equal(email.data.email.subject, "Nhac han");
   assert.equal(email.data.command[1], "gmail");
+});
+
+test("Google Workspace previews cover PLAN.md calendar and email scenarios", () => {
+  const calendar = runScript("scripts/calendar-management.js", [
+    "--title", "Họp rà soát hồ sơ cán bộ năm 2026",
+    "--start", "2026-06-02T09:00:00+07:00",
+    "--end", "2026-06-02T10:30:00+07:00",
+    "--description", "Phân công rà soát hồ sơ và thống nhất hạn gửi báo cáo",
+  ]);
+  const email = runScript("scripts/email-automation.js", [
+    "--subject", "Nhắc hạn rà soát hồ sơ cán bộ",
+    "--body", "Kính gửi Phòng Hành chính - Tổng hợp,\n\nĐề nghị Phòng hoàn thành rà soát hồ sơ trước ngày 05/06/2026.",
+  ]);
+
+  assert.equal(calendar.data.action, "preview");
+  assert.equal(calendar.data.event.title, "Họp rà soát hồ sơ cán bộ năm 2026");
+  assert.equal(calendar.data.event.start, "2026-06-02T09:00:00+07:00");
+  assert.equal(calendar.data.event.end, "2026-06-02T10:30:00+07:00");
+  assert.equal(calendar.data.command.includes("--json"), true);
+  assert.equal(email.data.action, "preview-draft");
+  assert.equal(email.data.ready_for_confirmation, false);
+  assert.deepEqual(email.data.missing, ["to"]);
+  assert.equal(email.data.command, null);
+  assert.match(email.data.email.body, /05\/06\/2026/);
+});
+
+test("email wrapper supports SMTP dry-run after confirmation", () => {
+  const email = runScript("scripts/email-automation.js", [
+    "--to", "canbo@example.com",
+    "--subject", "Nhac han",
+    "--body", "Noi dung nhap",
+    "--smtp",
+    "--confirmed",
+    "--dry-run",
+  ], {
+    SMTP_HOST: "smtp.example.com",
+    SMTP_PORT: "587",
+    SMTP_USER: "sender@example.com",
+    SMTP_PASS: "app-password",
+  });
+
+  assert.equal(email.data.action, "smtp-dry-run");
+  assert.equal(email.data.to, "canbo@example.com");
+  assert.equal(email.data.from, "sender@example.com");
+});
+
+test("email wrapper normalizes escaped newlines to plain text line breaks", () => {
+  const email = runScript("scripts/email-automation.js", [
+    "--to", "canbo@example.com",
+    "--subject", "Đề nghị tham dự cuộc họp khẩn cấp",
+    "--body", "Kính gửi Anh/Chị,\\n\\nTôi gửi email này để đề nghị Anh/Chị tham dự cuộc họp.\\n\\nTrân trọng,",
+  ]);
+
+  assert.equal(email.data.action, "preview-draft");
+  assert.match(email.data.email.body, /Kính gửi Anh\/Chị,\n\nTôi gửi email này/);
+  assert.doesNotMatch(email.data.email.body, /\\n/);
+});
+
+test("email composer emits plain text body without html tags", () => {
+  const composed = runScript("scripts/email-composer.js", [
+    "--request", "soạn nội dung email và gửi tin nhắn với nội dung đó đến mail thanhbinhnkd@gmail.com để yêu cầu họp khẩn cấp",
+    "--to", "thanhbinhnkd@gmail.com",
+  ]);
+
+  assert.equal(composed.data.action, "composed");
+  assert.match(composed.data.email.body, /\n\nNội dung dự kiến:\n-/);
+  assert.doesNotMatch(composed.data.email.body, /<br|<p|<\/p|\\n/i);
+});
+
+test("email composer turns raw office request into professional subject and body", () => {
+  const composed = runScript("scripts/email-composer.js", [
+    "--request", "soạn nội dung email và gửi tin nhắn với nội dung đó đến mail thanhbinhnkd@gmail.com để yêu cầu họp khẩn cấp",
+    "--to", "thanhbinhnkd@gmail.com",
+  ]);
+
+  assert.equal(composed.data.action, "composed");
+  assert.equal(composed.data.email.to, "thanhbinhnkd@gmail.com");
+  assert.equal(composed.data.email.subject, "Đề nghị tham dự cuộc họp khẩn cấp");
+  assert.match(composed.data.email.body, /Kính gửi Anh\/Chị/);
+  assert.match(composed.data.email.body, /Nội dung dự kiến/);
+  assert.match(composed.data.email.body, /xác nhận khả năng tham dự/);
+  assert.doesNotMatch(composed.data.email.subject, /soạn nội dung email/i);
 });
 
 test("calendar wrapper rejects invalid scheduling input before gog execution", () => {

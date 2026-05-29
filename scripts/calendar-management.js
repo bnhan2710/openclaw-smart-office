@@ -1,11 +1,12 @@
 #!/usr/bin/env node
-import fs from "node:fs";
 import { spawnSync } from "node:child_process";
 import { parseArgs } from "node:util";
 
+import { gogBinary, gogEnv } from "../lib/gog.js";
 import { printEnvelope, printError } from "../lib/response.js";
 
 const SKILL = "calendar-management";
+const DEFAULT_CALENDAR_ID = process.env.GOOGLE_CALENDAR_ID?.trim() || "primary";
 const { values: args } = parseArgs({
   options: {
     title: { type: "string" },
@@ -13,7 +14,7 @@ const { values: args } = parseArgs({
     end: { type: "string" },
     description: { type: "string", default: "" },
     attendees: { type: "string", default: "" },
-    "calendar-id": { type: "string", default: "primary" },
+    "calendar-id": { type: "string", default: DEFAULT_CALENDAR_ID },
     confirmed: { type: "boolean" },
     "dry-run": { type: "boolean" },
     help: { type: "boolean", short: "h" },
@@ -21,7 +22,11 @@ const { values: args } = parseArgs({
   strict: false,
 });
 
-function commandArgs() {
+function parseAttendees(attendees) {
+  return attendees.split(",").map((attendee) => attendee.trim()).filter(Boolean);
+}
+
+function eventPreview() {
   if (!args.title || !args.start || !args.end) {
     throw new Error("--title, --start and --end are required");
   }
@@ -33,22 +38,28 @@ function commandArgs() {
   if (end <= start) {
     throw new Error("--end must be after --start");
   }
+  return {
+    title: args.title,
+    start: args.start,
+    end: args.end,
+    description: args.description,
+    attendees: parseAttendees(args.attendees),
+    calendar_id: args["calendar-id"]?.trim() || DEFAULT_CALENDAR_ID,
+  };
+}
+
+function commandArgs(event) {
   return [
-    "calendar", "create", args["calendar-id"],
-    "--summary", args.title,
-    "--from", args.start,
-    "--to", args.end,
-    "--description", args.description,
-    ...(args.attendees ? ["--attendees", args.attendees] : []),
+    "calendar", "create", event.calendar_id,
+    "--summary", event.title,
+    "--from", event.start,
+    "--to", event.end,
+    "--description", event.description,
+    ...(event.attendees.length ? ["--attendees", event.attendees.join(",")] : []),
     ...(args["dry-run"] ? ["--dry-run"] : []),
     "--json",
     "--no-input",
   ];
-}
-
-function gogBinary() {
-  const dockerBinary = "/home/node/.openclaw/bin/gog";
-  return fs.existsSync(dockerBinary) ? dockerBinary : "gog";
 }
 
 function main() {
@@ -57,12 +68,18 @@ function main() {
     return;
   }
   try {
-    const gogArgs = commandArgs();
+    const event = eventPreview();
+    const gogArgs = commandArgs(event);
     if (!args.confirmed) {
-      printEnvelope(SKILL, { action: "preview", requires_confirmation: true, command: [gogBinary(), ...gogArgs] });
+      printEnvelope(SKILL, {
+        action: "preview",
+        requires_confirmation: true,
+        event,
+        command: [gogBinary(), ...gogArgs],
+      });
       return;
     }
-    const result = spawnSync(gogBinary(), gogArgs, { encoding: "utf8" });
+    const result = spawnSync(gogBinary(), gogArgs, { encoding: "utf8", env: gogEnv() });
     if (result.error) throw result.error;
     if (result.status !== 0) throw new Error(result.stderr.trim() || "gog calendar command failed");
     printEnvelope(SKILL, { action: args["dry-run"] ? "dry-run" : "created", result: JSON.parse(result.stdout) });
