@@ -8,8 +8,8 @@ import { createHash } from "crypto";
 import fs from "fs";
 import path from "path";
 import { parseArgs } from "util";
-import { normalizeDate } from "../../../lib/dates.js";
 import { getDatabase, storeDocument, storeExtraction } from "../../../lib/database.js";
+import { normalizeDate } from "../../../lib/dates.js";
 import { fileHash, readDocumentText } from "../../../lib/documents.js";
 import { printEnvelope, printError } from "../../../lib/response.js";
 
@@ -410,6 +410,79 @@ function inferDocumentType(text) {
   return "unknown";
 }
 
+function inferDocumentTypeFromHeader(lines) {
+  const headerLines = lines.slice(0, 40);
+  const header = headerLines.join("\n");
+  const normalized = normalizeForSearch(header);
+
+  // Strong signals in Vietnamese administrative docs.
+  const hasVv = headerLines.some((line) => /\bV\/v\b/iu.test(line));
+  const hasToTrinhHeader = headerLines.some((line) => /^tờ\s+trình\b/iu.test(line));
+  if (hasVv) return "cong-van";
+  if (hasToTrinhHeader) return "to-trinh";
+
+  if (/quy che|quy che noi bo|quy dinh noi bo/.test(normalized)) return "quy-che";
+  if (/bien ban/.test(normalized) || /cuoc hop|hop giao ban|ban giao/.test(normalized)) return "bien-ban";
+  if (/quyet dinh/.test(normalized)) return "quyet-dinh";
+  if (/cong van/.test(normalized) || /van ban/.test(normalized)) return "cong-van";
+  if (/to trinh/.test(normalized)) return "to-trinh";
+  return null;
+}
+
+function inferIssueDate(lines) {
+  const headerLines = lines.slice(0, 60);
+  const stopWords = /^(?:căn\s+cứ|theo|dựa\s+trên|chiếu\s+theo)\b/iu;
+
+  const strongPattern = /(?:^|,\s*)ngày\s*\d{1,2}\s*tháng\s*\d{1,2}\s*năm\s*\d{4}\b/iu;
+  const mediumPattern = /\bngày\s*\d{1,2}\b/iu;
+  const legalRefNoise = /\b(quyết\s+định|nghị\s+định|thông\s+tư|văn\s+bản|kế\s+hoạch|chỉ\s+thị|luật)\b/iu;
+
+  const candidates = [];
+  for (let i = 0; i < headerLines.length; i++) {
+    const line = headerLines[i];
+    if (!line) continue;
+    if (stopWords.test(line)) continue;
+    const parsed = normalizeDate(line);
+    if (!parsed) continue;
+
+    let score = 0;
+    if (strongPattern.test(line)) score += 5;
+    if (mediumPattern.test(line)) score += 2;
+    if (i < 25) score += 1;
+    if (legalRefNoise.test(line) && !strongPattern.test(line)) score -= 2;
+    candidates.push({ parsed, score, index: i });
+  }
+
+  if (candidates.length) {
+    candidates.sort((a, b) => b.score - a.score || b.parsed.localeCompare(a.parsed) || a.index - b.index);
+    return candidates[0].parsed;
+  }
+
+  // Prefer explicit header date lines (usually near the top) and avoid legal-basis dates.
+  for (const line of headerLines) {
+    if (!line) continue;
+    if (stopWords.test(line)) continue;
+    if (!/\bngày\b/iu.test(line)) continue;
+    const parsed = normalizeDate(line);
+    if (parsed) return parsed;
+  }
+
+  // Fallback: any parsed date in header excluding legal-basis lines.
+  for (const line of headerLines) {
+    if (!line) continue;
+    if (stopWords.test(line)) continue;
+    const parsed = normalizeDate(line);
+    if (parsed) return parsed;
+  }
+
+  // Last resort: any date anywhere.
+  for (const line of lines) {
+    const parsed = normalizeDate(line);
+    if (parsed) return parsed;
+  }
+  return null;
+}
+
 function tokenizeSearchTerms(text) {
   return normalizeForSearch(text)
     .split(/\s+/)
@@ -427,12 +500,22 @@ function extractDocumentMetadata(text, filePath, { pageCount = null, sourceLabel
     .filter(Boolean);
   const normalizedText = normalizeForSearch(text);
   const title = inferTitle(text);
-  const documentNumber =
-    text.match(/\bSố\s*:\s*([^\n]{3,80})/iu)?.[1]?.trim() ??
+  let documentNumber =
+    // Prefer strict number right after 'Số:' to avoid capturing the subject (V/v).
+    text.match(/\bSố\s*:\s*([0-9A-ZĐ\/.-]{3,60})\b/iu)?.[1]?.trim() ??
     text.match(/\b(?:CV|TTr|BB|QD|NQ|TB)\s*[-:]\s*([A-ZĐ0-9\/.-]{3,50})/iu)?.[1]?.trim() ??
     text.match(/\b(\d{1,5}\/[A-ZĐ0-9.-]{2,})\b/u)?.[1]?.trim() ??
+    // Fallback: broader capture from the 'Số:' line.
+    text.match(/\bSố\s*:\s*([^\n]{1,80}?)(?:\s+(?:V\/v|Về\s+việc)\b|$)/iu)?.[1]?.trim() ??
     null;
-  const issueDate = lines.map((line) => normalizeDate(line)).find(Boolean) ?? null;
+
+  if (documentNumber) {
+    // If the line got merged (e.g., "047/... V/v ..."), keep only the number token.
+    documentNumber = documentNumber.split(/\bV\/v\b/iu)[0].trim();
+    documentNumber = documentNumber.split(/\s+/)[0].trim();
+    documentNumber = documentNumber.replace(/[:;,.]+$/u, "");
+  }
+  const issueDate = inferIssueDate(lines);
   const issuer =
     lines.find((line) => /(?:UBND|ỦY BAN|SỞ|BỘ|CỤC|PHÒNG|TRƯỜNG|VIỆN|TRUNG TÂM)/iu.test(line)) ??
     null;
@@ -447,7 +530,7 @@ function extractDocumentMetadata(text, filePath, { pageCount = null, sourceLabel
     text.match(/(?:V\/v|Về việc)\s*:?\s*(.+)/iu)?.[1]?.trim() ??
     lines.find((line) => /(?:V\/v|Về việc)/iu.test(line)) ??
     null;
-  const documentType = inferDocumentType(text);
+  const documentType = inferDocumentTypeFromHeader(lines) ?? inferDocumentType(text);
   const typeSpecific = extractTypeSpecificMetadata(text, documentType, lines, normalizedText);
   const keywords = unique(
     [
