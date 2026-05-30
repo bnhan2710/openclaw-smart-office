@@ -73,6 +73,53 @@ test("Google Workspace previews cover PLAN.md calendar and email scenarios", () 
   assert.match(email.data.email.body, /05\/06\/2026/);
 });
 
+test("calendar wrapper previews multiple events in one batch", () => {
+  const events = [
+    {
+      title: "[Công văn 128/PNV-VP] Rà soát danh mục hồ sơ cán bộ/công chức",
+      start: "2026-06-01T08:30:00+07:00",
+      end: "2026-06-01T09:30:00+07:00",
+      description: "Ưu tiên cao",
+    },
+    {
+      title: "[Công văn 128/PNV-VP] Kiểm tra hồ sơ theo 3 nhóm giấy tờ",
+      start: "2026-06-03T08:30:00+07:00",
+      end: "2026-06-03T09:30:00+07:00",
+      description: "Ưu tiên cao",
+    },
+  ];
+  const calendar = runScript("scripts/calendar-management.js", [
+    "--events-json", JSON.stringify(events),
+  ]);
+
+  assert.equal(calendar.data.action, "preview-batch");
+  assert.equal(calendar.data.requires_confirmation, true);
+  assert.equal(calendar.data.count, 2);
+  assert.equal(calendar.data.events[0].calendar_id, "primary");
+  assert.equal(calendar.data.commands.length, 2);
+  assert.equal(calendar.data.commands[1][1], "calendar");
+});
+
+test("calendar wrapper reads batch events from utf8 bom file", () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "calendar-events-"));
+  const eventsPath = path.join(dir, "events.json");
+  fs.writeFileSync(eventsPath, `\uFEFF${JSON.stringify([
+    {
+      title: "Task tu file",
+      start: "2026-06-05T08:30:00+07:00",
+      end: "2026-06-05T09:30:00+07:00",
+    },
+  ])}`, "utf8");
+
+  const calendar = runScript("scripts/calendar-management.js", [
+    "--events-file", eventsPath,
+  ]);
+
+  assert.equal(calendar.data.action, "preview-batch");
+  assert.equal(calendar.data.count, 1);
+  assert.equal(calendar.data.events[0].title, "Task tu file");
+});
+
 test("email wrapper supports SMTP dry-run after confirmation", () => {
   const email = runScript("scripts/email-automation.js", [
     "--to", "canbo@example.com",

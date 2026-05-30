@@ -146,9 +146,11 @@ Required behavior:
 - Read `skills/calendar-management/SKILL.md` if needed.
 - Convert Vietnamese date/time to ISO 8601 with timezone `+07:00` when the user gives local Vietnam time.
 - For a real event, immediately run `node /home/node/.openclaw/workspace/skills/calendar-management/scripts/calendar.js --title "<title>" --start "<ISO>" --end "<ISO>" --description "<description>" --confirmed` with `exec` from `/home/node/.openclaw/workspace`.
+- For multiple real events from one request, write a JSON array to `/tmp/calendar-events.json` and immediately run `node /home/node/.openclaw/workspace/skills/calendar-management/scripts/calendar.js --events-file /tmp/calendar-events.json --confirmed` with `exec` from `/home/node/.openclaw/workspace`.
 - For a preview-only request, run the same wrapper without `--confirmed`.
 - Do not call `gog calendar ...` directly. Do not give raw `gog` commands as the primary answer.
 - If the command succeeds, summarize the created event. If it fails, show the actual wrapper error and stop.
+- If you propose default event times and the user accepts or says to create now, treat that as approval. Do not ask for another confirmation, do not ask about optional title prefixes, and do not stop after the first event in a batch.
 
 ### Smart Office Email
 
