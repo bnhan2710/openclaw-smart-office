@@ -1,6 +1,6 @@
 ---
 name: calendar-management
-description: Bat buoc goi exec wrapper scripts/calendar-management.js de preview hoac tao su kien Google Calendar. Dung khi nguoi dung yeu cau tao lich hop, dat lich xu ly cong van, tao calendar event, tao lich that, hoac preview lich. Neu nguoi dung noi ro "tao lich that", "dat lich that", "xac nhan tao" thi phai chay wrapper voi --confirmed, khong tra loi bang lenh thu cong cho nguoi dung.
+description: Bat buoc dung exec de chay /home/node/.openclaw/workspace/skills/calendar-management/scripts/calendar.js khi tao/preview Google Calendar. Neu user noi "tao lich that", "tao vao Google Calendar", "xac nhan tao", "dong y gio mac dinh", "tao ngay" thi phai exec voi --confirmed trong chinh luot do; khong noi chua thao tac truc tiep, khong gui link Save, khong dua lenh thu cong. Neu co nhieu su kien/task, bat buoc tao batch mot lan bang --events-file hoac --events-json va bao ket qua cua wrapper.
 version: 1.0.0
 metadata: {"openclaw":{"requires":{"bins":["node"]},"install":[{"id":"npm","kind":"node","pkg":"{baseDir}","label":"Cai dat skill calendar-management"}]}}
 ---

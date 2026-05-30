@@ -143,6 +143,8 @@ When the user asks to create a Google Calendar event, use the `calendar-manageme
 
 Critical: for a real calendar request, your next assistant turn must either call `exec` or report the real `exec` error. A plain text reply such as "ban hay chay lenh nay", "minh chua co quyen truy cap", or "hay dang nhap Google" is incorrect unless the wrapper command was actually run and returned that error.
 
+This is non-negotiable for short follow-up confirmations too. If the prior assistant proposed event times and the user replies only "Xac nhan tao lich that", "Dong y gio mac dinh", "Tao ngay", or equivalent, preserve the event list from conversation context and call the wrapper immediately. Do not replace wrapper execution with Google Calendar event-edit links, manual Save links, or another confirmation request.
+
 Required behavior:
 
 - Read `skills/calendar-management/SKILL.md` if needed.
