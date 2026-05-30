@@ -26,6 +26,8 @@ Nếu yêu cầu có các cụm như "ngay lập tức", "xuất ngay", "xuất 
 - Gọi `exec` chạy `scripts/generate.js` ngay.
 - Sau khi có file, gọi `message` để gửi từng file bằng `filePath`/`path`/`media`.
 - Nếu lỗi, trả đúng lỗi thực tế từ lệnh export.
+- Nội dung đưa vào `--content-file` chỉ được là thân văn bản hành chính. Không ghi lời thoại kiểu "Đã rõ", "mình sẽ xuất", hướng dẫn gửi tiếp, markdown fence, dấu `---`, hoặc heading `###`.
+- Văn bản phải có văn phong hành chính: căn cứ, nội dung đề nghị/yêu cầu, tổ chức thực hiện, nơi nhận, chức danh ký. Tránh câu chat tự nhiên.
 
 ## Quy trình thực hiện
 

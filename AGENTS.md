@@ -128,6 +128,8 @@ Required behavior:
 - Read `skills/soan-thao/SKILL.md` if needed.
 - If required fields are missing and the user asks to export immediately or as a draft, use clear placeholders such as `[....]` and continue. Do not block the export just to ask again.
 - Save the final document text to a temporary file, for example `/tmp/<name>.txt`.
+- The temporary file must contain only the administrative document body. Do not include chat text such as "Đã rõ", "mình sẽ xuất", instructions to the user, markdown fences, `---`, or `###` headings.
+- Use formal office wording: legal/administrative basis, purpose, implementation content, responsibilities, request/proposal, recipients, and signer block. Do not write casual chat prose into the document.
 - Choose the document type from the request: use `--type to-trinh` for tờ trình, báo cáo/tờ trình phê duyệt, xin phê duyệt, or approval-submission drafts; use `--type cong-van` only for công văn; use `--type bien-ban` for biên bản.
 - Use `--format both` when the user asks for "PDF hoặc DOCX", "DOCX/PDF", "xuất file", or does not clearly choose one format. Use the specific format only when the user clearly requests one.
 - Immediately run `node /home/node/.openclaw/workspace/skills/soan-thao/scripts/generate.js --type <type> --content-file <temp-file> --format <docx|pdf|both> --output <name>` with `exec` from `/home/node/.openclaw/workspace`.

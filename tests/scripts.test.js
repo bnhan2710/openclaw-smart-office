@@ -25,6 +25,15 @@ function runFailingScript(script, args, env = {}) {
   }
 }
 
+function runScriptWithMedia(script, args, env = {}) {
+  const output = execFileSync(process.execPath, [script, ...args], {
+    cwd: path.resolve("."),
+    encoding: "utf8",
+    env: { ...process.env, ...env },
+  });
+  return JSON.parse(output.split(/\r?\nMEDIA:/)[0]);
+}
+
 test("Google wrappers return previews until explicitly confirmed", () => {
   const calendar = runScript("scripts/calendar-management.js", [
     "--title", "Hop xu ly cong van",
@@ -187,6 +196,48 @@ test("calendar wrapper rejects invalid scheduling input before gog execution", (
 
   assert.equal(invalid.success, false);
   assert.match(invalid.error, /after/);
+});
+
+test("soan-thao strips chat wrapper text and exports administrative docx margins", async () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "soan-thao-docx-"));
+  const contentPath = path.join(dir, "draft.txt");
+  const outputDir = path.join(dir, "out");
+  fs.writeFileSync(contentPath, [
+    "Đã rõ. Tôi sẽ xuất ngay văn bản tờ trình phê duyệt cho công văn 128/PNV-VP thành 2 file DOCX + PDF.",
+    "",
+    "---",
+    "",
+    "TỜ TRÌNH",
+    "Về việc phê duyệt triển khai thực hiện Công văn số 128/PNV-VP",
+    "",
+    "Kính trình: [Lãnh đạo/Thủ trưởng đơn vị]",
+    "",
+    "### I. Nội dung công việc đề nghị phê duyệt",
+    "1. Mục tiêu",
+    "- Rà soát, cập nhật đầy đủ hồ sơ cán bộ, công chức.",
+    "",
+    "Nơi nhận:",
+    "- Như trên;",
+    "- Lưu: VT.",
+    "",
+    "[CHỨC VỤ NGƯỜI TRÌNH]",
+  ].join("\n"), "utf8");
+
+  const result = runScriptWithMedia("skills/soan-thao/scripts/generate.js", [
+    "--type", "to-trinh",
+    "--content-file", contentPath,
+    "--format", "docx",
+    "--output", "to-trinh-test",
+  ], { OUTPUT_DIR: outputDir });
+
+  const PizZip = (await import("pizzip")).default;
+  const docxPath = result.data.files.docx;
+  const xml = new PizZip(fs.readFileSync(docxPath)).file("word/document.xml").asText();
+
+  assert.doesNotMatch(xml, /Đã rõ|Tôi sẽ xuất|---|###/);
+  assert.match(xml, /TỜ TRÌNH/);
+  assert.match(xml, /w:pgMar[^>]+w:left="1701"/);
+  assert.match(xml, /w:pgMar[^>]+w:right="1134"/);
 });
 
 test("report generator exports monthly SQLite statistics as JSON", () => {
