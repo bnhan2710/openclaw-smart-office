@@ -187,6 +187,24 @@ test("email composer turns raw office request into professional subject and body
   assert.doesNotMatch(composed.data.email.subject, /soạn nội dung email/i);
 });
 
+test("email automation auto-composes raw command subject and body before sending", () => {
+  const raw = "Hãy soạn một email để yêu cầu họp khẩn cấp và gửi nó đến mail thanhbinhnkd@gmail.com ngay lập tức";
+  const email = runScript("scripts/email-automation.js", [
+    "--to", "thanhbinhnkd@gmail.com",
+    "--subject", raw,
+    "--body", raw,
+    "--smtp",
+  ]);
+
+  assert.equal(email.data.action, "preview-smtp");
+  assert.equal(email.data.email.auto_composed, true);
+  assert.equal(email.data.email.subject, "Đề nghị tham dự cuộc họp khẩn cấp");
+  assert.match(email.data.email.body, /Kính gửi Anh\/Chị/);
+  assert.match(email.data.email.body, /Nội dung dự kiến/);
+  assert.doesNotMatch(email.data.email.subject, /Hãy soạn/i);
+  assert.doesNotMatch(email.data.email.body, /Hãy soạn/i);
+});
+
 test("calendar wrapper rejects invalid scheduling input before gog execution", () => {
   const invalid = runFailingScript("scripts/calendar-management.js", [
     "--title", "Hop xu ly cong van",

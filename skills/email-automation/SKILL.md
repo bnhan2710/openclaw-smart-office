@@ -1,6 +1,6 @@
 ---
 name: email-automation
-description: Tao preview Gmail draft hoac gui email qua wrapper an toan scripts/email-automation.js sau khi da co subject/body chuyen nghiep. Dung khi nguoi dung yeu cau gui email, tao Gmail draft, preview email, hoac nhac han qua email. Neu nguoi dung chua cung cap subject/body hoan chinh, bat buoc dung skill email-composer truoc; khong gui nguyen cau lenh cua nguoi dung lam tieu de/noi dung.
+description: Tao preview Gmail draft hoac gui email qua wrapper an toan scripts/email-automation.js sau khi da co subject/body chuyen nghiep. Dung khi nguoi dung yeu cau gui email, gui mail, tao Gmail draft, preview email, hoac nhac han qua email. Neu nguoi dung chua cung cap subject/body hoan chinh, bat buoc dung email-composer truoc; khong gui nguyen cau lenh cua nguoi dung lam tieu de/noi dung. Neu user noi gui ngay/ngay lap tuc den mot dia chi email thi phai exec composer roi exec email --smtp --confirmed; khong hoi them tru khi thieu dia chi nhan.
 version: 1.0.0
 metadata: {"openclaw":{"requires":{"bins":["node"]},"install":[{"id":"npm","kind":"node","pkg":"{baseDir}","label":"Cai dat skill email-automation"}]}}
 ---

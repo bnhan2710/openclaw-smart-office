@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import { parseArgs } from "node:util";
+import { pathToFileURL } from "node:url";
 
 import { printEnvelope, printError } from "../lib/response.js";
 
@@ -138,45 +139,58 @@ function composeBody({ request, recipient, sender, deadline, time, location }) {
   return lines.join("\n");
 }
 
+export function composeEmail({ request, to, recipient, sender, subject, deadline, time, location }) {
+  const normalizedRequest = clean(request);
+  if (!normalizedRequest) throw new Error("--request is required");
+  const intent = detectIntent(normalizedRequest);
+  const urgent = detectUrgency(normalizedRequest);
+  const topic = stripCommandWords(normalizedRequest);
+  return {
+    action: "composed",
+    email: {
+      to: clean(to) || null,
+      subject: subjectFor(intent, urgent, topic, subject),
+      body: composeBody({
+        request: normalizedRequest,
+        recipient,
+        sender,
+        deadline,
+        time,
+        location,
+      }),
+    },
+    meta: {
+      intent,
+      urgent,
+      topic: topic || null,
+      style: "hanh-chinh-van-phong",
+      language: "vi",
+    },
+  };
+}
+
 function main() {
   if (args.help) {
     console.log("Usage: node scripts/email-composer.js --request text [--to email] [--recipient name] [--sender name] [--subject text] [--deadline text] [--time text] [--location text]");
     return;
   }
   try {
-    const request = clean(args.request);
-    if (!request) throw new Error("--request is required");
-    const intent = detectIntent(request);
-    const urgent = detectUrgency(request);
-    const topic = stripCommandWords(request);
-    const subject = subjectFor(intent, urgent, topic, args.subject);
-    const body = composeBody({
-      request,
+    printEnvelope(SKILL, composeEmail({
+      request: args.request,
+      to: args.to,
       recipient: args.recipient,
       sender: args.sender,
+      subject: args.subject,
       deadline: args.deadline,
       time: args.time,
       location: args.location,
-    });
-    printEnvelope(SKILL, {
-      action: "composed",
-      email: {
-        to: clean(args.to) || null,
-        subject,
-        body,
-      },
-      meta: {
-        intent,
-        urgent,
-        topic: topic || null,
-        style: "hanh-chinh-van-phong",
-        language: "vi",
-      },
-    });
+    }));
   } catch (error) {
     printError(SKILL, error);
     process.exitCode = 1;
   }
 }
 
-main();
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  main();
+}

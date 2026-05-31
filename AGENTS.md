@@ -164,6 +164,8 @@ Critical: never send the user's raw command as the email subject or body. The ou
 
 Email body must be normal plain text. Do not use HTML. Do not send literal `\n` sequences that appear in Gmail; line breaks must render as real new lines.
 
+For immediate email requests, do not ask for extra meeting details when the user already gave recipient and purpose. If details such as time, location, or agenda are missing, use a professional default office email and continue. The next assistant turn after "gui ngay", "ngay lap tuc", "gui email", or a request with a recipient email must either call `exec` for composer + email automation, or report the real `exec` error.
+
 Required behavior:
 
 - Run `node /home/node/.openclaw/workspace/skills/email-composer/scripts/compose.js --request "<user_request>" --to "<recipient_email>"` first.

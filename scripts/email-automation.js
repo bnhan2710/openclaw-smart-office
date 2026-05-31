@@ -4,6 +4,7 @@ import { parseArgs } from "node:util";
 
 import { gogBinary, gogEnv } from "../lib/gog.js";
 import { printEnvelope, printError } from "../lib/response.js";
+import { composeEmail } from "./email-composer.js";
 
 const SKILL = "email-automation";
 const { values: args } = parseArgs({
@@ -31,6 +32,22 @@ function normalizePlainText(value) {
     .replace(/\r\n/g, "\n");
 }
 
+function cleanText(value) {
+  return normalizePlainText(value).replace(/\s+/g, " ").trim();
+}
+
+function looksLikeRawEmailInstruction(value) {
+  const text = cleanText(value).toLowerCase();
+  return /h[ãa]y so[ạa]n|so[ạa]n.*email|so[ạa]n.*mail|g[ửu]i.*email|g[ửu]i.*mail|den mail|đến mail|ngay l[ậa]p t[ứu]c|hop khan|h[ọo]p kh[ẩa]n/.test(text);
+}
+
+function shouldAutoCompose(subject, body) {
+  const normalizedSubject = cleanText(subject);
+  const normalizedBody = cleanText(body);
+  if (looksLikeRawEmailInstruction(normalizedSubject) || looksLikeRawEmailInstruction(normalizedBody)) return true;
+  return normalizedSubject && normalizedSubject === normalizedBody && /email|mail|h[ọo]p|hop|kh[ẩa]n|khan/i.test(normalizedSubject);
+}
+
 function emailPreview({ requireRecipient = false } = {}) {
   if (!args.subject || !args.body) {
     throw new Error("--subject and --body are required");
@@ -42,10 +59,21 @@ function emailPreview({ requireRecipient = false } = {}) {
   if (to && !isValidEmail(to)) {
     throw new Error("Recipient email is invalid");
   }
+  let subject = args.subject;
+  let body = normalizePlainText(args.body);
+  let autoComposed = false;
+  if (shouldAutoCompose(subject, body)) {
+    const request = cleanText(body).length >= cleanText(subject).length ? body : subject;
+    const composed = composeEmail({ request, to });
+    subject = composed.email.subject;
+    body = composed.email.body;
+    autoComposed = true;
+  }
   return {
     to,
-    subject: args.subject,
-    body: normalizePlainText(args.body),
+    subject,
+    body,
+    auto_composed: autoComposed,
   };
 }
 
