@@ -133,15 +133,110 @@ function normalizeFormat(rawFormat, outputName) {
 }
 
 function splitLines(text) {
-  return text.replace(/^\uFEFF/, "").split(/\r?\n/);
+  return text.replace(/^\uFEFF/, "").replace(/\r\n/g, "\n").split("\n");
+}
+
+function normalizeDocumentContent(text) {
+  const rawLines = splitLines(text)
+    .map((line) => line.replace(/\t/g, " ").replace(/[ \u00A0]+$/g, ""))
+    .filter((line) => !/^```/.test(line.trim()));
+  const firstDocumentLine = rawLines.findIndex((line) =>
+    /^(CÔNG VĂN|TỜ TRÌNH|BIÊN BẢN|BÁO CÁO|Kính gửi|Kính trình|Căn cứ|UBND|CỘNG HÒA)/i.test(line.trim()),
+  );
+  const selected = firstDocumentLine >= 0 ? rawLines.slice(firstDocumentLine) : rawLines;
+  const cleaned = [];
+
+  for (const line of selected) {
+    const trimmed = line.trim();
+    if (/^---+$/.test(trimmed)) continue;
+    if (/^(\[\[reply_to_current\]\]\s*)?Đã rõ[.!,:;–-]?/i.test(trimmed)) continue;
+    if (/^Mình sẽ\s+/i.test(trimmed)) continue;
+    if (/^Tôi sẽ\s+/i.test(trimmed)) continue;
+    if (/^Do môi trường/i.test(trimmed)) continue;
+    if (/^Bạn gửi tiếp/i.test(trimmed)) continue;
+    if (/^Ngay khi\b/i.test(trimmed)) continue;
+
+    cleaned.push(line
+      .replace(/^#{1,6}\s+/, "")
+      .replace(/^\s*[-*]\s+\[ \]\s+/, "- ")
+      .replace(/\*\*(.*?)\*\*/g, "$1")
+      .replace(/__(.*?)__/g, "$1")
+      .trim());
+  }
+
+  while (cleaned.length && cleaned[0] === "") cleaned.shift();
+  while (cleaned.length && cleaned[cleaned.length - 1] === "") cleaned.pop();
+
+  const compacted = [];
+  for (const line of cleaned) {
+    if (line === "" && compacted[compacted.length - 1] === "") continue;
+    compacted.push(line);
+  }
+  return compacted.join("\n");
+}
+
+function stripExistingAdministrativeHeader(text) {
+  const lines = splitLines(text);
+  const titleIndex = lines.findIndex((line) => isDocumentTitle(line.trim()));
+  return titleIndex > 0 ? lines.slice(titleIndex).join("\n") : text;
+}
+
+function vietnameseDate(date = new Date()) {
+  return `ngày ${date.getDate()} tháng ${date.getMonth() + 1} năm ${date.getFullYear()}`;
+}
+
+function isDocumentTitle(trimmed) {
+  return /^(CÔNG VĂN|TỜ TRÌNH|BIÊN BẢN|BÁO CÁO)$/i.test(trimmed);
+}
+
+function isSubjectLine(trimmed) {
+  return /^(V\/v|Về việc)\b/i.test(trimmed);
+}
+
+function isNationalHeader(trimmed) {
+  return /^(CỘNG HÒA|Độc lập|UBND|ỦY BAN|PHÒNG|Số:)/i.test(trimmed);
+}
+
+function isDateLine(trimmed) {
+  return /ngày\s+\d{1,2}\s+tháng\s+\d{1,2}\s+năm\s+\d{4}/i.test(trimmed);
+}
+
+function isSectionHeading(trimmed) {
+  return /^([IVX]+\.|[A-ZĐ]\.|Điều\s+\d+\.?)\s+/.test(trimmed) || /^[IVX]+\.\s*[^.]+$/i.test(trimmed);
+}
+
+function isListLine(trimmed) {
+  return /^(\d+[.)]|[-+•])\s+/.test(trimmed);
+}
+
+function isSignatureLine(trimmed) {
+  return /^(TM\.|KT\.|CHỦ TỊCH|PHÓ CHỦ TỊCH|TRƯỞNG PHÒNG|THỦ TRƯỞNG|NGƯỜI LẬP|CHỦ TRÌ|Ký,|Ký tên|\[CHỨC VỤ)/i.test(trimmed);
 }
 
 function isCenteredLine(trimmed) {
-  return /^(CỘNG HÒA|QUỐC HIỆU|ĐỘC LẬP|THÔNG BÁO|BIÊN BẢN|QUYẾT ĐỊNH|SỐ:|V\/v)/i.test(trimmed);
+  return isDocumentTitle(trimmed) || isSubjectLine(trimmed) || isNationalHeader(trimmed);
 }
 
 function isBoldLine(trimmed) {
-  return /^(CỘNG HÒA|ĐỘC LẬP|THÔNG BÁO|BIÊN BẢN|QUYẾT ĐỊNH|Điều \d)/i.test(trimmed);
+  return isDocumentTitle(trimmed) || isNationalHeader(trimmed) || isSectionHeading(trimmed) || isSignatureLine(trimmed);
+}
+
+function paragraphOptions(trimmed) {
+  if (!trimmed) return { skip: true };
+  if (isDateLine(trimmed)) return { alignment: "RIGHT", before: 120, after: 180, firstLine: 0, italic: true };
+  if (isDocumentTitle(trimmed)) return { alignment: "CENTER", before: 180, after: 60, firstLine: 0, bold: true, size: 28 };
+  if (isSubjectLine(trimmed)) return { alignment: "CENTER", before: 0, after: 180, firstLine: 0, italic: true };
+  if (isNationalHeader(trimmed)) return { alignment: "CENTER", before: 0, after: 0, firstLine: 0, bold: true };
+  if (isSignatureLine(trimmed)) return { alignment: "RIGHT", before: 0, after: 0, firstLine: 0, bold: true };
+  if (/^Nơi nhận:/i.test(trimmed)) return { alignment: "LEFT", before: 180, after: 0, firstLine: 0, bold: true };
+  if (isSectionHeading(trimmed)) return { alignment: "LEFT", before: 180, after: 60, firstLine: 0, bold: true };
+  if (isListLine(trimmed)) return { alignment: "JUSTIFIED", before: 0, after: 0, firstLine: 0, hanging: 360 };
+  if (/^Kính (gửi|trình)/i.test(trimmed)) return { alignment: "LEFT", before: 120, after: 120, firstLine: 0 };
+  return { alignment: "JUSTIFIED", before: 0, after: 60, firstLine: 567 };
+}
+
+function docxAlignment(value, AlignmentType) {
+  return AlignmentType[value] ?? AlignmentType.JUSTIFIED;
 }
 
 function buildOutputTargets(params) {
@@ -165,10 +260,10 @@ function buildOutputTargets(params) {
   }
   if (format === "pdf") {
     const fileName = requested || `${baseDefault}.pdf`;
-    return { pdf: path.resolve(outputDir, ext === ".pdf" || !ext ? fileName : `${baseWithoutExt}.pdf`) };
+    return { pdf: path.resolve(outputDir, ext === ".pdf" ? fileName : `${baseWithoutExt}.pdf`) };
   }
   const fileName = requested || `${baseDefault}.docx`;
-  return { docx: path.resolve(outputDir, ext === ".docx" || !ext ? fileName : `${baseWithoutExt}.docx`) };
+  return { docx: path.resolve(outputDir, ext === ".docx" ? fileName : `${baseWithoutExt}.docx`) };
 }
 
 function formatMediaPath(filePath) {
@@ -180,7 +275,7 @@ function formatMediaPath(filePath) {
 }
 
 // ── DOCX generation ───────────────────────────────────────────────────────────
-async function exportDocx(text, outputPath, templateName) {
+async function exportDocx(text, outputPath, templateName, meta) {
   const templatePath = path.join(TEMPLATES_DIR, templateName);
 
   // Thử dùng template docxtemplater nếu có
@@ -201,28 +296,94 @@ async function exportDocx(text, outputPath, templateName) {
     }
   }
 
-  // Fallback: tạo DOCX đơn giản với font Times New Roman 13pt (chuẩn VN)
-  const { Document, Paragraph, TextRun, Packer, AlignmentType } = await import("docx").catch(() => {
+  // Fallback: tạo DOCX hành chính với font Times New Roman 13pt và lề A4 chuẩn.
+  const { Document, Paragraph, TextRun, Packer, AlignmentType, Table, TableRow, TableCell, WidthType, BorderStyle } = await import("docx").catch(() => {
     throw new Error("Cần cài đặt: npm install docx");
   });
+  const noBorders = {
+    top: { style: BorderStyle.NONE, size: 0, color: "FFFFFF" },
+    bottom: { style: BorderStyle.NONE, size: 0, color: "FFFFFF" },
+    left: { style: BorderStyle.NONE, size: 0, color: "FFFFFF" },
+    right: { style: BorderStyle.NONE, size: 0, color: "FFFFFF" },
+    insideHorizontal: { style: BorderStyle.NONE, size: 0, color: "FFFFFF" },
+    insideVertical: { style: BorderStyle.NONE, size: 0, color: "FFFFFF" },
+  };
+  const headerRun = (text, bold = true) => new TextRun({ text, font: "Times New Roman", size: 26, bold });
+  const headerParagraph = (text, alignment = AlignmentType.CENTER, bold = true) => new Paragraph({
+    alignment,
+    spacing: { before: 0, after: 0, line: 276 },
+    children: [headerRun(text, bold)],
+  });
+  const headerTable = new Table({
+    width: { size: 100, type: WidthType.PERCENTAGE },
+    borders: noBorders,
+    rows: [
+      new TableRow({
+        children: [
+          new TableCell({
+            width: { size: 43, type: WidthType.PERCENTAGE },
+            borders: noBorders,
+            children: [
+              headerParagraph(CONFIG.coQuanTen.toUpperCase()),
+              headerParagraph(`Số: ${meta.soHieu}`, AlignmentType.CENTER, false),
+            ],
+          }),
+          new TableCell({
+            width: { size: 57, type: WidthType.PERCENTAGE },
+            borders: noBorders,
+            children: [
+              headerParagraph("CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM"),
+              headerParagraph("Độc lập - Tự do - Hạnh phúc"),
+            ],
+          }),
+        ],
+      }),
+    ],
+  });
+  const dateParagraph = headerParagraph(`${process.env.DIA_DANH || "[Địa danh]"}, ${vietnameseDate()}`, AlignmentType.RIGHT, false);
 
-  const paragraphs = splitLines(text).map((line) => {
+  const paragraphs = splitLines(stripExistingAdministrativeHeader(text)).map((line) => {
     const trimmed = line.trim();
+    const options = paragraphOptions(trimmed);
+    if (options.skip) return null;
 
     return new Paragraph({
-      alignment: isCenteredLine(trimmed) ? AlignmentType.CENTER : AlignmentType.JUSTIFIED,
+      alignment: docxAlignment(options.alignment, AlignmentType),
+      spacing: {
+        before: options.before,
+        after: options.after,
+        line: 276,
+      },
+      indent: options.hanging
+        ? { left: options.hanging, hanging: options.hanging }
+        : { firstLine: options.firstLine },
       children: [
         new TextRun({
-          text: line,
+          text: trimmed,
           font: "Times New Roman",
-          size: 26, // 13pt
-          bold: isBoldLine(trimmed),
+          size: options.size ?? 26, // 13pt
+          bold: options.bold ?? isBoldLine(trimmed),
+          italics: options.italic ?? false,
         }),
       ],
     });
-  });
+  }).filter(Boolean);
 
-  const doc = new Document({ sections: [{ properties: {}, children: paragraphs }] });
+  const doc = new Document({
+    sections: [{
+      properties: {
+        page: {
+          margin: {
+            top: 1134,
+            bottom: 1134,
+            left: 1701,
+            right: 1134,
+          },
+        },
+      },
+      children: [headerTable, dateParagraph, ...paragraphs],
+    }],
+  });
   fs.writeFileSync(outputPath, await Packer.toBuffer(doc));
   return "generated";
 }
@@ -242,16 +403,24 @@ async function exportPdf(text, outputPath, meta) {
     pdfMake.vfs = vfs;
   }
 
-  const content = splitLines(text).map((line) => {
+  const bodyContent = splitLines(stripExistingAdministrativeHeader(text)).map((line) => {
     const trimmed = line.trim();
-    const empty = trimmed.length === 0;
+    const options = paragraphOptions(trimmed);
+    if (options.skip) return null;
     return {
-      text: empty ? " " : line,
-      alignment: empty ? "left" : isCenteredLine(trimmed) ? "center" : "justify",
-      bold: !empty && isBoldLine(trimmed),
-      margin: [0, empty ? 4 : 1, 0, empty ? 4 : 1],
+      text: trimmed,
+      alignment: String(options.alignment || "JUSTIFIED").toLowerCase(),
+      bold: options.bold ?? isBoldLine(trimmed),
+      italics: options.italic ?? false,
+      fontSize: options.size ? options.size / 2 : 13,
+      margin: [
+        options.firstLine ? 24 : options.hanging ? 18 : 0,
+        options.before ? 4 : 1,
+        0,
+        options.after ? 4 : 1,
+      ],
     };
-  });
+  }).filter(Boolean);
 
   const docDefinition = {
     info: {
@@ -260,12 +429,34 @@ async function exportPdf(text, outputPath, meta) {
       author: CONFIG.coQuanTen,
     },
     pageSize: "A4",
-    pageMargins: [56, 56, 56, 56],
+    pageMargins: [85, 57, 57, 57],
     defaultStyle: {
       fontSize: 12,
       lineHeight: 1.25,
     },
-    content,
+    content: [
+      {
+        columns: [
+          {
+            width: "43%",
+            stack: [
+              { text: CONFIG.coQuanTen.toUpperCase(), alignment: "center", bold: true },
+              { text: `Số: ${meta.soHieu}`, alignment: "center" },
+            ],
+          },
+          {
+            width: "57%",
+            stack: [
+              { text: "CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM", alignment: "center", bold: true },
+              { text: "Độc lập - Tự do - Hạnh phúc", alignment: "center", bold: true },
+            ],
+          },
+        ],
+        margin: [0, 0, 0, 8],
+      },
+      { text: `${process.env.DIA_DANH || "[Địa danh]"}, ${vietnameseDate()}`, alignment: "right", italics: true, margin: [0, 0, 0, 10] },
+      ...bodyContent,
+    ],
   };
 
   await new Promise((resolve, reject) => {
@@ -293,6 +484,7 @@ async function main() {
       content = fs.readFileSync(cfPath, "utf8");
     }
     if (!content) throw new Error("Cần --content hoặc --content-file");
+    content = normalizeDocumentContent(content);
     if (args.review) {
       const review = analyzeAdministrativeDocument(content);
       if (!review.passed) {
@@ -325,7 +517,7 @@ async function main() {
 
     if (outputTargets.docx) {
       console.error(`📝 Xuất ${docTypeDef.label} DOCX: ${soHieu} → ${outputTargets.docx}`);
-      result.methods.docx = await exportDocx(content, outputTargets.docx, docTypeDef.template);
+      result.methods.docx = await exportDocx(content, outputTargets.docx, docTypeDef.template, { soHieu });
       result.files.docx = outputTargets.docx;
       mediaOutputs.push(outputTargets.docx);
     }
@@ -334,31 +526,37 @@ async function main() {
       await exportPdf(content, outputTargets.pdf, {
         title: `${docTypeDef.label} ${soHieu}`,
         subtitle: `Cơ quan: ${CONFIG.coQuanTen}`,
+        soHieu,
       });
       result.methods.pdf = "pdfmake";
       result.files.pdf = outputTargets.pdf;
       mediaOutputs.push(outputTargets.pdf);
     }
 
-    const storedPath = result.files.docx ?? result.files.pdf;
-    const db = getDatabase();
-    const stored = db.transaction(() => {
-      const document = storeDocument(db, {
-        filePath: storedPath,
-        fileName: path.basename(storedPath),
-        fileHash: fileHash(storedPath),
-        source: "soan-thao",
-      });
-      storeExtraction(db, {
-        documentId: document.id,
-        method: "authored",
-        text: content,
-        metadata: { so_hieu: soHieu, loai: docTypeDef.label, format },
-      });
-      return document;
-    })();
-    db.close();
-    printEnvelope("soan-thao", { document_id: stored.id, ...result });
+    let stored = null;
+    try {
+      const storedPath = result.files.docx ?? result.files.pdf;
+      const db = getDatabase();
+      stored = db.transaction(() => {
+        const document = storeDocument(db, {
+          filePath: storedPath,
+          fileName: path.basename(storedPath),
+          fileHash: fileHash(storedPath),
+          source: "soan-thao",
+        });
+        storeExtraction(db, {
+          documentId: document.id,
+          method: "authored",
+          text: content,
+          metadata: { so_hieu: soHieu, loai: docTypeDef.label, format },
+        });
+        return document;
+      })();
+      db.close();
+    } catch (error) {
+      result.storage_warning = error instanceof Error ? error.message : String(error);
+    }
+    printEnvelope("soan-thao", { document_id: stored?.id ?? null, ...result });
 
     for (const mediaPath of mediaOutputs) {
       const escaped = formatMediaPath(mediaPath).replace(/"/g, "\\\"");

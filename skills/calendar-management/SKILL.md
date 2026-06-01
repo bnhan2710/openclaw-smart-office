@@ -1,6 +1,6 @@
 ---
 name: calendar-management
-description: Bat buoc goi exec wrapper scripts/calendar-management.js de preview hoac tao su kien Google Calendar. Dung khi nguoi dung yeu cau tao lich hop, dat lich xu ly cong van, tao calendar event, tao lich that, hoac preview lich. Neu nguoi dung noi ro "tao lich that", "dat lich that", "xac nhan tao" thi phai chay wrapper voi --confirmed, khong tra loi bang lenh thu cong cho nguoi dung.
+description: Bat buoc dung exec de chay /home/node/.openclaw/workspace/skills/calendar-management/scripts/calendar.js khi tao/preview Google Calendar. Neu user noi "tao lich that", "tao vao Google Calendar", "xac nhan tao", "dong y gio mac dinh", "tao ngay" thi phai exec voi --confirmed trong chinh luot do; khong noi chua thao tac truc tiep, khong gui link Save, khong dua lenh thu cong. Neu co nhieu su kien/task, bat buoc tao batch mot lan bang --events-file hoac --events-json va bao ket qua cua wrapper.
 version: 1.0.0
 metadata: {"openclaw":{"requires":{"bins":["node"]},"install":[{"id":"npm","kind":"node","pkg":"{baseDir}","label":"Cai dat skill calendar-management"}]}}
 ---
@@ -10,6 +10,10 @@ metadata: {"openclaw":{"requires":{"bins":["node"]},"install":[{"id":"npm","kind
 Dung skill nay khi nguoi dung muon tao lich hop, lich xu ly cong van, Google Calendar event, hoac xem truoc lich hop. Skill nay khong goi Google Calendar truc tiep; no goi wrapper an toan o workspace root.
 
 Neu nguoi dung noi ro muon "tao lich that", "dat lich that", "tao vao Google Calendar", "xac nhan tao", hoac "confirm", day la quyen ro rang de tao event. Trong truong hop do, cau tra loi dung la goi `exec` chay wrapper voi `--confirmed`, sau do bao ket qua. Khong duoc noi "khong co quyen truy cap", "hay chay lenh nay", hoac dua lenh `gog calendar ...` cho nguoi dung tru khi wrapper that su bao loi.
+
+Neu co nhieu task/su kien trong cung yeu cau, bat buoc tao theo batch bang `--events-file` hoac `--events-json` trong mot lan goi wrapper. Khong tao tung lich mot roi dung lai, khong tra loi "se tao tiep" neu chua chay wrapper cho tat ca su kien.
+
+Neu agent da de xuat khung gio mac dinh va nguoi dung tra loi "xac nhan tao lich that", "dong y gio mac dinh", "tao ngay", hoac tuong duong, xem nhu da du xac nhan. Khong hoi lai cung mot thong tin, khong xin them "xac nhan cuoi cung".
 
 ## Quy trinh
 
@@ -36,9 +40,30 @@ node {baseDir}/scripts/calendar.js \
   --confirmed
 ```
 
+Neu can tao nhieu su kien, ghi JSON array vao file tam va goi wrapper mot lan:
+
+```bash
+node {baseDir}/scripts/calendar.js \
+  --events-file "/tmp/calendar-events.json" \
+  --confirmed
+```
+
+File JSON co dang:
+
+```json
+[
+  {
+    "title": "[Cong van 128/PNV-VP] Ra soat danh muc ho so can bo/cong chuc",
+    "start": "2026-06-01T08:30:00+07:00",
+    "end": "2026-06-01T09:30:00+07:00",
+    "description": "Task tu cong van 128/PNV-VP. Uu tien cao."
+  }
+]
+```
+
 Neu muon kiem tra duong goi `gog` nhung van khong tao that, dung `--confirmed --dry-run`.
 
-Neu lenh thanh cong, tra loi ngan gon rang da tao lich va tom tat tieu de/thoi gian. Neu lenh loi, tra lai dung loi cua wrapper. Khong suy doan rang chua co quyen khi chua chay wrapper.
+Neu lenh thanh cong, tra loi ngan gon rang da tao lich va tom tat tieu de/thoi gian. Neu batch thanh cong, bao tong so da tao va liet ke tat ca su kien. Neu lenh loi, tra lai dung loi cua wrapper. Khong suy doan rang chua co quyen khi chua chay wrapper.
 
 ## Tham so
 
@@ -48,6 +73,8 @@ Neu lenh thanh cong, tra loi ngan gon rang da tao lich va tom tat tieu de/thoi g
 - `--description`: noi dung su kien.
 - `--attendees`: danh sach email ngan cach bang dau phay, tuy chon.
 - `--calendar-id`: lich can tao, mac dinh `GOOGLE_CALENDAR_ID` hoac `primary`.
+- `--events-json`: JSON array nhieu su kien, moi phan tu co `title`, `start`, `end`, `description`, `attendees`, `calendar_id`.
+- `--events-file`: duong dan file JSON array nhieu su kien.
 - `--confirmed`: dung khi nguoi dung da noi ro muon tao lich that, hoac sau khi da xem preview va xac nhan.
 
 ## Cau hinh

@@ -1,6 +1,6 @@
 ---
 name: email-composer
-description: Soan tieu de va noi dung email tieng Viet chuyen nghiep theo van phong hanh chinh truoc khi tao Gmail draft hoac gui SMTP. Dung khi nguoi dung yeu cau soan email, gui email, viet noi dung mail, nhac han qua email, moi hop, yeu cau hop khan, yeu cau bao cao, hoac phan hoi cong viec. Khong gui mail; chi tao subject/body co y nghia de skill email-automation gui.
+description: Soan tieu de va noi dung email tieng Viet chuyen nghiep theo van phong hanh chinh truoc khi tao Gmail draft hoac gui SMTP. Dung khi nguoi dung yeu cau soan email, gui email, viet noi dung mail, nhac han qua email, moi hop, yeu cau hop khan, yeu cau bao cao, hoac phan hoi cong viec. Khong gui mail; chi tao subject/body co y nghia de skill email-automation gui. Khong bao gio lay nguyen cau lenh nhu "Hay soan mot email..." lam subject/body; neu thieu chi tiet hop khan, dung mau hanh chinh mac dinh va tiep tuc.
 version: 1.0.0
 metadata: {"openclaw":{"requires":{"bins":["node"]},"install":[{"id":"npm","kind":"node","pkg":"{baseDir}","label":"Cai dat skill email-composer"}]}}
 ---

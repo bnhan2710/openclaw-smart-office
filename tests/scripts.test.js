@@ -25,6 +25,15 @@ function runFailingScript(script, args, env = {}) {
   }
 }
 
+function runScriptWithMedia(script, args, env = {}) {
+  const output = execFileSync(process.execPath, [script, ...args], {
+    cwd: path.resolve("."),
+    encoding: "utf8",
+    env: { ...process.env, ...env },
+  });
+  return JSON.parse(output.split(/\r?\nMEDIA:/)[0]);
+}
+
 test("Google wrappers return previews until explicitly confirmed", () => {
   const calendar = runScript("scripts/calendar-management.js", [
     "--title", "Hop xu ly cong van",
@@ -71,6 +80,53 @@ test("Google Workspace previews cover PLAN.md calendar and email scenarios", () 
   assert.deepEqual(email.data.missing, ["to"]);
   assert.equal(email.data.command, null);
   assert.match(email.data.email.body, /05\/06\/2026/);
+});
+
+test("calendar wrapper previews multiple events in one batch", () => {
+  const events = [
+    {
+      title: "[Công văn 128/PNV-VP] Rà soát danh mục hồ sơ cán bộ/công chức",
+      start: "2026-06-01T08:30:00+07:00",
+      end: "2026-06-01T09:30:00+07:00",
+      description: "Ưu tiên cao",
+    },
+    {
+      title: "[Công văn 128/PNV-VP] Kiểm tra hồ sơ theo 3 nhóm giấy tờ",
+      start: "2026-06-03T08:30:00+07:00",
+      end: "2026-06-03T09:30:00+07:00",
+      description: "Ưu tiên cao",
+    },
+  ];
+  const calendar = runScript("scripts/calendar-management.js", [
+    "--events-json", JSON.stringify(events),
+  ]);
+
+  assert.equal(calendar.data.action, "preview-batch");
+  assert.equal(calendar.data.requires_confirmation, true);
+  assert.equal(calendar.data.count, 2);
+  assert.equal(calendar.data.events[0].calendar_id, "primary");
+  assert.equal(calendar.data.commands.length, 2);
+  assert.equal(calendar.data.commands[1][1], "calendar");
+});
+
+test("calendar wrapper reads batch events from utf8 bom file", () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "calendar-events-"));
+  const eventsPath = path.join(dir, "events.json");
+  fs.writeFileSync(eventsPath, `\uFEFF${JSON.stringify([
+    {
+      title: "Task tu file",
+      start: "2026-06-05T08:30:00+07:00",
+      end: "2026-06-05T09:30:00+07:00",
+    },
+  ])}`, "utf8");
+
+  const calendar = runScript("scripts/calendar-management.js", [
+    "--events-file", eventsPath,
+  ]);
+
+  assert.equal(calendar.data.action, "preview-batch");
+  assert.equal(calendar.data.count, 1);
+  assert.equal(calendar.data.events[0].title, "Task tu file");
 });
 
 test("email wrapper supports SMTP dry-run after confirmation", () => {
@@ -131,6 +187,24 @@ test("email composer turns raw office request into professional subject and body
   assert.doesNotMatch(composed.data.email.subject, /soạn nội dung email/i);
 });
 
+test("email automation auto-composes raw command subject and body before sending", () => {
+  const raw = "Hãy soạn một email để yêu cầu họp khẩn cấp và gửi nó đến mail thanhbinhnkd@gmail.com ngay lập tức";
+  const email = runScript("scripts/email-automation.js", [
+    "--to", "thanhbinhnkd@gmail.com",
+    "--subject", raw,
+    "--body", raw,
+    "--smtp",
+  ]);
+
+  assert.equal(email.data.action, "preview-smtp");
+  assert.equal(email.data.email.auto_composed, true);
+  assert.equal(email.data.email.subject, "Đề nghị tham dự cuộc họp khẩn cấp");
+  assert.match(email.data.email.body, /Kính gửi Anh\/Chị/);
+  assert.match(email.data.email.body, /Nội dung dự kiến/);
+  assert.doesNotMatch(email.data.email.subject, /Hãy soạn/i);
+  assert.doesNotMatch(email.data.email.body, /Hãy soạn/i);
+});
+
 test("calendar wrapper rejects invalid scheduling input before gog execution", () => {
   const invalid = runFailingScript("scripts/calendar-management.js", [
     "--title", "Hop xu ly cong van",
@@ -140,6 +214,48 @@ test("calendar wrapper rejects invalid scheduling input before gog execution", (
 
   assert.equal(invalid.success, false);
   assert.match(invalid.error, /after/);
+});
+
+test("soan-thao strips chat wrapper text and exports administrative docx margins", async () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "soan-thao-docx-"));
+  const contentPath = path.join(dir, "draft.txt");
+  const outputDir = path.join(dir, "out");
+  fs.writeFileSync(contentPath, [
+    "Đã rõ. Tôi sẽ xuất ngay văn bản tờ trình phê duyệt cho công văn 128/PNV-VP thành 2 file DOCX + PDF.",
+    "",
+    "---",
+    "",
+    "TỜ TRÌNH",
+    "Về việc phê duyệt triển khai thực hiện Công văn số 128/PNV-VP",
+    "",
+    "Kính trình: [Lãnh đạo/Thủ trưởng đơn vị]",
+    "",
+    "### I. Nội dung công việc đề nghị phê duyệt",
+    "1. Mục tiêu",
+    "- Rà soát, cập nhật đầy đủ hồ sơ cán bộ, công chức.",
+    "",
+    "Nơi nhận:",
+    "- Như trên;",
+    "- Lưu: VT.",
+    "",
+    "[CHỨC VỤ NGƯỜI TRÌNH]",
+  ].join("\n"), "utf8");
+
+  const result = runScriptWithMedia("skills/soan-thao/scripts/generate.js", [
+    "--type", "to-trinh",
+    "--content-file", contentPath,
+    "--format", "docx",
+    "--output", "to-trinh-test",
+  ], { OUTPUT_DIR: outputDir });
+
+  const PizZip = (await import("pizzip")).default;
+  const docxPath = result.data.files.docx;
+  const xml = new PizZip(fs.readFileSync(docxPath)).file("word/document.xml").asText();
+
+  assert.doesNotMatch(xml, /Đã rõ|Tôi sẽ xuất|---|###/);
+  assert.match(xml, /TỜ TRÌNH/);
+  assert.match(xml, /w:pgMar[^>]+w:left="1701"/);
+  assert.match(xml, /w:pgMar[^>]+w:right="1134"/);
 });
 
 test("report generator exports monthly SQLite statistics as JSON", () => {

@@ -128,6 +128,8 @@ Required behavior:
 - Read `skills/soan-thao/SKILL.md` if needed.
 - If required fields are missing and the user asks to export immediately or as a draft, use clear placeholders such as `[....]` and continue. Do not block the export just to ask again.
 - Save the final document text to a temporary file, for example `/tmp/<name>.txt`.
+- The temporary file must contain only the administrative document body. Do not include chat text such as "Đã rõ", "mình sẽ xuất", instructions to the user, markdown fences, `---`, or `###` headings.
+- Use formal office wording: legal/administrative basis, purpose, implementation content, responsibilities, request/proposal, recipients, and signer block. Do not write casual chat prose into the document.
 - Choose the document type from the request: use `--type to-trinh` for tờ trình, báo cáo/tờ trình phê duyệt, xin phê duyệt, or approval-submission drafts; use `--type cong-van` only for công văn; use `--type bien-ban` for biên bản.
 - Use `--format both` when the user asks for "PDF hoặc DOCX", "DOCX/PDF", "xuất file", or does not clearly choose one format. Use the specific format only when the user clearly requests one.
 - Immediately run `node /home/node/.openclaw/workspace/skills/soan-thao/scripts/generate.js --type <type> --content-file <temp-file> --format <docx|pdf|both> --output <name>` with `exec` from `/home/node/.openclaw/workspace`.
@@ -141,14 +143,18 @@ When the user asks to create a Google Calendar event, use the `calendar-manageme
 
 Critical: for a real calendar request, your next assistant turn must either call `exec` or report the real `exec` error. A plain text reply such as "ban hay chay lenh nay", "minh chua co quyen truy cap", or "hay dang nhap Google" is incorrect unless the wrapper command was actually run and returned that error.
 
+This is non-negotiable for short follow-up confirmations too. If the prior assistant proposed event times and the user replies only "Xac nhan tao lich that", "Dong y gio mac dinh", "Tao ngay", or equivalent, preserve the event list from conversation context and call the wrapper immediately. Do not replace wrapper execution with Google Calendar event-edit links, manual Save links, or another confirmation request.
+
 Required behavior:
 
 - Read `skills/calendar-management/SKILL.md` if needed.
 - Convert Vietnamese date/time to ISO 8601 with timezone `+07:00` when the user gives local Vietnam time.
 - For a real event, immediately run `node /home/node/.openclaw/workspace/skills/calendar-management/scripts/calendar.js --title "<title>" --start "<ISO>" --end "<ISO>" --description "<description>" --confirmed` with `exec` from `/home/node/.openclaw/workspace`.
+- For multiple real events from one request, write a JSON array to `/tmp/calendar-events.json` and immediately run `node /home/node/.openclaw/workspace/skills/calendar-management/scripts/calendar.js --events-file /tmp/calendar-events.json --confirmed` with `exec` from `/home/node/.openclaw/workspace`.
 - For a preview-only request, run the same wrapper without `--confirmed`.
 - Do not call `gog calendar ...` directly. Do not give raw `gog` commands as the primary answer.
 - If the command succeeds, summarize the created event. If it fails, show the actual wrapper error and stop.
+- If you propose default event times and the user accepts or says to create now, treat that as approval. Do not ask for another confirmation, do not ask about optional title prefixes, and do not stop after the first event in a batch.
 
 ### Smart Office Email
 
@@ -157,6 +163,8 @@ When the user asks to write or send an email, use `email-composer` before `email
 Critical: never send the user's raw command as the email subject or body. The outgoing email must have a concise subject, a greeting, a clear purpose, concrete requested actions, and a formal closing.
 
 Email body must be normal plain text. Do not use HTML. Do not send literal `\n` sequences that appear in Gmail; line breaks must render as real new lines.
+
+For immediate email requests, do not ask for extra meeting details when the user already gave recipient and purpose. If details such as time, location, or agenda are missing, use a professional default office email and continue. The next assistant turn after "gui ngay", "ngay lap tuc", "gui email", or a request with a recipient email must either call `exec` for composer + email automation, or report the real `exec` error.
 
 Required behavior:
 
